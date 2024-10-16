@@ -15,6 +15,11 @@
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
 3. [Usage](#usage)
+    - [Data Sets](#data_sets)
+    - [Plotted Graphs](#plotted_graphs)
+        - [Systems Where Exoplanets Most Commonly Occur](#plot1)
+        - [Exoplanet Systems by Star Count](#plot2)
+        - [Most Common Exoplanet Systems](#plot3)
 4. [Acknowledgements](#acknowledgements)
 5. [Contact](#contact)
 </details>
@@ -98,6 +103,8 @@ Then the data is sorted alphabetically and any duplicate data is removed by syst
 Once the data is cleaned three data sets are created...
 
 
+<a id='data_sets'></a>
+
 ### data sets
 <a id='system_df'></a>
 - **system_df:**
@@ -109,26 +116,28 @@ Once the data is cleaned three data sets are created...
     - A small pandas series with the 'system star count' as the index and the occurrence that exoplanets have been observed in the system type *(not all exoplanets - the occurrence of a system containing exoplanets)*.
     - Created from the 'system_df'
 
-
 <a id='planet_to_star_df'></a>
 - **planet_to_star_df:**
     - A small pandas dataframe with the 'system star count' as the index and divided into additional 'exoplanet count' columns by system, the data relates to observed occurrences.
     - Created from the 'system_df'
 
-
 Once the data required is organised three plots are visualised using the data...
+
+
+<a id='plotted_graphs'></a>
 
 ### Plotted Graphs
 <details>
 <summary>Plots</summary>
 The program creates three plot figures...
 
+<a id='plot1'></a>
+
 #### 1. Systems Where Exoplanets Most Commonly Occur:
 
 
 Intent:
 > A pie chart representation of what type of systems exoplanets most commonly occur in relation to how many stars are within the system.
-
 
 Contents:
 - Figure
@@ -138,14 +147,14 @@ Contents:
 
 ![Systems where exoplanets most commonly occur pie chart](systems_where_exoplanets_most_commonly_occur.png)
 
-#### 2. Exoplanet Systems by Star Count:
+<a id='plot2'></a>
 
+#### 2. Exoplanet Systems by Star Count:
 
 Intent:
 > A figure containing two nested bar charts that represent all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system. This is intended to show the frequency in which exoplanets/multiplanetary systems occur in relation to singular star and binary star systems.
 >
 > The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence of exoplanetary systems whereas 'log' is intended to help visualise small frequencies.
-
 
 Contents:
 - Figure
@@ -154,8 +163,10 @@ Contents:
 
 ![exoplanet systems by star count figure image](exoplanet_systems_by_star_count.png)
 
-#### 3. Most Common Exoplanet Systems:
 
+<a id='plot3'></a>
+
+#### 3. Most Common Exoplanet Systems:
 
 Intent:
 > A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.
@@ -173,6 +184,7 @@ Contents:
 
 ![Most common exoplanet systems pie charts figure](most_common_exoplanet_systems.png)
 </details>
+
 
 <a id='acknowledgements'></a>
 
