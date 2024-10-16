@@ -1,20 +1,31 @@
-# PLANETARY SYSTEM QUERY DATA
+# EXOPLANETARY SYSTEMS
 
-### Video Demo: <URL HERE>
+[Documentation Template](https://github.com/othneildrew/Best-README-Template?tab=readme-ov-file#roadmap)
 
-## Description:
-Using the following libraries:
-- astroquery.utils.tap.core's TapPlus
-- io's StringIO
-- matplotlib's pyplot
-- numpy, pandas
+<a id='table_of_contents'></a>
+<!-- make it drop down -->
 
+## table of contents
+1. [About The Project](#about_the_project)
+    - [built With](#)
+2. [Getting Started](#)
+    - [Prerequisites](#)
+    - [Installation](#)
+3. [Usage](#)
+4. []()
+5. []()
+6. []()
+7. []()
+8. [](#)
 
+<a id='about_the_project'></a>
+
+## About The Project
 ### Summary:
 This program is intended to get star system data from NASA's 'stellar hosts' database via TAP request using SQL. Then the data is organised and cleaned down to the unique star systems required Ready for analysis, the data is then organised into new data frames to plot various visual graphs...
 
 
-## Program:
+### Program:
 This program is written in 'Jupyter NoteBooks' in Python and Markdown. The program is designed to make a request to NASA's astronomical Database using a TAP Plus request (Similar to an API request but the TAP protocol is a standard for the astronomical community).
 
 
@@ -29,6 +40,16 @@ Then the data is sorted alphabetically and any duplicate data is removed by syst
 
 
 Once the data is cleaned three data sets are created...
+
+### Built with
+
+
+## Description:
+Using the following libraries:
+- astroquery.utils.tap.core's TapPlus
+- io's StringIO
+- matplotlib's pyplot
+- numpy, pandas
 
 
 ### data sets
