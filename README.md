@@ -13,7 +13,7 @@
     - [built With](#built_with)
 2. [Getting Started](#getting_started)
     - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
+    <!-- - [Installation](#installation) -->
 3. [Usage](#usage)
     - [Data Sets](#data_sets)
     - [Plotted Graphs](#plotted_graphs)
@@ -78,16 +78,18 @@ This program is intended to get star system data from NASA's 'stellar hosts' dat
     Download Python3 
 </details>
 
-<a id='installation'></a>
+<!-- <a id='installation'></a>
 
 ### Installation
 how to install the program...
+
+    $ git clone   -->
 
 <a id='usage'></a>
 
 ## Usage
 
-This program is written in 'Jupyter NoteBooks' in Python and Markdown. The program is designed to make a request to NASA's astronomical Database using a TAP Plus request (Similar to an API request but the TAP protocol is a standard for the astronomical community).
+This program is written in 'Jupyter NoteBooks' in Python and Markdown. The program is designed to make a request to NASA's astronomical Database using a TAP Plus request (TAP protocol is a standard for the astronomical community).
 
 
 Firstly a TapPlus class instance is created to carry out the TAP request to NASA's database. A query variable is made with an ADQL string. Then a synchronous job is carried out as a function on the TapPlus class instance, with the ADQL query passed in as an argument. This makes the ADQL request and returns a job object with a VOTable table format.
@@ -127,7 +129,7 @@ Once the data required is organised three plots are visualised using the data...
 <a id='plotted_graphs'></a>
 
 ### Plotted Graphs
-<details>
+<details open>
 <summary>Plots</summary>
 The program creates three plot figures...
 
@@ -137,7 +139,7 @@ The program creates three plot figures...
 
 
 Intent:
-> A pie chart representation of what type of systems exoplanets most commonly occur in relation to how many stars are within the system.
+A pie chart representation of what type of systems exoplanets most commonly occur in relation to how many stars are within the system.
 
 Contents:
 - Figure
@@ -152,9 +154,9 @@ Contents:
 #### 2. Exoplanet Systems by Star Count:
 
 Intent:
-> A figure containing two nested bar charts that represent all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system. This is intended to show the frequency in which exoplanets/multiplanetary systems occur in relation to singular star and binary star systems.
->
-> The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence of exoplanetary systems whereas 'log' is intended to help visualise small frequencies.
+A figure containing two nested bar charts that represent all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system. This is intended to show the frequency in which exoplanets/multiplanetary systems occur in relation to singular star and binary star systems.
+
+The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence of exoplanetary systems whereas 'log' is intended to help visualise small frequencies.
 
 Contents:
 - Figure
@@ -169,12 +171,11 @@ Contents:
 #### 3. Most Common Exoplanet Systems:
 
 Intent:
-> A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.
->
-> [!NOTE]
-> These pie charts do not include any exoplanet systems that would fall in less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
->
-> Additionally note that data that falls in less than the 1% is completely left out of the data.
+A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.
+
+    [!NOTE] These pie charts do not include any exoplanet systems that would fall in less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
+
+    Additionally note that data that falls in less than the 1% is completely left out of the data.
 
 
 Contents:
@@ -200,9 +201,12 @@ Contents:
 
 ## Contact
 
-Creator: Rachael Lampard-France
+###  Creator: Rachael Lampard-France
 
-Project Link - 
+<!-- [![Linkedin Logo](linkedin.png)](https://www.linkedin.com/in/rachael-lampard-france-a5995b195/) -->
 
+<a href='https://www.linkedin.com/in/rachael-lampard-france-a5995b195/'><img src='linkedin.png' alt='Linkedin Logo' width='100'></a>
+
+Project Link - https://github.com/rachaellampardfrance/Exoplanetary_Systems
 
 [return to top](#top)
