@@ -33,14 +33,16 @@
 This program is intended to get star system data from NASA's 'stellar hosts' database via TAP request using ADQL. Then the data is organised and cleaned down to the unique star systems required Ready for analysis, the data is then organised into new data frames to plot various visual graphs...
 
 <a id='built_with'></a>
+
 ### Built with
-- Astroquery
+
+- [Astropy & Astroquery](https://astroquery.readthedocs.io/en/latest/index.html)
     - ADQL 
-- Juptyer NoteBooks
-- Numpy 
-- Matplotlib
-- Pandas
-- Python
+- [Jupyter Notebooks](https://docs.jupyter.org/en/stable/install.html)
+- [Matplotlib](https://matplotlib.org/stable/install/index.html)
+- [Numpy](https://numpy.org/install/)
+- [Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
+- [Python](https://www.python.org/downloads/)
 
 <a id='getting_started'></a>
 
@@ -51,31 +53,18 @@ This program is intended to get star system data from NASA's 'stellar hosts' dat
 ### Prerequisites
 
 <details open>
-<summary>packages</summary>
+<summary>Installation</summary>
 
-#### [Astropy & Astroquery](https://astroquery.readthedocs.io/en/latest/index.html)
+1. Install [Python](https://www.python.org/downloads/)
+    - Download Python3
+2. Install [Jupyter Notebooks](https://docs.jupyter.org/en/stable/install.html)
 
-    $ pip install astropy astroquery
+        $pip install jupyter
+3. Fork this repository
+    - git clone https://github.com/rachaellampardfrance/Exoplanetary_Systems
+4. Install requirements.txt
 
-#### [Jupyter](https://docs.jupyter.org/en/stable/install.html)
-
-    $ pip install jupyter
-
-#### [Matplotlib](https://matplotlib.org/stable/install/index.html)
-
-    $ pip install matplotlib
-
-#### [Numpy](https://numpy.org/install/)
-
-    $ pip install numpy
-
-#### [Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
-
-    $ pip install pandas
-
-#### [Python](https://www.python.org/downloads/)
-
-    Download Python3 
+        $pip install -r requirements.txt
 </details>
 
 <!-- <a id='installation'></a>
@@ -147,7 +136,9 @@ Contents:
     - Legend - *displays how many stars are in each system on the pie chart related by color.*
     - Additional exoplanet discovery data - *extra data displayed on the figure represents how many confirmed exoplanet systems have been discovered as well as individual exoplanets.*
 
-![Systems where exoplanets most commonly occur pie chart](systems_where_exoplanets_most_commonly_occur.png)
+<p align="center">
+<img src='static/systems_where_exoplanets_most_commonly_occur.png' alt='Systems where exoplanets most commonly occur pie chart' width='600'>
+</p>
 
 <a id='plot2'></a>
 
@@ -163,7 +154,9 @@ Contents:
     - Nested bar chart - *represents all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system.*
     - Nested bar chart LOG - *represents the same data as above but in a log format to help visualise small data*
 
-![exoplanet systems by star count figure image](exoplanet_systems_by_star_count.png)
+<p align="center">
+<img src='static/exoplanet_systems_by_star_count.png' alt='exoplanet systems by star count figure image' width='900'>
+</p>
 
 
 <a id='plot3'></a>
@@ -183,7 +176,10 @@ Contents:
     - Pie charts - *Each pie chart represents which is the most common types of exoplanet systems in relation to it's systems star count*
     - Legend - *The legend visualises the planet count by color and applies to all pie charts*
 
-![Most common exoplanet systems pie charts figure](most_common_exoplanet_systems.png)
+<p align="center">
+<img src='static/most_common_exoplanet_systems.png' alt='Most common exoplanet systems pie charts figure' width='900'>
+</p>
+
 </details>
 
 
@@ -205,7 +201,7 @@ Contents:
 
 <!-- [![Linkedin Logo](linkedin.png)](https://www.linkedin.com/in/rachael-lampard-france-a5995b195/) -->
 
-<a href='https://www.linkedin.com/in/rachael-lampard-france-a5995b195/'><img src='linkedin.png' alt='Linkedin Logo' width='100'></a>
+<a href='https://www.linkedin.com/in/rachael-lampard-france-a5995b195/'><img src='static/linkedin.png' alt='Linkedin Logo' width='100'></a>
 
 Project Link - https://github.com/rachaellampardfrance/Exoplanetary_Systems
 
