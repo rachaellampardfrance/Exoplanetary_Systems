@@ -1,59 +1,59 @@
 <a id='top'></a>
 
-# EXOPLANETARY SYSTEMS
+# 🌌 EXOPLANETARY SYSTEMS
 
 <a id='table_of_contents'></a>
 
-<details open>
-<summary>Table of Contents</summary>
-
 ## Table of Contents
-1. [About The Project](#about_the_project)
-    - [Summary](#summary)
-    - [built With](#built_with)
-2. [Getting Started](#getting_started)
-    - [Prerequisites](#prerequisites)
-    <!-- - [Installation](#installation) -->
-3. [Usage](#usage)
-    - [Data Sets](#data_sets)
-    - [Plotted Graphs](#plotted_graphs)
-        - [Systems Where Exoplanets Most Commonly Occur](#plot1)
-        - [Exoplanet Systems by Star Count](#plot2)
-        - [Most Common Exoplanet Systems](#plot3)
-4. [Acknowledgements](#acknowledgements)
-5. [Contact](#contact)
+<details open>
+<summary>Contents</summary>
+
+1. [📖 About The Project](#about_the_project)
+    - [📋 Summary](#summary)
+    - [🔧 built With](#built_with)
+2. [❔ Getting Started](#getting_started)
+    - [🖥️ Installation](#installation)
+3. [🛰️ Usage](#usage)
+    - 📈 [Data Sets](#data_sets)
+    - 📉 [Plotted Graphs](#plotted_graphs)
+        - 🌍 [Systems Where Exoplanets Most Commonly Occur](#plot1)
+        - 🌏 [Exoplanet Systems by Star Count](#plot2)
+        - 🌎 [Most Common Exoplanet Systems](#plot3)
+4. [📡 Acknowledgements](#acknowledgements)
+5. [📧 Contact](#contact)
 </details>
 
 <a id='about_the_project'></a>
 
-## About The Project
+## 📖 About The Project
 <a id='summary'></a>
 
-### Summary:
+### 📋 Summary:
 This program is intended to get star system data from NASA's 'stellar hosts' database via TAP request using ADQL. Then the data is organised and cleaned down to the unique star systems required Ready for analysis, the data is then organised into new data frames to plot various visual graphs...
 
 <a id='built_with'></a>
 
-### Built with
+### 🔧Built with
 
-- [Astropy & Astroquery](https://astroquery.readthedocs.io/en/latest/index.html)
+- 🌌 [Astropy & Astroquery](https://astroquery.readthedocs.io/en/latest/index.html)
     - ADQL 
-- [Jupyter Notebooks](https://docs.jupyter.org/en/stable/install.html)
-- [Matplotlib](https://matplotlib.org/stable/install/index.html)
-- [Numpy](https://numpy.org/install/)
-- [Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
-- [Python](https://www.python.org/downloads/)
+- 🪐 [Jupyter Notebooks](https://docs.jupyter.org/en/stable/install.html)
+- 📊 [Matplotlib](https://matplotlib.org/stable/install/index.html)
+- 🔢 [Numpy](https://numpy.org/install/)
+- 🐼 [Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
+- 🐍 [Python](https://www.python.org/downloads/)
+- 💠 Visual Studio Code
 
 <a id='getting_started'></a>
 
-## Getting Started
+## ❔ Getting Started
 
-<a id='prerequisites'></a>
+<a id='installation'></a>
 
-### Prerequisites
+### 🖥️ Installation
 
 <details open>
-<summary>Installation</summary>
+<summary>Installation steps</summary>
 
 1. Install [Python](https://www.python.org/downloads/)
     - Download Python3
@@ -76,7 +76,7 @@ how to install the program...
 
 <a id='usage'></a>
 
-## Usage
+## 🛰️ Usage
 
 This program is written in 'Jupyter NoteBooks' in Python and Markdown. The program is designed to make a request to NASA's astronomical Database using a TAP Plus request (TAP protocol is a standard for the astronomical community).
 
@@ -96,7 +96,7 @@ Once the data is cleaned three data sets are created...
 
 <a id='data_sets'></a>
 
-### data sets
+### 📈 data sets
 <a id='system_df'></a>
 - **system_df:**
     - A large pandas dataframe containing all systems names, star number and planet number within the system.  
@@ -117,14 +117,14 @@ Once the data required is organised three plots are visualised using the data...
 
 <a id='plotted_graphs'></a>
 
-### Plotted Graphs
+### 📉 Plotted Graphs
 <details open>
 <summary>Plots</summary>
 The program creates three plot figures...
 
 <a id='plot1'></a>
 
-#### 1. Systems Where Exoplanets Most Commonly Occur:
+#### 🌍**1. Systems Where Exoplanets Most Commonly Occur:**
 
 
 Intent:
@@ -142,7 +142,7 @@ Contents:
 
 <a id='plot2'></a>
 
-#### 2. Exoplanet Systems by Star Count:
+#### 🌏**2. Exoplanet Systems by Star Count:**
 
 Intent:
 A figure containing two nested bar charts that represent all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system. This is intended to show the frequency in which exoplanets/multiplanetary systems occur in relation to singular star and binary star systems.
@@ -161,7 +161,7 @@ Contents:
 
 <a id='plot3'></a>
 
-#### 3. Most Common Exoplanet Systems:
+#### 🌎**3. Most Common Exoplanet Systems:**
 
 Intent:
 A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.
@@ -185,17 +185,17 @@ Contents:
 
 <a id='acknowledgements'></a>
 
-## Acknowledgements
+## 📡 Acknowledgements
 
-- [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu): All data is gathered from NASA's 'Stellar Hosts' database 
+- 🚀 [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu): All data is gathered from NASA's 'Stellar Hosts' database 
     - **DOI: 10.26133/NEA40**
 
-- [Astroquery](https://ui.adsabs.harvard.edu/abs/2019AJ....157...98G/abstract)
+- 🔭 [Astroquery](https://ui.adsabs.harvard.edu/abs/2019AJ....157...98G/abstract)
 
 
 <a id='contact'></a>
 
-## Contact
+## 📧 Contact
 
 ###  Creator: Rachael Lampard-France
 
