@@ -196,7 +196,7 @@ Contents:
 
 This program has been designed so that when a new figure is created it attempt to create a folder within static named with the current date, and save the figure within this folder with the addition of a datestamp in the file name. The figure will also be saved to the top level of 'static/' without a date stamp and will overwrite the existing figure so that the figures remain up to date for this README. 
 - if a folder with the current date already exists the folder creation step will be skipped
-- if a file with the same name already exists in this folder the user will be asked if they want to overwrite the file.
+- if a file with the same name already exists in this folder the user will be asked if they want to overwrite the file. (This will happen if the same figure is generated again on the same day)
 
 <a id='acknowledgements'></a>
 
