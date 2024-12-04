@@ -21,6 +21,8 @@
         - 🌎 [Most Common Exoplanet Systems](#plot3)
 4. [📡 Acknowledgements](#acknowledgements)
 5. [📧 Contact](#contact)
+
+<!-- 🌠☄️👩‍🚀👩‍💻👩‍🔬💬💭🥼📻🔍📷📃📝✒️📊📆🗃️🪐 -->
 </details>
 
 <a id='about_the_project'></a>
@@ -137,7 +139,7 @@ Contents:
     - Additional exoplanet discovery data - *extra data displayed on the figure represents how many confirmed exoplanet systems have been discovered as well as individual exoplanets.*
 
 <p align="center">
-<img src='static/systems_where_exoplanets_most_commonly_occur.png' alt='Systems where exoplanets most commonly occur pie chart' width='600'>
+<img src='static\occurance_of_exoplanetary_systems_by_star_system_type.png' alt='"occurance of exoplanetary systems by star system type" pie chart' width='600'>
 </p>
 
 <a id='plot2'></a>
@@ -166,7 +168,7 @@ Contents:
 Intent:
 A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.
 
-    [!NOTE] These pie charts do not include any exoplanet systems that would fall in less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
+    [!NOTE] These pie charts do not include any exoplanet systems that would fall in \n less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
 
     Additionally note that data that falls in less than the 1% is completely left out of the data.
 
