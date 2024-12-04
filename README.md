@@ -16,11 +16,12 @@
 3. [🛰️ Usage](#usage)
     - 📈 [Data Sets](#data_sets)
     - 📉 [Plotted Graphs](#plotted_graphs)
-        - 🌍 [Systems Where Exoplanets Most Commonly Occur](#plot1)
+        - 🌍 [Occurance Of Exoplanetary Systems By Star System Type](#plot1)
         - 🌏 [Exoplanet Systems by Star Count](#plot2)
         - 🌎 [Most Common Exoplanet Systems](#plot3)
-4. [📡 Acknowledgements](#acknowledgements)
-5. [📧 Contact](#contact)
+4. [🗃️ Folder Automation](#folder_automation)
+5. [📡 Acknowledgements](#acknowledgements)
+6. [📧 Contact](#contact)
 
 <!-- 🌠☄️👩‍🚀👩‍💻👩‍🔬💬💭🥼📻🔍📷📃📝✒️📊📆🗃️🪐 -->
 </details>
@@ -80,7 +81,10 @@ how to install the program...
 
 ## 🛰️ Usage
 
-This program is written in 'Jupyter NoteBooks' in Python and Markdown. The program is designed to make a request to NASA's astronomical Database using a TAP Plus request (TAP protocol is a standard for the astronomical community).
+<details open>
+<summary>Usage</summary>
+
+This program is written in 'Jupyter NoteBooks' in Python and Markdown. The program is designed to make a request to NASA's astronomical Database using a TAPPlus request (TAP protocol is a standard for the astronomical community).
 
 
 Firstly a TapPlus class instance is created to carry out the TAP request to NASA's database. A query variable is made with an ADQL string. Then a synchronous job is carried out as a function on the TapPlus class instance, with the ADQL query passed in as an argument. This makes the ADQL request and returns a job object with a VOTable table format.
@@ -116,6 +120,8 @@ Once the data is cleaned three data sets are created...
 
 Once the data required is organised three plots are visualised using the data...
 
+</details>
+
 
 <a id='plotted_graphs'></a>
 
@@ -126,7 +132,7 @@ The program creates three plot figures...
 
 <a id='plot1'></a>
 
-#### 🌍**1. Systems Where Exoplanets Most Commonly Occur:**
+#### 🌍**1. Occurance Of Exoplanetary Systems By Star System Type:**
 
 
 Intent:
@@ -168,9 +174,9 @@ Contents:
 Intent:
 A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.
 
-    [!NOTE] These pie charts do not include any exoplanet systems that would fall in \n less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
-
-    Additionally note that data that falls in less than the 1% is completely left out of the data.
+>[!NOTE] These pie charts do not include any exoplanet systems that would fall in less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
+>
+>Additionally note that data that falls in less than the 1% is completely left out of the data.
 
 
 Contents:
@@ -184,6 +190,13 @@ Contents:
 
 </details>
 
+<a id='folder_automation'></a>
+
+## 🗃️ Folder Automation
+
+This program has been designed so that when a new figure is created it attempt to create a folder within static named with the current date, and save the figure within this folder with the addition of a datestamp in the file name. The figure will also be saved to the top level of 'static/' without a date stamp and will overwrite the existing figure so that the figures remain up to date for this README. 
+- if a folder with the current date already exists the folder creation step will be skipped
+- if a file with the same name already exists in this folder the user will be asked if they want to overwrite the file.
 
 <a id='acknowledgements'></a>
 
