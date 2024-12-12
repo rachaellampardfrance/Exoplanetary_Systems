@@ -1,0 +1,355 @@
+table_name,column_name,datatype,arraysize,xtype,size,description,utype,unit,ucd,indexed,principal,std,column_index,format
+ps,pl_name,char,30.0,,30.0,Planet Name,,,,0,1,0,1,30s
+ps,pl_letter,char,10.0,,10.0,Planet Letter,,,,0,0,0,2,10s
+ps,hostname,char,28.0,,28.0,Host Name,,,,0,1,0,3,28s
+ps,hd_name,char,14.0,,14.0,HD ID,,,,0,0,0,4,14s
+ps,hip_name,char,15.0,,15.0,HIP ID,,,,0,0,0,5,15s
+ps,tic_id,char,16.0,,16.0,TIC ID,,,,0,0,0,6,16s
+ps,default_flag,int,,,,Default Parameter Set,,,,0,1,0,7,13d
+ps,pl_refname,char,200.0,,200.0,Planetary Parameter Reference,,,,0,1,0,8,200s
+ps,st_refname,char,200.0,,200.0,Stellar Parameter Reference,,,,0,1,0,9,200s
+ps,sy_refname,char,200.0,,200.0,System Parameter Reference,,,,0,1,0,10,200s
+ps,disc_pubdate,char,23.0,,23.0,Discovery Publication Date,,,,0,0,0,11,23s
+ps,disc_year,int,,,,Discovery Year,,,,0,1,0,12,9d
+ps,discoverymethod,char,30.0,,30.0,Discovery Method,,,,0,1,0,13,30s
+ps,disc_locale,char,17.0,,17.0,Discovery Locale,,,,0,0,0,14,17s
+ps,disc_facility,char,45.0,,45.0,Discovery Facility,,,,0,1,0,15,45s
+ps,disc_instrument,char,41.0,,41.0,Discovery Instrument,,,,0,0,0,16,41s
+ps,disc_telescope,char,60.0,,60.0,Discovery Telescope,,,,0,0,0,17,60s
+ps,disc_refname,char,179.0,,179.0,Discovery Reference,,,,0,0,0,18,179s
+ps,ra,double,,,,RA [decimal],,deg,pos.eq.ra;meta.main,0,1,0,19,14.7f
+ps,rastr,char,200.0,,200.0,RA [sexagesimal],,hhmmss,,0,1,0,20,200s
+ps,dec,double,,,,Dec [decimal],,deg,pos.eq.dec;meta.main,0,1,0,21,14.7f
+ps,decstr,char,200.0,,200.0,Dec [sexagesimal],,ddmmss,,0,1,0,22,200s
+ps,glon,double,,,,Galactic Longitude [deg],,deg,,0,0,0,23,14.5f
+ps,glat,double,,,,Galactic Latitude [deg],,deg,,0,0,0,24,14.5f
+ps,elon,double,,,,Ecliptic Longitude [deg],,deg,,0,0,0,25,14.5f
+ps,elat,double,,,,Ecliptic Latitude [deg],,deg,,0,0,0,26,14.5f
+ps,pl_orbper,double,,,,Orbital Period [day],,day,,0,1,0,27,20.8f
+ps,pl_orbpererr1,double,,,,Orbital Period Upper Unc. [day],,day,,0,1,0,28,20.8f
+ps,pl_orbpererr2,double,,,,Orbital Period Lower Unc. [day],,day,,0,1,0,29,20.8f
+ps,pl_orbperlim,int,,,,Orbital Period Limit Flag,,,,0,1,0,30,13d
+ps,pl_orbperstr,char,200.0,,200.0,Orbital Period [day],,day,,0,0,0,31,200s
+ps,pl_orblpererr1,double,,,,Argument of Periastron Upper Unc. [deg],,deg,,0,0,0,32,8.4f
+ps,pl_orblper,double,,,,Argument of Periastron [deg],,deg,,0,0,0,33,8.4f
+ps,pl_orblpererr2,double,,,,Argument of Periastron Lower Unc. [deg],,deg,,0,0,0,34,8.4f
+ps,pl_orblperlim,int,,,,Argument of Periastron Limit Flag,,,,0,0,0,35,14d
+ps,pl_orblperstr,char,200.0,,200.0,Argument of Periastron [deg],,deg,,0,0,0,36,200s
+ps,pl_orbsmax,double,,,,Orbit Semi-Major Axis [au],,au,,0,1,0,37,12.6f
+ps,pl_orbsmaxerr1,double,,,,Orbit Semi-Major Axis Upper Unc. [au],,au,,0,1,0,38,12.6f
+ps,pl_orbsmaxerr2,double,,,,Orbit Semi-Major Axis Lower Unc. [au],,au,,0,1,0,39,12.6f
+ps,pl_orbsmaxlim,int,,,,Orbit Semi-Major Axis Limit Flag,,,,0,1,0,40,14d
+ps,pl_orbsmaxstr,char,200.0,,200.0,Orbit Semi-Major Axis [au],,au,,0,0,0,41,200s
+ps,pl_orbincl,double,,,,Inclination [deg],,deg,,0,0,0,42,6.3f
+ps,pl_orbinclerr1,double,,,,Inclination Upper Unc. [deg],,deg,,0,0,0,43,6.3f
+ps,pl_orbinclerr2,double,,,,Inclination Lower Unc. [deg],,deg,,0,0,0,44,6.3f
+ps,pl_orbincllim,int,,,,Inclination Limit Flag,,,,0,0,0,45,14d
+ps,pl_orbinclstr,char,200.0,,200.0,Inclination [deg],,deg,,0,0,0,46,200s
+ps,pl_orbtper,double,,,,Epoch of Periastron [day],,day,,0,0,0,47,14.6f
+ps,pl_orbtpererr1,double,,,,Epoch of Periastron Upper Unc. [day],,day,,0,0,0,48,14.6f
+ps,pl_orbtpererr2,double,,,,Epoch of Periastron Lower Unc. [day],,day,,0,0,0,49,14.6f
+ps,pl_orbtperlim,int,,,,Epoch of Periastron Limit Flag,,,,0,0,0,50,14d
+ps,pl_orbtperstr,char,200.0,,200.0,Epoch of Periastron [day],,day,,0,0,0,51,200s
+ps,pl_orbeccen,double,,,,Eccentricity,,,,0,1,0,52,8.6f
+ps,pl_orbeccenerr1,double,,,,Eccentricity Upper Unc.,,,,0,1,0,53,8.6f
+ps,pl_orbeccenerr2,double,,,,Eccentricity Lower Unc.,,,,0,1,0,54,8.6f
+ps,pl_orbeccenlim,int,,,,Eccentricity Limit Flag,,,,0,1,0,55,15d
+ps,pl_orbeccenstr,char,200.0,,200.0,Eccentricity,,,,0,0,0,56,200s
+ps,pl_eqt,double,,,,Equilibrium Temperature [K],,K,,0,1,0,57,4d
+ps,pl_eqterr1,double,,,,Equilibrium Temperature Upper Unc. [K],,K,,0,1,0,58,4d
+ps,pl_eqterr2,double,,,,Equilibrium Temperature Lower Unc. [K],,K,,0,1,0,59,4d
+ps,pl_eqtlim,int,,,,Equilibrium Temperature Limit Flag,,,,0,1,0,60,10d
+ps,pl_eqtstr,char,200.0,,200.0,Equilibrium Temperature [K],,K,,0,0,0,61,200s
+ps,pl_occdep,double,,,,Occultation Depth [%],,%,,0,0,0,62,10.6f
+ps,pl_occdeperr1,double,,,,Occultation Depth Upper Unc. [%],,%,,0,0,0,63,10.6f
+ps,pl_occdeperr2,double,,,,Occultation Depth Lower Unc. [%],,%,,0,0,0,64,10.6f
+ps,pl_occdeplim,int,,,,Occultation Depth Limit Flag,,,,0,0,0,65,13d
+ps,pl_occdepstr,char,200.0,,200.0,Occultation Depth [%],,%,,0,0,0,66,200s
+ps,pl_insol,double,,,,Insolation Flux [Earth Flux],,Searth,,0,1,0,67,12.2f
+ps,pl_insolerr1,double,,,,Insolation Flux Upper Unc. [Earth Flux],,Searth,,0,1,0,68,12.2f
+ps,pl_insolerr2,double,,,,Insolation Flux Lower Unc. [Earth Flux],,Searth,,0,1,0,69,12.2f
+ps,pl_insollim,int,,,,Insolation Flux Limit Flag,,,,0,1,0,70,12d
+ps,pl_insolstr,char,200.0,,200.0,Insolation Flux [Earth Flux],,Searth,,0,0,0,71,200s
+ps,pl_dens,double,,,,Planet Density [g/cm**3],,g/cm**3,,0,0,0,72,10.5f
+ps,pl_denserr1,double,,,,Planet Density Upper Unc. [g/cm**3],,g/cm**3,,0,0,0,73,10.5f
+ps,pl_denserr2,double,,,,Planet Density Lower Unc. [g/cm**3],,g/cm**3,,0,0,0,74,10.5f
+ps,pl_denslim,int,,,,Planet Density Limit Flag,,,,0,0,0,75,11d
+ps,pl_densstr,char,200.0,,200.0,Planet Density [g/cm**3],,g/cm**3,,0,0,0,76,200s
+ps,pl_trandep,double,,,,Transit Depth [%],,%,,0,0,0,77,11.6f
+ps,pl_trandeperr1,double,,,,Transit Depth Upper Unc. [%],,%,,0,0,0,78,11.6f
+ps,pl_trandeperr2,double,,,,Transit Depth Lower Unc. [%],,%,,0,0,0,79,11.6f
+ps,pl_trandeplim,int,,,,Transit Depth Limit Flag,,,,0,0,0,80,14d
+ps,pl_trandepstr,char,200.0,,200.0,Transit Depth [%],,%,,0,0,0,81,200s
+ps,pl_tranmid,double,,,,Transit Midpoint [day],,day,,0,0,0,82,14.6f
+ps,pl_tranmiderr1,double,,,,Transit Midpoint Upper Unc. [day],,day,,0,0,0,83,14.6f
+ps,pl_tranmiderr2,double,,,,Transit Midpoint Lower Unc. [day],,day,,0,0,0,84,14.6f
+ps,pl_tranmidlim,int,,,,Transit Midpoint Limit Flag,,,,0,0,0,85,14d
+ps,pl_tranmidstr,char,200.0,,200.0,Time of Conjunction (Transit Midpoint) [day],,day,,0,0,0,86,200s
+ps,pl_trandur,double,,,,Transit Duration [hour],,hour,,0,0,0,87,7.7f
+ps,pl_trandurerr1,double,,,,Transit Duration Upper Unc. [hour],,hour,,0,0,0,88,7.7f
+ps,pl_trandurerr2,double,,,,Transit Duration Lower Unc. [hour],,hour,,0,0,0,89,7.7f
+ps,pl_trandurlim,int,,,,Transit Duration Limit Flag,,,,0,0,0,90,15d
+ps,pl_trandurstr,char,200.0,,200.0,Transit Duration [hour],,hour,,0,0,0,91,200s
+ps,pl_rvamp,double,,,,Radial Velocity Amplitude [m/s],,m/s,,0,0,0,92,9.3f
+ps,pl_rvamperr1,double,,,,Radial Velocity Amplitude Upper Unc. [m/s],,m/s,,0,0,0,93,9.3f
+ps,pl_rvamperr2,double,,,,Radial Velocity Amplitude Lower Unc. [m/s],,m/s,,0,0,0,94,9.3f
+ps,pl_rvamplim,int,,,,Radial Velocity Amplitude Limit Flag,,,,0,0,0,95,12d
+ps,pl_rvampstr,char,200.0,,200.0,Radial Velocity Amplitude [m/s],,m/s,,0,0,0,96,200s
+ps,pl_radj,double,,,,Planet Radius [Jupiter Radius],,Rjupiter,,0,1,0,97,6.3f
+ps,pl_radjerr1,double,,,,Planet Radius Upper Unc. [Jupiter Radius],,Rjupiter,,0,1,0,98,6.3f
+ps,pl_radjerr2,double,,,,Planet Radius Lower Unc. [Jupiter Radius],,Rjupiter,,0,1,0,99,6.3f
+ps,pl_radjlim,int,,,,Planet Radius Limit Flag,,,,0,1,0,100,11d
+ps,pl_radjstr,char,200.0,,200.0,Planet Radius [Jupiter Radius],,Rjupiter,,0,0,0,101,200s
+ps,pl_rade,double,,,,Planet Radius [Earth Radius],,Rearth,,0,1,0,102,8.3f
+ps,pl_radeerr1,double,,,,Planet Radius Upper Unc. [Earth Radius],,Rearth,,0,1,0,103,8.3f
+ps,pl_radeerr2,double,,,,Planet Radius Lower Unc. [Earth Radius],,Rearth,,0,1,0,104,8.3f
+ps,pl_radelim,int,,,,Planet Radius Limit Flag,,,,0,1,0,105,11d
+ps,pl_radestr,char,200.0,,200.0,Planet Radius [Earth Radius],,Rearth,,0,0,0,106,200s
+ps,pl_ratror,double,,,,Ratio of Planet to Stellar Radius,,,,0,0,0,107,7.5f
+ps,pl_ratrorerr1,double,,,,Ratio of Planet to Stellar Radius Upper Unc.,,,,0,0,0,108,7.5f
+ps,pl_ratrorerr2,double,,,,Ratio of Planet to Stellar Radius Lower Unc.,,,,0,0,0,109,7.5f
+ps,pl_ratrorlim,int,,,,Ratio of Planet to Stellar Radius Limit Flag,,,,0,0,0,110,13d
+ps,pl_ratrorstr,char,200.0,,200.0,Ratio of Planet to Stellar Radius,,,,0,0,0,111,200s
+ps,pl_ratdor,double,,,,Ratio of Semi-Major Axis to Stellar Radius,,,,0,0,0,112,11.6f
+ps,pl_ratdorerr1,double,,,,Ratio of Semi-Major Axis to Stellar Radius Upper Unc.,,,,0,0,0,113,11.6f
+ps,pl_ratdorerr2,double,,,,Ratio of Semi-Major Axis to Stellar Radius Lower Unc.,,,,0,0,0,114,11.6f
+ps,pl_ratdorlim,int,,,,Ratio of Semi-Major Axis to Stellar Radius Limit Flag,,,,0,0,0,115,13d
+ps,pl_ratdorstr,char,200.0,,200.0,Ratio of Semi-Major Axis to Stellar Radius,,,,0,0,0,116,200s
+ps,pl_imppar,double,,,,Impact Parameter,,,,0,0,0,117,10.4f
+ps,pl_impparerr1,double,,,,Impact Parameter Upper Unc.,,,,0,0,0,118,10.4f
+ps,pl_impparerr2,double,,,,Impact Parameter Lower Unc.,,,,0,0,0,119,10.4f
+ps,pl_impparlim,int,,,,Impact Parameter Limit Flag,,,,0,0,0,120,13d
+ps,pl_impparstr,char,200.0,,200.0,Impact Parameter,,,,0,0,0,121,200s
+ps,pl_cmassj,double,,,,Planet Mass*sin(i)/sin(i) [Jupiter Mass],,Mjupiter,,0,0,0,122,8.5f
+ps,pl_cmassjerr1,double,,,,Planet Mass*sin(i)/sin(i) [Jupiter Mass] Upper Unc.,,Mjupiter,,0,0,0,123,7.5f
+ps,pl_cmassjerr2,double,,,,Planet Mass*sin(i)/sin(i) [Jupiter Mass] Lower Unc.,,Mjupiter,,0,0,0,124,8.5f
+ps,pl_cmassjlim,int,,,,Planet Mass*sin(i)/sin(i) [Jupiter Mass] Limit Flag,,,,0,0,0,125,13d
+ps,pl_cmassjstr,char,200.0,,200.0,Planet Mass*sin(i)/sin(i) [Jupiter Mass],,Mjupiter,,0,0,0,126,200s
+ps,pl_cmasse,double,,,,Planet Mass*sin(i)/sin(i) [Earth Mass],,Mearth,,0,0,0,127,8.3f
+ps,pl_cmasseerr1,double,,,,Planet Mass*sin(i)/sin(i) [Earth Mass] Upper Unc.,,Mearth,,0,0,0,128,8.3f
+ps,pl_cmasseerr2,double,,,,Planet Mass*sin(i)/sin(i) [Earth Mass] Lower Unc.,,Mearth,,0,0,0,129,9.3f
+ps,pl_cmasselim,int,,,,Planet Mass*sin(i)/sin(i) [Earth Mass] Limit Flag,,,,0,0,0,130,13d
+ps,pl_cmassestr,char,200.0,,200.0,Planet Mass*sin(i)/sin(i) [Earth Mass],,Mearth,,0,0,0,131,200s
+ps,pl_massj,double,,,,Planet Mass [Jupiter Mass],,Mjupiter,,0,0,0,132,8.5f
+ps,pl_massjerr1,double,,,,Planet Mass [Jupiter Mass] Upper Unc.,,Mjupiter,,0,0,0,133,8.5f
+ps,pl_massjerr2,double,,,,Planet Mass [Jupiter Mass] Lower Unc.,,Mjupiter,,0,0,0,134,8.5f
+ps,pl_massjlim,int,,,,Planet Mass [Jupiter Mass] Limit Flag,,,,0,0,0,135,12d
+ps,pl_massjstr,char,200.0,,200.0,Planet Mass [Jupiter Mass],,Mjupiter,,0,0,0,136,200s
+ps,pl_masse,double,,,,Planet Mass [Earth Mass],,Mearth,,0,0,0,137,11.5f
+ps,pl_masseerr1,double,,,,Planet Mass [Earth Mass] Upper Unc.,,Mearth,,0,0,0,138,11.5f
+ps,pl_masseerr2,double,,,,Planet Mass [Earth Mass] Lower Unc.,,Mearth,,0,0,0,139,11.5f
+ps,pl_masselim,int,,,,Planet Mass [Earth Mass] Limit Flag,,,,0,0,0,140,12d
+ps,pl_massestr,char,200.0,,200.0,Planet Mass [Earth Mass],,Mearth,,0,0,0,141,200s
+ps,pl_bmassj,double,,,,Planet Mass or Mass*sin(i) [Jupiter Mass],,Mjupiter,,0,1,0,142,8.5f
+ps,pl_bmassjerr1,double,,,,Planet Mass or Mass*sin(i) [Jupiter Mass] Upper Unc.,,Mjupiter,,0,1,0,143,8.5f
+ps,pl_bmassjerr2,double,,,,Planet Mass or Mass*sin(i) [Jupiter Mass] Lower Unc.,,Mjupiter,,0,1,0,144,8.5f
+ps,pl_bmassjlim,int,,,,Planet Mass or Mass*sin(i) [Jupiter Mass] Limit Flag,,,,0,1,0,145,13d
+ps,pl_bmassjstr,char,200.0,,200.0,Planet Mass or Mass*sin(i) [Jupiter Mass],,Mjupiter,,0,0,0,146,200s
+ps,pl_bmasse,double,,,,Planet Mass or Mass*sin(i) [Earth Mass],,Mearth,,0,1,0,147,11.5f
+ps,pl_bmasseerr1,double,,,,Planet Mass or Mass*sin(i) [Earth Mass] Upper Unc.,,Mearth,,0,1,0,148,11.5f
+ps,pl_bmasseerr2,double,,,,Planet Mass or Mass*sin(i) [Earth Mass] Lower Unc.,,Mearth,,0,1,0,149,11.5f
+ps,pl_bmasselim,int,,,,Planet Mass or Mass*sin(i) [Earth Mass] Limit Flag,,,,0,1,0,150,13d
+ps,pl_bmassestr,char,200.0,,200.0,Planet Mass or Mass*sin(i) [Earth Mass],,Mearth,,0,0,0,151,200s
+ps,pl_bmassprov,char,200.0,,200.0,Planet Mass or Mass*sin(i) Provenance,,,,0,1,0,152,200s
+ps,pl_msinij,double,,,,Planet Mass*sin(i) [Jupiter Mass],,Mjupiter,,0,0,0,153,8.5f
+ps,pl_msinijerr1,double,,,,Planet Mass*sin(i) [Jupiter Mass] Upper Unc.,,Mjupiter,,0,0,0,154,8.5f
+ps,pl_msinijerr2,double,,,,Planet Mass*sin(i) [Jupiter Mass] Lower Unc.,,Mjupiter,,0,0,0,155,8.5f
+ps,pl_msinijlim,int,,,,Planet Mass*sin(i) [Jupiter Mass] Limit Flag,,,,0,0,0,156,13d
+ps,pl_msinijstr,char,200.0,,200.0,Planet Mass*sin(i) [Jupiter Mass],,Mjupiter,,0,0,0,157,200s
+ps,pl_msinie,double,,,,Planet Mass*sin(i) [Earth Mass],,Mearth,,0,0,0,158,11.5f
+ps,pl_msinieerr1,double,,,,Planet Mass*sin(i) [Earth Mass] Upper Unc.,,Mearth,,0,0,0,159,11.5f
+ps,pl_msinieerr2,double,,,,Planet Mass*sin(i) [Earth Mass] Lower Unc.,,Mearth,,0,0,0,160,11.5f
+ps,pl_msinielim,int,,,,Planet Mass*sin(i) [Earth Mass] Limit Flag,,,,0,0,0,161,13d
+ps,pl_msiniestr,char,200.0,,200.0,Planet Mass*sin(i) [Earth Mass],,Mearth,,0,0,0,162,200s
+ps,st_teff,double,,,,Stellar Effective Temperature [K],,K,,0,1,0,163,8.2f
+ps,st_tefferr1,double,,,,Stellar Effective Temperature Upper Unc. [K],,K,,0,1,0,164,8.2f
+ps,st_tefferr2,double,,,,Stellar Effective Temperature Lower Unc. [K],,K,,0,1,0,165,8.2f
+ps,st_tefflim,int,,,,Stellar Effective Temperature Limit Flag,,,,0,1,0,166,11d
+ps,st_teffstr,char,200.0,,200.0,Stellar Effective Temperature [K],,K,,0,0,0,167,200s
+ps,st_met,double,,,,Stellar Metallicity [dex],,dex,,0,1,0,168,6.3f
+ps,st_meterr1,double,,,,Stellar Metallicity Upper Unc. [dex],,dex,,0,1,0,169,6.3f
+ps,st_meterr2,double,,,,Stellar Metallicity Lower Unc. [dex],,dex,,0,1,0,170,6.3f
+ps,st_metlim,int,,,,Stellar Metallicity Limit Flag,,,,0,1,0,171,10d
+ps,st_metstr,char,200.0,,200.0,Stellar Metallicity [dex],,dex,,0,0,0,172,200s
+ps,st_radv,double,,,,Systemic Radial Velocity [km/s],,km/s,,0,0,0,173,9.2f
+ps,st_radverr1,double,,,,Systemic Radial Velocity Upper Unc. [km/s],,km/s,,0,0,0,174,9.2f
+ps,st_radverr2,double,,,,Systemic Radial Velocity Lower Unc. [km/s],,km/s,,0,0,0,175,9.2f
+ps,st_radvlim,int,,,,Systemic Radial Velocity Limit Flag,,,,0,0,0,176,11d
+ps,st_radvstr,char,200.0,,200.0,Systemic Radial Velocity [km/s],,km/s,,0,0,0,177,200s
+ps,st_vsin,double,,,,Stellar Rotational Velocity [km/s],,km/s,,0,0,0,178,10.4f
+ps,st_vsinerr1,double,,,,Stellar Rotational Velocity [km/s] Upper Unc.,,km/s,,0,0,0,179,10.4f
+ps,st_vsinerr2,double,,,,Stellar Rotational Velocity [km/s] Lower Unc.,,km/s,,0,0,0,180,10.4f
+ps,st_vsinlim,int,,,,Stellar Rotational Velocity Limit Flag,,,,0,0,0,181,11d
+ps,st_vsinstr,char,200.0,,200.0,Stellar Rotational Velocity [km/s],,km/s,,0,0,0,182,200s
+ps,st_lum,double,,,,Stellar Luminosity [log(Solar)],,log(Lsun),,0,0,0,183,12.3f
+ps,st_lumerr1,double,,,,Stellar Luminosity Upper Unc. [log(Solar)],,log(Lsun),,0,0,0,184,12.3f
+ps,st_lumerr2,double,,,,Stellar Luminosity Lower Unc. [log(Solar)],,log(Lsun),,0,0,0,185,12.3f
+ps,st_lumlim,int,,,,Stellar Luminosity Limit Flag,,,,0,0,0,186,10d
+ps,st_lumstr,char,200.0,,200.0,Stellar Luminosity [log(Solar)],,log(Lsun),,0,0,0,187,200s
+ps,st_logg,double,,,,Stellar Surface Gravity [log(cm/s**2)],,log(cm/s**2),,0,1,0,188,8.2f
+ps,st_loggerr1,double,,,,Stellar Surface Gravity Upper Unc. [log(cm/s**2)],,log(cm/s**2),,0,1,0,189,8.2f
+ps,st_loggerr2,double,,,,Stellar Surface Gravity Lower Unc. [log(cm/s**2)],,log(cm/s**2),,0,1,0,190,8.2f
+ps,st_logglim,int,,,,Stellar Surface Gravity Limit Flag,,,,0,1,0,191,11d
+ps,st_loggstr,char,200.0,,200.0,Stellar Surface Gravity [log(cm/s**2)],,log(cm/s**2),,0,0,0,192,200s
+ps,st_age,double,,,,Stellar Age [Gyr],,Gyr,,0,0,0,193,7.3f
+ps,st_ageerr1,double,,,,Stellar Age Upper Unc. [Gyr],,Gyr,,0,0,0,194,7.3f
+ps,st_ageerr2,double,,,,Stellar Age Lower Unc. [Gyr],,Gyr,,0,0,0,195,7.3f
+ps,st_agelim,int,,,,Stellar Age Limit Flag,,,,0,0,0,196,10d
+ps,st_agestr,char,200.0,,200.0,Stellar Age [Gyr],,Gyr,,0,0,0,197,200s
+ps,st_mass,double,,,,Stellar Mass [Solar mass],,Msun,,0,1,0,198,6.2f
+ps,st_masserr1,double,,,,Stellar Mass Upper Unc. [Solar mass],,Msun,,0,1,0,199,6.2f
+ps,st_masserr2,double,,,,Stellar Mass Lower Unc. [Solar mass],,Msun,,0,1,0,200,6.2f
+ps,st_masslim,int,,,,Stellar Mass Limit Flag,,,,0,1,0,201,11d
+ps,st_massstr,char,200.0,,200.0,Stellar Mass [Solar mass],,Msun,,0,0,0,202,200s
+ps,st_dens,double,,,,Stellar Density [g/cm**3],,g/cm**3,,0,0,0,203,8.4f
+ps,st_denserr1,double,,,,Stellar Density Upper Unc. [g/cm**3],,g/cm**3,,0,0,0,204,8.4f
+ps,st_denserr2,double,,,,Stellar Density Lower Unc. [g/cm**3],,g/cm**3,,0,0,0,205,8.4f
+ps,st_denslim,int,,,,Stellar Density Limit Flag,,,,0,0,0,206,11d
+ps,st_densstr,char,200.0,,200.0,Stellar Density [g/cm**3],,g/cm**3,,0,0,0,207,200s
+ps,st_rad,double,,,,Stellar Radius [Solar Radius],,Rsun,,0,1,0,208,6.2f
+ps,st_raderr1,double,,,,Stellar Radius Upper Unc. [Solar Radius],,Rsun,,0,1,0,209,6.2f
+ps,st_raderr2,double,,,,Stellar Radius Lower Unc. [Solar Radius],,Rsun,,0,1,0,210,6.2f
+ps,st_radlim,int,,,,Stellar Radius Limit Flag,,,,0,1,0,211,10d
+ps,st_radstr,char,200.0,,200.0,Stellar Radius [Solar Radius],,Rsun,,0,0,0,212,200s
+ps,ttv_flag,int,,,,Data show Transit Timing Variations,,,,0,1,0,213,9d
+ps,ptv_flag,int,,,,Detected by Pulsation Timing Variations,,,,0,0,0,214,9d
+ps,tran_flag,int,,,,Detected by Transits,,,,0,0,0,215,10d
+ps,rv_flag,int,,,,Detected by Radial Velocity Variations,,,,0,0,0,216,8d
+ps,ast_flag,int,,,,Detected by Astrometric Variations,,,,0,0,0,217,9d
+ps,obm_flag,int,,,,Detected by Orbital Brightness Modulations,,,,0,0,0,218,9d
+ps,micro_flag,int,,,,Detected by Microlensing,,,,0,0,0,219,11d
+ps,etv_flag,int,,,,Detected by Eclipse Timing Variations,,,,0,0,0,220,9d
+ps,ima_flag,int,,,,Detected by Imaging,,,,0,0,0,221,9d
+ps,pul_flag,int,,,,Detected by Pulsar Timing Variations,,,,0,0,0,222,9d
+ps,soltype,char,100.0,,100.0,Solution Type,,,,0,1,0,223,100s
+ps,sy_snum,int,,,,Number of Stars,,,,0,1,0,224,8d
+ps,sy_pnum,int,,,,Number of Planets,,,,0,1,0,225,8d
+ps,sy_mnum,int,,,,Number of Moons,,,,0,0,0,226,8d
+ps,st_nphot,int,,,,Number of Photometry Time Series,,,,0,0,0,227,7d
+ps,st_nrvc,int,,,,Number of Radial Velocity Time Series,,,,0,0,0,228,8d
+ps,st_nspec,int,,,,Number of Stellar Spectra Measurements,,,,0,0,0,229,9d
+ps,pl_nnotes,int,,,,Number of Notes,,,,0,0,0,230,10d
+ps,pl_ntranspec,int,,,,Number of Transmission Spectra,,,,0,0,0,231,13d
+ps,pl_nespec,int,,,,Number of Eclipse Spectra,,,,0,0,0,232,13d
+ps,pl_ndispec,int,,,,Number of Direct Imaging Spectra,,,,0,0,0,233,13d
+ps,sy_pm,double,,,,Total Proper Motion [mas/yr],,mas/yr,,0,0,0,234,14.7f
+ps,sy_pmerr1,double,,,,Total Proper Motion Upper Unc [mas/yr],,mas/yr,,0,0,0,235,14.7f
+ps,sy_pmerr2,double,,,,Total Proper Motion Lower Unc [mas/yr],,mas/yr,,0,0,0,236,14.7f
+ps,sy_pmstr,char,200.0,,200.0,Total Proper Motion [mas/yr],,mas/yr,,0,0,0,237,200s
+ps,sy_pmra,double,,,,Proper Motion (RA) [mas/yr],,mas/yr,,0,0,0,238,14.7f
+ps,sy_pmraerr1,double,,,,Proper Motion (RA) [mas/yr] Upper Unc,,mas/yr,,0,0,0,239,14.7f
+ps,sy_pmraerr2,double,,,,Proper Motion (RA) [mas/yr] Lower Unc,,mas/yr,,0,0,0,240,14.7f
+ps,sy_pmrastr,char,200.0,,200.0,Proper Motion (RA) [mas/yr],,mas/yr,,0,0,0,241,200s
+ps,sy_pmdec,double,,,,Proper Motion (Dec) [mas/yr],,mas/yr,,0,0,0,242,14.7f
+ps,sy_pmdecerr1,double,,,,Proper Motion (Dec) [mas/yr] Upper Unc,,mas/yr,,0,0,0,243,14.7f
+ps,sy_pmdecerr2,double,,,,Proper Motion (Dec) [mas/yr] Lower Unc,,mas/yr,,0,0,0,244,14.7f
+ps,sy_pmdecstr,char,200.0,,200.0,Proper Motion (Dec) [mas/yr],,mas/yr,,0,0,0,245,200s
+ps,sy_plx,double,,,,Parallax [mas],,mas,,0,0,0,246,14.7f
+ps,sy_plxerr1,double,,,,Parallax [mas] Upper Unc,,mas,,0,0,0,247,14.7f
+ps,sy_plxerr2,double,,,,Parallax [mas] Lower Unc,,mas,,0,0,0,248,14.7f
+ps,sy_plxstr,char,200.0,,200.0,Parallax [mas],,mas,,0,0,0,249,200s
+ps,sy_dist,double,,,,Distance [pc],,pc,,0,1,0,250,14.7f
+ps,sy_disterr1,double,,,,Distance [pc] Upper Unc,,pc,,0,1,0,251,14.7f
+ps,sy_disterr2,double,,,,Distance [pc] Lower Unc,,pc,,0,1,0,252,14.7f
+ps,sy_diststr,char,200.0,,200.0,Distance [pc],,pc,,0,0,0,253,200s
+ps,sy_bmag,double,,,,B (Johnson) Magnitude,,mag,,0,0,0,254,14.7f
+ps,sy_bmagerr1,double,,,,B (Johnson) Magnitude Upper Unc,,mag,,0,0,0,255,14.7f
+ps,sy_bmagerr2,double,,,,B (Johnson) Magnitude Lower Unc,,mag,,0,0,0,256,14.7f
+ps,sy_bmagstr,char,200.0,,200.0,B (Johnson) Magnitude,,mag,,0,0,0,257,200s
+ps,sy_vmag,double,,,,V (Johnson) Magnitude,,mag,,0,1,0,258,14.7f
+ps,sy_vmagerr1,double,,,,V (Johnson) Magnitude Upper Unc,,mag,,0,1,0,259,14.7f
+ps,sy_vmagerr2,double,,,,V (Johnson) Magnitude Lower Unc,,mag,,0,1,0,260,14.7f
+ps,sy_vmagstr,char,200.0,,200.0,V (Johnson) Magnitude,,mag,,0,0,0,261,200s
+ps,sy_jmag,double,,,,J (2MASS) Magnitude,,mag,,0,0,0,262,14.7f
+ps,sy_jmagerr1,double,,,,J (2MASS) Magnitude Upper Unc,,mag,,0,0,0,263,14.7f
+ps,sy_jmagerr2,double,,,,J (2MASS) Magnitude Lower Unc,,mag,,0,0,0,264,14.7f
+ps,sy_jmagstr,char,200.0,,200.0,J (2MASS) Magnitude,,mag,,0,0,0,265,200s
+ps,sy_hmag,double,,,,H (2MASS) Magnitude,,mag,,0,0,0,266,14.7f
+ps,sy_hmagerr1,double,,,,H (2MASS) Magnitude Upper Unc,,mag,,0,0,0,267,14.7f
+ps,sy_hmagerr2,double,,,,H (2MASS) Magnitude Lower Unc,,mag,,0,0,0,268,14.7f
+ps,sy_hmagstr,char,200.0,,200.0,H (2MASS) Magnitude,,mag,,0,0,0,269,200s
+ps,sy_kmag,double,,,,Ks (2MASS) Magnitude,,mag,,0,1,0,270,14.7f
+ps,sy_kmagerr1,double,,,,Ks (2MASS) Magnitude Upper Unc,,mag,,0,1,0,271,14.7f
+ps,sy_kmagerr2,double,,,,Ks (2MASS) Magnitude Lower Unc,,mag,,0,1,0,272,14.7f
+ps,sy_kmagstr,char,200.0,,200.0,Ks (2MASS) Magnitude,,mag,,0,0,0,273,200s
+ps,sy_umag,double,,,,u (Sloan) Magnitude,,mag,,0,0,0,274,14.7f
+ps,sy_umagerr1,double,,,,u (Sloan) Magnitude Upper Unc,,mag,,0,0,0,275,14.7f
+ps,sy_umagerr2,double,,,,u (Sloan) Magnitude Lower Unc,,mag,,0,0,0,276,14.7f
+ps,sy_umagstr,char,200.0,,200.0,u (Sloan) Magnitude,,mag,,0,0,0,277,200s
+ps,sy_rmag,double,,,,r (Sloan) Magnitude,,mag,,0,0,0,278,14.7f
+ps,sy_rmagerr1,double,,,,r (Sloan) Magnitude Upper Unc,,mag,,0,0,0,279,14.7f
+ps,sy_rmagerr2,double,,,,r (Sloan) Magnitude Lower Unc,,mag,,0,0,0,280,14.7f
+ps,sy_rmagstr,char,200.0,,200.0,r (Sloan) Magnitude,,mag,,0,0,0,281,200s
+ps,sy_imag,double,,,,i (Sloan) Magnitude,,mag,,0,0,0,282,14.7f
+ps,sy_imagerr1,double,,,,i (Sloan) Magnitude Upper Unc,,mag,,0,0,0,283,14.7f
+ps,sy_imagerr2,double,,,,i (Sloan) Magnitude Lower Unc,,mag,,0,0,0,284,14.7f
+ps,sy_imagstr,char,200.0,,200.0,i (Sloan) Magnitude,,mag,,0,0,0,285,200s
+ps,sy_zmag,double,,,,z (Sloan) Magnitude,,mag,,0,0,0,286,14.7f
+ps,sy_zmagerr1,double,,,,z (Sloan) Magnitude Upper Unc,,mag,,0,0,0,287,14.7f
+ps,sy_zmagerr2,double,,,,z (Sloan) Magnitude Lower Unc,,mag,,0,0,0,288,14.7f
+ps,sy_zmagstr,char,200.0,,200.0,z (Sloan) Magnitude,,mag,,0,0,0,289,200s
+ps,sy_w1mag,double,,,,W1 (WISE) Magnitude,,mag,,0,0,0,290,14.7f
+ps,sy_w1magerr1,double,,,,W1 (WISE) Magnitude Upper Unc,,mag,,0,0,0,291,14.7f
+ps,sy_w1magerr2,double,,,,W1 (WISE) Magnitude Lower Unc,,mag,,0,0,0,292,14.7f
+ps,sy_w1magstr,char,200.0,,200.0,W1 (WISE) Magnitude,,mag,,0,0,0,293,200s
+ps,sy_w2mag,double,,,,W2 (WISE) Magnitude,,mag,,0,0,0,294,14.7f
+ps,sy_w2magerr1,double,,,,W2 (WISE) Magnitude Upper Unc,,mag,,0,0,0,295,14.7f
+ps,sy_w2magerr2,double,,,,W2 (WISE) Magnitude Lower Unc,,mag,,0,0,0,296,14.7f
+ps,sy_w2magstr,char,200.0,,200.0,W2 (WISE) Magnitude,,mag,,0,0,0,297,200s
+ps,sy_w3mag,double,,,,W3 (WISE) Magnitude,,mag,,0,0,0,298,14.7f
+ps,sy_w3magerr1,double,,,,W3 (WISE) Magnitude Upper Unc,,mag,,0,0,0,299,14.7f
+ps,sy_w3magerr2,double,,,,W3 (WISE) Magnitude Lower Unc,,mag,,0,0,0,300,14.7f
+ps,sy_w3magstr,char,200.0,,200.0,W3 (WISE) Magnitude,,mag,,0,0,0,301,200s
+ps,sy_w4mag,double,,,,W4 (WISE) Magnitude,,mag,,0,0,0,302,14.7f
+ps,sy_w4magerr1,double,,,,W4 (WISE) Magnitude Upper Unc,,mag,,0,0,0,303,14.7f
+ps,sy_w4magerr2,double,,,,W4 (WISE) Magnitude Lower Unc,,mag,,0,0,0,304,14.7f
+ps,sy_w4magstr,char,200.0,,200.0,W4 (WISE) Magnitude,,mag,,0,0,0,305,200s
+ps,sy_gmag,double,,,,g (Sloan) Magnitude,,mag,,0,0,0,306,14.7f
+ps,sy_gmagerr1,double,,,,g (Sloan) Magnitude Upper Unc,,mag,,0,0,0,307,14.7f
+ps,sy_gmagerr2,double,,,,g (Sloan) Magnitude Lower Unc,,mag,,0,0,0,308,14.7f
+ps,sy_gmagstr,char,200.0,,200.0,g (Sloan) Magnitude,,mag,,0,0,0,309,200s
+ps,sy_gaiamag,double,,,,Gaia Magnitude,,mag,,0,1,0,310,14.7f
+ps,sy_gaiamagerr1,double,,,,Gaia Magnitude Upper Unc,,mag,,0,1,0,311,14.7f
+ps,sy_gaiamagerr2,double,,,,Gaia Magnitude Lower Unc,,mag,,0,1,0,312,14.7f
+ps,sy_gaiamagstr,char,200.0,,200.0,Gaia Magnitude,,mag,,0,0,0,313,200s
+ps,sy_tmag,double,,,,TESS Magnitude,,mag,,0,0,0,314,14.7f
+ps,sy_tmagerr1,double,,,,TESS Magnitude Upper Unc,,mag,,0,0,0,315,14.7f
+ps,sy_tmagerr2,double,,,,TESS Magnitude Lower Unc,,mag,,0,0,0,316,14.7f
+ps,sy_tmagstr,char,200.0,,200.0,TESS Magnitude,,mag,,0,0,0,317,200s
+ps,pl_controv_flag,int,,,,Controversial Flag,,,,0,1,0,318,16d
+ps,pl_tsystemref,char,14.0,,14.0,Time Reference Frame and Standard,,,,0,0,0,319,14s
+ps,st_metratio,char,15.0,,15.0,Stellar Metallicity Ratio,,,,0,1,0,320,15s
+ps,st_spectype,char,25.0,,25.0,Spectral Type,,,,0,1,0,321,25s
+ps,sy_kepmag,double,,,,Kepler Magnitude,,mag,,0,0,0,322,6.3f
+ps,sy_kepmagerr1,double,,,,Kepler Magnitude Upper Unc,,mag,,0,0,0,323,6.3f
+ps,sy_kepmagerr2,double,,,,Kepler Magnitude Lower Unc,,mag,,0,0,0,324,6.3f
+ps,sy_kepmagstr,char,200.0,,200.0,Kepler Magnitude,,mag,,0,0,0,325,200s
+ps,st_rotp,double,,,,Stellar Rotational Period [day],,day,,0,0,0,326,8.2f
+ps,st_rotperr1,double,,,,Stellar Rotational Period [day] Upper Unc.,,day,,0,0,0,327,8.2f
+ps,st_rotperr2,double,,,,Stellar Rotational Period [day] Lower Unc.,,day,,0,0,0,328,8.2f
+ps,st_rotplim,int,,,,Stellar Rotational Period Limit Flag,,,,0,0,0,329,11d
+ps,st_rotpstr,char,200.0,,200.0,Stellar Rotational Period [day],,day,,0,0,0,330,200s
+ps,pl_projobliq,double,,,,Projected Obliquity [deg],,deg,,0,0,0,331,6.2f
+ps,pl_projobliqerr1,double,,,,Projected Obliquity Upper Unc. [deg],,deg,,0,0,0,332,6.2f
+ps,pl_projobliqerr2,double,,,,Projected Obliquity Lower Unc. [deg],,deg,,0,0,0,333,6.2f
+ps,pl_projobliqlim,int,,,,Projected Obliquity Limit Flag,,,,0,0,0,334,16d
+ps,pl_projobliqstr,char,200.0,,200.0,Projected Obliquity [deg],,deg,,0,0,0,335,200s
+ps,x,double,,,,Spatial Coordinate X,,,,0,0,0,336,20.17f
+ps,pl_trueobliq,double,,,,True Obliquity [deg],,deg,,0,0,0,337,6.2f
+ps,pl_trueobliqerr1,double,,,,True Obliquity Upper Unc. [deg],,deg,,0,0,0,338,6.2f
+ps,y,double,,,,Spatial Coordinate Y,,,,0,0,0,339,20.17f
+ps,z,double,,,,Spatial Coordinate Z,,,,0,0,0,340,20.17f
+ps,pl_trueobliqerr2,double,,,,True Obliquity Lower Unc. [deg],,deg,,0,0,0,341,6.2f
+ps,htm20,int,,,,Spatial Index,,,,0,0,0,342,20d
+ps,pl_trueobliqlim,int,,,,True Obliquity Limit Flag,,,,0,0,0,343,16d
+ps,gaia_id,char,30.0,,30.0,GAIA ID,,,,0,0,0,344,30s
+ps,cb_flag,int,,,,Circumbinary Flag,,,,0,0,0,345,9d
+ps,pl_trueobliqstr,char,200.0,,200.0,True Obliquity [deg],,deg,,0,0,0,346,200s
+ps,sy_icmag,double,,,,I (Cousins) Magnitude,,mag,,0,0,0,347,8.3f
+ps,sy_icmagerr1,double,,,,I (Cousins) Magnitude Upper Unc,,mag,,0,0,0,348,8.3f
+ps,sy_icmagerr2,double,,,,I (Cousins) Magnitude Lower Unc,,mag,,0,0,0,349,8.3f
+ps,sy_icmagstr,char,200.0,,200.0,I (Cousins) Magnitude,,mag,,0,0,0,350,200s
+ps,rowupdate,char,20.0,,20.0,Date of Last Update,,,,0,1,0,351,20s
+ps,pl_pubdate,char,20.0,,20.0,Planetary Parameter Reference Publication Date,,,,0,1,0,352,20s
+ps,releasedate,char,20.0,,20.0,Release Date,,,,0,1,0,353,20s
+ps,dkin_flag,int,,,,Detected by Disk Kinematics,,,,0,0,0,354,9d

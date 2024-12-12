@@ -1,9 +1,14 @@
+"""helper fucntions for data gathering/saving"""
 from datetime import datetime
 from datetime import date
+from io import StringIO
 import os
 import re
 
-path = "directory"
+from astroquery.utils.tap.core import TapPlus
+import pandas as pd
+
+# PATH = "directory"
 
 def get_user_confirm(message: str) -> bool:
     """take in message for user input and confirmation
@@ -32,7 +37,7 @@ def is_valid_file_name(string: str) -> bool:
     return False
 
 
-def get_hour_str():
+def get_hour_str() -> str:
     """:returns: 'str': HH format"""
     return datetime.now().strftime("%H")
 
@@ -43,7 +48,7 @@ def get_date_str() -> str:
 def path_exists(path_name: str) -> bool:
     return os.path.exists(path_name)
 
-def make_path(current_path, add_path):
+def make_path(current_path: str, add_path: str) -> str:
     return current_path+"/"+add_path
 
 def get_dirs(directory: str) -> list|None:
@@ -97,3 +102,64 @@ def format_name_for_file(string: str) -> str:
     if string:
         return string.replace(" ", "_")
     raise ValueError("No text to format")
+
+
+def tap_request(service_url: str, query: str, sync_type: str) -> pd.DataFrame:
+    """get TapPlus query data back as pandas DataFrame"""
+    if not sync_type in ["async", "sync"]:
+        raise ValueError("sync_type must be 'async' or 'sync'")
+
+    tap_service = TapPlus(url=service_url)
+
+    if sync_type == "async":
+        job = tap_service.launch_job_async(query)
+    else:
+        job = tap_service.launch_job(query)
+
+    result_csv = job.get_results().to_pandas().to_csv(index=False)
+    return pd.read_csv(StringIO(result_csv))
+
+
+
+def clean_data(data: pd.DataFrame, column_name: str) -> pd.DataFrame:
+    """organise data alphabetaically and drop duplicates
+    
+    :param column_name: column name to sort data by"""
+    data = _organise_data(data, column_name)
+    data = _drop_duplicate_data(data)
+
+    return data
+
+def _organise_data(data, column_name):
+    return data.sort_values(by=[column_name])
+
+def _drop_duplicate_data(data):
+    return data.drop_duplicates()
+
+
+def show_cleaning(data: pd.DataFrame, data_colum: pd.DataFrame, column_name: str):
+    """
+    :param data_column: Dataframe.column to reference data by
+    :param column_name: column name to reference data by
+    """
+    print(f"Rows in data: {data_colum.count().sum()}\n")
+    duplicates = data.duplicated(subset=[column_name], keep='first')
+    print(f"Number of non-duplicate systems: {data_colum.count().sum() - duplicates.sum()}")
+    print(f"Number of duplicate systems: {duplicates.sum()}")
+    print(f"Columns with null values:\n{data.isnull().sum()}")
+
+def is_data_different(last: str, new: str) -> bool:
+    """checks if data is different from the last time it was gathered
+    :param last: str path to csv
+    :param new: str path to csv
+    """
+    last = pd.read_csv(last)
+    new = pd.read_csv(new)
+
+    if new.equals(last):
+        return False
+    return True
+
+def date_data_pull(data):
+    data['data_collected_on'] = pd.to_datetime(datetime.now())
+    return data

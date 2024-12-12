@@ -1,3 +1,5 @@
+"""functions to create visual figures from dataframes"""
+
 from matplotlib import pyplot as plt
 import matplotlib.figure
 import numpy as np
@@ -29,6 +31,8 @@ STAR_COLOURS = [
 ]
 
 def save_figures(systems_df, star_series, planet_to_star_df):
+    """save all figures"""
+
     # create figure
     fig1, fig1_name = create_fig_star_pie(star_series=star_series, systems_df=systems_df)
     # save figure
@@ -38,19 +42,23 @@ def save_figures(systems_df, star_series, planet_to_star_df):
     fig2, fig2_name = create_fig_nested_bar(planet_to_star_df=planet_to_star_df)
     # save figure
     save_fig(fig2, fig2_name)
-    
+
     # create figure
     fig3, fig3_name = create_fig_system_pies(planet_to_star_df=planet_to_star_df)
     # save figure
     save_fig(fig3, fig3_name)
 
 def save_fig(fig: matplotlib.figure.Figure, fig_name: str) -> None:
+    """formats file names and saves figures"""
+
     # overwrite top level figure
     fig.savefig(("static/"+fig_name+".png"))
     # save with datestamp to dated folder
     save_dated_figure(fig, fig_name, "png")
 
 def create_fig_star_pie(star_series, systems_df):
+    """generate Occurance of Exoplanetary Systems by Star System Type pie figure"""
+
     # create figure for chart and text to display on
     fig, ax = plt.subplots(figsize=(8, 6))
     # Array of the dataframe index == star count for the legend
@@ -60,13 +68,13 @@ def create_fig_star_pie(star_series, systems_df):
 
     # create pie chart
     ax.pie(
-        star_series, 
-        colors=STAR_COLOURS, 
-        explode=explode, 
-        labels=labels, 
-        autopct='%1.2f%%', 
-        pctdistance=0.5, 
-        labeldistance=1.2, 
+        star_series,
+        colors=STAR_COLOURS,
+        explode=explode,
+        labels=labels,
+        autopct='%1.2f%%',
+        pctdistance=0.5,
+        labeldistance=1.2,
         textprops={
             'size' : 'large',
             'color': '#581845',
@@ -83,8 +91,8 @@ def create_fig_star_pie(star_series, systems_df):
 
     # allow legend to be set to fig not ax
     fig.legend(
-        labels, 
-        title="Stars in system", 
+        labels,
+        title="Stars in system",
         title_fontsize=12,
         loc=1,
         fontsize=12
@@ -92,7 +100,7 @@ def create_fig_star_pie(star_series, systems_df):
 
     # print count of rows from cleaned data as it will match systems with confirmed exoplanets
     text1 = f"Confirmed exoplanet\nsystems:\n{systems_df['sy_pnum'].count()}"
-    # print sum of system planets column as all values will match the total amount of exoplanets 
+    # print sum of system planets column as all values will match the total amount of exoplanets
     text2 = f"Confirmed exoplanets:\n{systems_df['sy_pnum'].sum()}"
     fig.text(0, 0.9, text1, size=12)
     fig.text(0, 0.8, text2, size=12)
@@ -107,7 +115,9 @@ def create_fig_star_pie(star_series, systems_df):
     # save_dated_figure(fig, fig_name, "png")
 
 def create_fig_nested_bar(planet_to_star_df):
-    # create a figure that contains 2 plots 
+    """generate exoplanet_systems_by_star_count nested bar figure"""
+
+    # create a figure that contains 2 plots
     fig, ax = plt.subplots(1, 2, figsize=(16, 5))
 
     bar_width = 0.1
@@ -142,7 +152,7 @@ def create_fig_nested_bar(planet_to_star_df):
                         fontsize=8,
                     )
         # *******************
-        
+
         ax[i].set_xlabel('System Star Count')
         ax[i].set_ylabel('Observations')
         ax[i].set_xticks(indices + bar_width * 4)
@@ -166,6 +176,8 @@ def create_fig_nested_bar(planet_to_star_df):
     # save_dated_figure(fig, fig_name, "png")
 
 def create_fig_system_pies(planet_to_star_df):
+    """generate Most Common Exoplanet Systems pies figure"""
+
     # assign axes to automate axes columns for charts
     axes = len(planet_to_star_df)
     fig, ax = plt.subplots(1, axes, figsize=(16, 5))
@@ -188,11 +200,11 @@ def create_fig_system_pies(planet_to_star_df):
 
         # create a color map with only the labels in current data
         # *************
-        # Author: ChatGPT 
+        # Author: ChatGPT
         # Date: 2024
         colors = [
-            PLANET_COLOUR_MAP[label] 
-            for label in star_system.index 
+            PLANET_COLOUR_MAP[label]
+            for label in star_system.index
             if label in PLANET_COLOUR_MAP
         ]
         # *************
@@ -206,8 +218,8 @@ def create_fig_system_pies(planet_to_star_df):
             explode=explode,
             textprops={'color': TEXT_COLOUR, 'weight': 'bold'}
         )
-        
-        # systems_df.name makes sure that the right star count if printed out if there 
+
+        # systems_df.name makes sure that the right star count if printed out if there
         # was a missing star count i.e no 5 star systems but there was a 6 star system
         ax[i].set_title(
             f"{star_system.name} star",
@@ -215,7 +227,7 @@ def create_fig_system_pies(planet_to_star_df):
         i += 1
 
     # *************
-    # Author: ChatGPT 
+    # Author: ChatGPT
     # Date: 2024
     # ChatGPT wrote this for me as I struggled with the handles documentation
     handles = [
@@ -226,7 +238,7 @@ def create_fig_system_pies(planet_to_star_df):
     ]
     # *************
 
-    # create legend with corrosponding colours for 
+    # create legend with corrosponding colours for
     # planet counts and colours
     fig.legend(
         handles,
