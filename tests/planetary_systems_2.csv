@@ -1,0 +1,9 @@
+pl_name,hostname,sy_snum,sy_pnum,cb_flag,disc_pubdate
+planet-a,star-a,3,2,1,2003-12
+planet-b,star-z,1,2,1,2003-01
+planet-c,star-c,7,2,1,2003-02
+planet-d,star-d,1,7,1,2003-02
+planet-e,star-e,1,2,7,2003-02
+planet-f,star-f,1,2,1,2003-02
+planet-g,star-g,1,2,1,2003-02
+planet-h,star-h,1,2,1,2003-02

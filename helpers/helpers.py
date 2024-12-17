@@ -36,11 +36,6 @@ def is_valid_file_name(string: str) -> bool:
         return True
     return False
 
-
-def get_hour_str() -> str:
-    """:returns: 'str': HH format"""
-    return datetime.now().strftime("%H")
-
 def get_date_str() -> str:
     """:returns: 'str' of current date in YYYYMMDD format"""
     return str(date.today()).replace("-", "")
@@ -120,7 +115,6 @@ def tap_request(service_url: str, query: str, sync_type: str) -> pd.DataFrame:
     return pd.read_csv(StringIO(result_csv))
 
 
-
 def clean_data(data: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """organise data alphabetaically and drop duplicates
     
@@ -137,7 +131,7 @@ def _drop_duplicate_data(data):
     return data.drop_duplicates()
 
 
-def show_cleaning(data: pd.DataFrame, data_colum: pd.DataFrame, column_name: str):
+def show_cleaning(data: pd.DataFrame, data_colum: pd.DataFrame, column_name: str) -> None:
     """
     :param data_column: Dataframe.column to reference data by
     :param column_name: column name to reference data by
@@ -147,19 +141,3 @@ def show_cleaning(data: pd.DataFrame, data_colum: pd.DataFrame, column_name: str
     print(f"Number of non-duplicate systems: {data_colum.count().sum() - duplicates.sum()}")
     print(f"Number of duplicate systems: {duplicates.sum()}")
     print(f"Columns with null values:\n{data.isnull().sum()}")
-
-def is_data_different(last: str, new: str) -> bool:
-    """checks if data is different from the last time it was gathered
-    :param last: str path to csv
-    :param new: str path to csv
-    """
-    last = pd.read_csv(last)
-    new = pd.read_csv(new)
-
-    if new.equals(last):
-        return False
-    return True
-
-def date_data_pull(data):
-    data['data_collected_on'] = pd.to_datetime(datetime.now())
-    return data
