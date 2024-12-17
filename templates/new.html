@@ -8,4 +8,64 @@
 <h1>
     New Discoveries
 </h1>
+
+<!-- <div>
+    <table class="center">
+        <thead>
+            <tr>
+                <th colspan="3"><h2>NEW SYSTEMS</h2></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>System Name</th>
+                <th>Star Count</th>
+                <th>Planet Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for system in new_systems %}
+            <tr>
+                <td>{{ system.sy_name }}</td>
+                <td>{{ system.sy_snum }}</td>
+                <td>{{ system.sy_pnum }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div> -->
+
+<div>
+    <table class="center table-disc">
+        <thead>
+            <tr>
+                <th colspan="7"><h2>NEW PLANETS</h2></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Planet Name</th>
+                <th>Host Name</th>
+                <th>System Star Count</th>
+                <th>System Planet Count</th>
+                <th>Circumbinary?</th>
+                <th>Public Discovery Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in new_planets %}
+            <tr>
+                <td class="td-nowrap">{{ planet.planet_icos }}</td>
+                <td>{{ planet.pl_name }}</td>
+                <td>{{ planet.hostname }}</td>
+                <td>{{ planet.sy_snum }}</td>
+                <td>{{ planet.sy_pnum }}</td>
+                <td>{{ planet.cb_flag }}</td>
+                <td>{{ planet.disc_pubdate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
