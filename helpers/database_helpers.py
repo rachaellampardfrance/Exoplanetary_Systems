@@ -59,6 +59,7 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
                 OR planetary_systems.hostname != excluded.hostname;
     """, data_to_insert)
 
+
 def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
     """insert/update new pandas dataframe into the stellar_hosts table"""
     
@@ -99,4 +100,36 @@ def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
             WHERE
                 stellar_hosts.sy_snum != excluded.sy_snum
                 OR stellar_hosts.sy_pnum != excluded.sy_pnum;
+    """, data_to_insert)
+
+
+def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
+    """insert/update new pandas dataframe into the stellar_hosts table"""
+    
+    data_to_insert = []
+    for _, row in data_frame.iterrows():
+        data_to_insert.append((
+            row['sy_name'],
+            row['hostname'],
+        ))
+
+    with sqlite3.connect(DB_PATH) as connection:
+        connection.executemany("""
+            INSERT INTO stellar (
+                sy_name,
+                hostname,
+                last_updated
+            )
+            VALUES (
+                ?, ?, current_timestamp
+            )
+            ON CONFLICT(hostname)
+            DO UPDATE SET
+                sy_name = CASE
+                    WHEN excluded.sy_name != stellar.sy_name
+                    THEN excluded.sy_name
+                    ELSE stellar.sy_name END,
+                last_updated = current_timestamp
+            WHERE
+                stellar.sy_name != excluded.sy_name;
     """, data_to_insert)
