@@ -9,7 +9,7 @@
     <div>
         <h2 class="padded-top-bottom">Exoplanet Systems by Star Count</h2>
         <p>A pie chart representation of what type of systems exoplanets most commonly occur in relation to how many stars are within the system.</p>
-        <img class="center padded" src="static/exoplanet_systems_by_star_count.png" alt="Exoplanet Systems by Star Count Nested Bar Charts" width="80%">
+        <img class="center padded" src="{{ url_for('static', filename='exoplanet_systems_by_star_count.png') }}" alt="Exoplanet Systems by Star Count Nested Bar Charts" width="80%">
         <div>
             <p><b>Pie chart -</b> represents data of what systems exoplanets most commonly occur in, related to how many stars are in the system.</p>
             <p><b>Legend -</b> displays how many stars are in each system on the pie chart related by color.</p>
@@ -20,7 +20,7 @@
         <h2 class="padded-top-bottom">Most Common Exoplanet Systems</h2>
         <p>A figure containing two nested bar charts that represent all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system. This is intended to show the frequency in which exoplanets/multiplanetary systems occur in relation to singular star and binary star systems.</p>
         <p>The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence of exoplanetary systems whereas 'log' is intended to help visualise small frequencies.</p>
-        <img class="center padded" src="static/most_common_exoplanet_systems.png" alt="Most Common Exoplanet Systems Pie Charts" width="80%">
+        <img class="center padded" src="{{ url_for('static', filename='most_common_exoplanet_systems.png') }}" alt="Most Common Exoplanet Systems Pie Charts" width="80%">
         <p><b>Nested bar chart -</b>represents all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system.</p>
         <p><b>Nested bar chart LOG -</b>represents the same data as above but in a log format to help visualise small data</p>
     </div>
@@ -29,7 +29,7 @@
         <p>A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.</p>
         <p><b>NOTE:</b> pie charts do not include any exoplanet systems that would fall in less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)</p>
         <p>Additionally note that data that falls in less than the 1% is completely left out of the data.</p>
-        <img class="center padded" src="static/occurance_of_exoplanetary_systems_by_star_system_type.png" alt="Occurance of Exoplanetary Systems by Star System Type Pie Chart" width="35%">
+        <img class="center padded" src="{{ url_for('static', filename='occurance_of_exoplanetary_systems_by_star_system_type.png') }}" alt="Occurance of Exoplanetary Systems by Star System Type Pie Chart" width="35%">
         <p><b>Pie charts -</b> Each pie chart represents which is the most common types of exoplanet systems in relation to it's systems star count</p>
         <p><b>Legend -</b> The legend visualises the planet count by color and applies to all pie charts</p>
     </div>

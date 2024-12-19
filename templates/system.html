@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    System
+{% endblock %}
+
+{% block main %}
+<h1>
+    System
+</h1>
+
+<div class="center">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="{{ data.size }}"><h2>{{ data.system_name }}</h2></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th></th>
+                <th colspan="{{ data.stars|length }}">Stars</th>
+                <th colspan="{{ data.planets|length }}">Planets</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>🌌</td>
+                {% for star in data.stars %}
+                <td>☀️</td>
+                {% endfor %}
+                {% for planet in data.planets %}
+                <td>🪐</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Name</td>
+                {% for star in data.stars %}
+                <td>{{ star }}</td>
+                {% endfor %}
+                {% for planet in data.planets %}
+                <td>{{ planet[0] }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Discovery Year<br>(Published)</td>
+                {% for star in data.stars %}
+                <td></td>
+                {% endfor %}
+                {% for planet in data.planets %}
+                <td>{{ planet[1] }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{ yes }}
+<!-- <p>{{ star_count }}</p>
+<p>{{ planet_count }}</p> -->
+{% endblock %}

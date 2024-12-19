@@ -1,15 +1,23 @@
-from flask import Flask, render_template
+"""API Program for handling requests for website pages"""
+
 import sqlite3
+from flask import Flask, render_template
+
+# flask --app main run --debug
 
 app = Flask(__name__)
 
-db = "database.db"
+DB = "database.db"
+TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
 
 @app.route("/")
 def home():
+    """Renders HTML home page with current exoplanet and
+    exoplanetary systems count
+    """
     exo_systems = 0
     planets = 0
-    with sqlite3.connect(db) as conn:
+    with sqlite3.connect(DB) as conn:
         cursor = conn.cursor()
 
         cursor.execute("""
@@ -28,12 +36,16 @@ def home():
 
 @app.route("/discoveries")
 def discoveries():
+    """Renders static page with plot images and descriptions"""
     return render_template("discoveries.html")
 
 @app.route("/new")
 def new():
+    """Generate most recent planet discoveries from planetary_systems
+    database table from MAX disc_pubdate
+    """
     new_systems = []
-    with sqlite3.connect(db) as conn:
+    with sqlite3.connect(DB) as conn:
         cursor = conn.cursor()
 
         modified = cursor.execute("""
@@ -55,7 +67,7 @@ def new():
         )
 
     new_planets = []
-    with sqlite3.connect(db) as conn:
+    with sqlite3.connect(DB) as conn:
         cursor = conn.cursor()
 
         modified = cursor.execute("""
@@ -73,7 +85,7 @@ def new():
             cb_flag = "Yes"
         else:
             cb_flag = "No"
-        
+
         planet_icos = ("☀️" * mod[2]) + ("🪐" * mod[3])
 
         new_planets.append(
@@ -88,6 +100,65 @@ def new():
             }
         )
     return render_template("new.html", new_systems=new_systems, new_planets=new_planets)
+
+@app.route("/system/<stellar_body>")
+def system(stellar_body):
+    """Dynamically generate system page from planet or star name
+    prefix query with 'p-' or 's-' to get system name from relevent database
+    """
+    body, body_name = stellar_body.split('-', 1)
+
+    data = {
+        'system_name': '',
+        'planets': [],
+        'stars': [],
+        'size': 0
+    }
+
+    if body not in ['p', 'st', 'sy']:
+        # fail
+        pass
+
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+
+        if body == 'p':
+            cursor.execute(f"""SELECT hostname FROM {TABLES[0]} WHERE pl_name='{body_name}'""")
+            body_name = cursor.fetchone()[0]
+        
+        if body in ['p', 'st']:
+            cursor.execute(f"""SELECT sy_name FROM {TABLES[2]} WHERE hostname='{body_name}'""")
+            data['system_name'] = cursor.fetchone()[0]
+        
+        if body == 'sy':
+            data['system_name'] = body_name
+
+
+        cursor.execute(f"""
+            SELECT hostname
+            FROM {TABLES[2]}
+            WHERE sy_name='{data['system_name']}'
+        """)
+        stars = cursor.fetchall()
+        data['stars'] = [i[0] for i in stars]
+
+        query = f"""
+            SELECT pl_name, disc_pubdate
+            FROM {TABLES[0]}
+            WHERE hostname IN ({','.join('?' * len(data['stars']))})
+        """
+        cursor.execute(query, data['stars'])
+        planets = cursor.fetchall()
+        data['planets'] = list(planets)
+
+
+        data['size'] = len(data['planets']) + len(data['stars']) + 1
+
+    return render_template("system.html", data=data)
+
+
+
+
 
 @app.route("/about")
 def about():

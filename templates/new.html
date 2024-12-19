@@ -35,8 +35,8 @@
     </table>
 </div> -->
 
-<div>
-    <table class="center table-disc">
+<div class="center">
+    <table>
         <thead>
             <tr>
                 <th colspan="7"><h2>NEW PLANETS</h2></th>
@@ -57,8 +57,8 @@
             {% for planet in new_planets %}
             <tr>
                 <td class="td-nowrap">{{ planet.planet_icos }}</td>
-                <td>{{ planet.pl_name }}</td>
-                <td>{{ planet.hostname }}</td>
+                <td><a href="{{ url_for('system', stellar_body='p-' + planet.pl_name) }}">{{ planet.pl_name }}</a></td>
+                <td><a href="{{ url_for('system', stellar_body='st-' + planet.hostname) }}">{{ planet.hostname }}</a></td>
                 <td>{{ planet.sy_snum }}</td>
                 <td>{{ planet.sy_pnum }}</td>
                 <td>{{ planet.cb_flag }}</td>

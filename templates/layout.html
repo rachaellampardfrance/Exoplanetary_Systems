@@ -7,8 +7,8 @@
 
         <!-- consider getting bootstrap -->
         
-        <link href="static\icons\solar-system_10462711.png" rel="icon">
-        <link href="/static/styles.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='icons/solar-system_10462711.png') }}" rel="icon">
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 
         <!-- google font AudioWide -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
@@ -20,7 +20,7 @@
         <nav class="navbar">
             <ul>
                 <a class="navbar-logo" href="/">
-                    <li class="nav-item"><img src="static\icons\star_system_white.png" alt="Star system icon" width="30"></li>
+                    <li class="nav-item"><img src="{{ url_for('static', filename='icons/star_system_white.png') }}" alt="Star system icon" width="30"></li>
                     <li class="nav-item">Exoplanetary Systems</li>
                 </a>
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
@@ -36,15 +36,15 @@
 
         <footer id="footer" class="txt-default">
             <p>
-                Data provided by the <a href="https://exoplanetarchive.ipac.caltech.edu/">NASA Exoplanet Archive</a>
+                Data provided by the <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA Exoplanet Archive</a>
             </p>
             <!-- <div>
                 <img class="center" src="static\star_system_white.png" alt="Star system icon" width="30">
             </div> -->
             <p>
                 Created by Rachael Lampard-France
-                <a href="https://www.linkedin.com/in/rachael-lampard-france-a5995b195"><img src="static\icons\linkedin_white.png" alt="git hub logo" width="80" style="padding-right: 10px;"></a>
-                <a href="https://github.com/rachaellampardfrance"><img src="static\icons\github_icon_white.png" alt="git hub logo" width="30" style="padding-right: 10px;"></a>
+                <a href="https://www.linkedin.com/in/rachael-lampard-france-a5995b195" target="_blank"><img src="{{ url_for('static', filename='icons/linkedin_white.png') }}" alt="git hub logo" width="80" style="padding-right: 10px;"></a>
+                <a href="https://github.com/rachaellampardfrance" target="_blank"><img src="{{ url_for('static', filename='icons/github_icon_white.png') }}" alt="git hub logo" width="30" style="padding-right: 10px;"></a>
             </p>
         </footer>
     </body>

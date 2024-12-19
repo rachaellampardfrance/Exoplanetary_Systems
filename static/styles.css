@@ -73,6 +73,7 @@ a:hover, a:active {
 }
 
 body {
+  margin-bottom: 100px;
   background-color: #1d2230;
   font-family: Audiowide, sans-serif;
 }
@@ -82,9 +83,9 @@ table {
   margin-right: auto;
   border-collapse: collapse;
 }
-.table-disc {
+/* .table-disc {
   width: 60%;
-}
+} */
 .table-home {
   width: 100%;
 }

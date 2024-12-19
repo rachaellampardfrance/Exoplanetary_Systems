@@ -9,23 +9,25 @@
     Home
 </h1>
 
-<table class="center table-home">
-    <thead>
+<div class="center">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2"><h2>CONFIRMED DISCOVERIES</h2></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>🌌 Exoplanet Systems 🌌</th>
+                <th>🌍🪐 Planets 🪐🌏</th>
+            </tr>
+        </thead>
         <tr>
-            <th colspan="2"><h2>CONFIRMED DISCOVERIES</h2></th>
+            <td>{{ exo_systems }}</td>
+            <td>{{ planets }}</td>
         </tr>
-    </thead>
-    <thead>
-        <tr>
-            <th>🌌 Exoplanet Systems 🌌</th>
-            <th>🌍🪐 Planets 🪐🌏</th>
-        </tr>
-    </thead>
-    <tr>
-        <td>{{ exo_systems }}</td>
-        <td>{{ planets }}</td>
-    </tr>
-</table>
+    </table>
+</div>
 
 
 
