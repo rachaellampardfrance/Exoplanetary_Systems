@@ -1,7 +1,7 @@
 """API Program for handling requests for website pages"""
 
 import sqlite3
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 # flask --app main run --debug
 
@@ -203,10 +203,11 @@ def system(stellar_body=None):
                 if name:
                     data['system_name'] = name[0]
                 else:
+                    return redirect(url_for('suggestions', search=stellar_body), code=302)
+                    # return render_template("error.html", message="System not found")
                     # fail case
                     # redirect to page with all alike planet, star and
                     # system names for clicking to take to take back to system page 
-                    pass
 
 
         cursor.execute(f"""
@@ -232,9 +233,33 @@ def system(stellar_body=None):
 
     return render_template("system.html", data=data, stellar_body=stellar_body)
 
+@app.route("/suggestions/<search>")
+def suggestions(search):
+    """Renders page with stellar body search suggestions"""
+    suggestions = {
+        'planets': [],
+        'stars': [],
+        'systems': []
+    }
 
-
-
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        
+        # Fetch planet names
+        cursor.execute(f"SELECT pl_name FROM {TABLES[0]} WHERE LOWER(pl_name) LIKE ?", (f"%{search}%",))
+        planets = cursor.fetchall()
+        suggestions["planets"].extend([planet[0] for planet in planets])
+        
+        # Fetch star names
+        cursor.execute(f"SELECT hostname FROM {TABLES[2]} WHERE LOWER(hostname) LIKE ?", (f"%{search}%",))
+        stars = cursor.fetchall()
+        suggestions['stars'].extend([star[0] for star in stars])
+        
+        # Fetch system names
+        cursor.execute(f"SELECT sy_name FROM {TABLES[1]} WHERE LOWER(sy_name) LIKE ?", (f"%{search}%",))
+        systems = cursor.fetchall()
+        suggestions['systems'].extend([system[0] for system in systems])
+    return render_template("suggestions.html", suggestions=suggestions)
 
 @app.route("/about")
 def about():

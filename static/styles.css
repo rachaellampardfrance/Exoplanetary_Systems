@@ -7,6 +7,13 @@
   /* width: 100%; */
   }
 
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* flex-wrap: wrap; */
+}
+
 [class|="txt"] {
   color: #f0f8ff;
 }
@@ -83,9 +90,7 @@ table {
   margin-right: auto;
   border-collapse: collapse;
 }
-/* .table-disc {
-  width: 60%;
-} */
+
 .table-home {
   width: 100%;
 }
@@ -143,9 +148,7 @@ td.nowrap {
 .search {
   background-color: #151922;
 }
-/* .search {
-  background: url("icons/search_icon.png") no-repeat;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
-} */
+
+table.suggestions {
+  margin: 10px;
+}

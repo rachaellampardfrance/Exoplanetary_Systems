@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Suggestions
+{% endblock %}
+
+{% block main %}
+<h1>
+    Suggestions
+</h1>
+
+<div class="center-container">
+    {% if suggestions.planets or suggestions.stars or suggestions.systems %}
+        {% if suggestions.planets %}
+        <table class="suggestions">
+            <tbody>
+                <tr>
+                    <td><h2>🪐 Planets 🪐</h2></td>
+                </tr>
+                {% for planet in suggestions.planets %}
+                <tr>
+                    <td><a href="{{ url_for('system', stellar_body=planet) }}">{{ planet }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        
+        {% if suggestions.stars %}
+        <table class="suggestions">
+            <tbody>
+                <tr>
+                    <td><h2>☀️ Stars ☀️</h2></td>
+                </tr>
+                {% for star in suggestions.stars %}
+                <tr>
+                    <td><a href="{{ url_for('system', stellar_body=star) }}">{{ star }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        
+        {% if suggestions.systems %}
+        <table class="suggestions">
+            <tbody>
+                <tr>
+                    <td><h2>🌌 Systems 🌌</h2></td>
+                </tr>
+                {% for system in suggestions.systems %}
+                <tr>
+                    <td><a href="{{ url_for('system', stellar_body=system) }}">{{ system }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+
+    {% else %}
+        <h2>No suggestions available</h2>
+    {% endif %}
+</div>
+{% endblock %}
