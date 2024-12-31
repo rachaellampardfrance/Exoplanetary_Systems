@@ -46,8 +46,7 @@ def new(category):
     """
 
     if category not in ['p', 's', 'ps']:
-        # fail
-        pass
+        return render_template("error.html", message="Page does not exist")
 
     if category in ['s', 'ps']:
         new_systems = []
@@ -154,8 +153,7 @@ def system(stellar_body=None):
         stellar_body = stellar_body.lower()
     else:
         # fail case
-        # return render_template("error.html", message="No search term or stellar body provided")
-        pass
+        return render_template("error.html", message="No search term or stellar body provided")
 
     data = {
         'system_name': '',
