@@ -5,11 +5,17 @@ from io import StringIO
 import os
 import re
 from database_helpers import get_last_updated
+from pyfiglet import Figlet
 
 from astroquery.utils.tap.core import TapPlus
 import pandas as pd
 
 # PATH = "directory"
+FG = Figlet(font='standard')
+# FG = Figlet(font='cybermedium')
+
+def render_figlet(message: str) -> None:
+    print(FG.renderText(message))
 
 def get_user_confirm(message: str) -> bool:
     """take in message for user input and confirmation

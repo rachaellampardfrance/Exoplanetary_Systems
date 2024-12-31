@@ -9,12 +9,15 @@ from database_helpers import upsert_stellar_data
 from helpers import (
     get_user_confirm,
     tap_request, clean_data,
-    show_cleaning, print_last_updated
+    show_cleaning, print_last_updated,
+    render_figlet
 )
 # from plots import save_figures
 
 def main():
     """collect updated data from archive and update the local database"""
+    render_figlet("Stellar Data Request Program...")
+
     service_url = "https://exoplanetarchive.ipac.caltech.edu/TAP"
     s_schema_query = """
         SELECT *

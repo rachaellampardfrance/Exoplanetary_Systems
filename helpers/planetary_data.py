@@ -7,11 +7,13 @@ from database_helpers import upsert_planetary_data
 from helpers import (
     get_user_confirm, tap_request,
     clean_data, show_cleaning,
-    print_last_updated
+    print_last_updated, render_figlet
 )
 
 def main():
     """collect updated data from archive and update the local database"""
+    render_figlet("Planetary Data Request Program...")
+
     service_url = "https://exoplanetarchive.ipac.caltech.edu/TAP"
     ps_schema_query = """
         SELECT *

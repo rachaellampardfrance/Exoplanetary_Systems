@@ -5,7 +5,7 @@ import matplotlib.figure
 import numpy as np
 import pandas as pd
 
-from helpers import format_name_for_file
+from helpers import format_name_for_file, render_figlet
 from database_helpers import get_stellar_hosts_db_data
 from save import save_dated_figure
 
@@ -34,6 +34,8 @@ STAR_COLOURS = [
 
 def main():
     # get dataframe from stellar_hosts database table
+    render_figlet("Plots...")
+
     sh_df = get_stellar_hosts_db_data()
     systems_df = create_systems_df(sh_df)
 
