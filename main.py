@@ -1,7 +1,7 @@
 """API Program for handling requests for website pages"""
 
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # flask --app main run --debug
 
@@ -22,91 +22,140 @@ def home():
 
         cursor.execute("""
             SELECT COUNT(sy_name)
-            FROM stellar_hosts
+              FROM stellar_hosts
         """)
         exo_systems = cursor.fetchone()[0]
 
         cursor.execute("""
             SELECT COUNT(pl_name)
-            FROM planetary_systems
+              FROM planetary_systems
         """)
         planets = cursor.fetchone()[0]
 
     return render_template("home.html", exo_systems=exo_systems, planets=planets)
 
-@app.route("/discoveries")
-def discoveries():
+@app.route("/statistics")
+def statistics():
     """Renders static page with plot images and descriptions"""
-    return render_template("discoveries.html")
+    return render_template("statistics.html")
 
-@app.route("/new")
-def new():
+@app.route("/new/<category>")
+def new(category):
     """Generate most recent planet discoveries from planetary_systems
     database table from MAX disc_pubdate
     """
-    new_systems = []
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
 
-        modified = cursor.execute("""
-            SELECT *
-            FROM stellar_hosts
-            WHERE last_updated = (
-                SELECT MAX(last_updated)
-                FROM stellar_hosts
-            );
-        """)
+    if category not in ['p', 's', 'ps']:
+        # fail
+        pass
 
-    for mod in modified:
-        new_systems.append(
-            {
-                "sy_name": mod[0],
-                "sy_snum": mod[1],
-                "sy_pnum": mod[2],
-            }
-        )
+    if category in ['s', 'ps']:
+        new_systems = []
+        with sqlite3.connect(DB) as conn:
+            cursor = conn.cursor()
 
-    new_planets = []
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
+            modified = cursor.execute("""
+                SELECT *
+                  FROM stellar_hosts
+                 WHERE last_updated = (
+                        SELECT MAX(last_updated)
+                          FROM stellar_hosts
+                );
+            """)
 
-        modified = cursor.execute("""
-            SELECT *
-            FROM planetary_systems
-            WHERE disc_pubdate = (
-                SELECT MAX(disc_pubdate)
+        for mod in modified:
+            system_icos = ("☀️" * mod[1]) + ("🪐" * mod[2])
+            new_systems.append(
+                {
+                    "sy_name": mod[0],
+                    "sy_snum": mod[1],
+                    "sy_pnum": mod[2],
+                    "system_icos": system_icos
+                }
+            )
+
+    if category in ['p', 'ps']:
+        new_planets = []
+        with sqlite3.connect(DB) as conn:
+            cursor = conn.cursor()
+
+            # List only most recently requested updates
+            modified = cursor.execute("""
+                SELECT *
                 FROM planetary_systems
-            );
-        """)
+                WHERE last_updated = (
+                    SELECT MAX(last_updated)
+                    FROM planetary_systems
+                )
+                ORDER BY disc_pubdate DESC;
+            """)
 
-    for mod in modified:
-        cb_flag = ""
-        if mod[4] == 1:
-            cb_flag = "Yes"
-        else:
-            cb_flag = "No"
+            # List only most recent disc_pubdate
+            # modified = cursor.execute("""
+            #     SELECT *
+            #     FROM planetary_systems
+            #     WHERE disc_pubdate = (
+            #         SELECT MAX(disc_pubdate)
+            #         FROM planetary_systems
+            #     );
+            # """)
 
-        planet_icos = ("☀️" * mod[2]) + ("🪐" * mod[3])
+        for mod in modified:
+            cb_flag = ""
+            if mod[4] == 1:
+                cb_flag = "Yes"
+            else:
+                cb_flag = "No"
 
-        new_planets.append(
-            {
-                "pl_name": mod[0],
-                "hostname": mod[1],
-                "sy_snum": mod[2],
-                "sy_pnum": mod[3],
-                "cb_flag": cb_flag,
-                "disc_pubdate": mod[5],
-                "planet_icos": planet_icos
-            }
+            planet_icos = ("☀️" * mod[2]) + ("🪐" * mod[3])
+
+            new_planets.append(
+                {
+                    "pl_name": mod[0],
+                    "hostname": mod[1],
+                    "sy_snum": mod[2],
+                    "sy_pnum": mod[3],
+                    "cb_flag": cb_flag,
+                    "disc_pubdate": mod[5],
+                    "planet_icos": planet_icos
+                }
+            )
+    if category == 'p':
+        return render_template(
+            "new.html",
+            new_planets=new_planets,
+            category=category
         )
-    return render_template("new.html", new_systems=new_systems, new_planets=new_planets)
+    elif category == 's':
+        return render_template(
+            "new.html",
+            new_systems=new_systems,
+            category=category
+        )
+    return render_template(
+        "new.html",
+        new_systems=new_systems,
+        new_planets=new_planets,
+        category=category
+    )
 
+
+@app.route("/system")
 @app.route("/system/<stellar_body>")
-def system(stellar_body):
-    """Dynamically generate system page from planet or star name
-    prefix query with 'p-' or 's-' to get system name from relevent database
+def system(stellar_body=None):
+    """Dynamically generate system page from planet, star or system name
     """
-    body, body_name = stellar_body.split('-', 1)
+
+    # if stellar_body == 's?':
+    #     stellar_body = request.form.get('search').lower()
+    if 'search' in request.args:
+        stellar_body = request.args.get('search').lower()
+    elif stellar_body:
+        stellar_body = stellar_body.lower()
+    else:
+        # fail case
+        # return render_template("error.html", message="No search term or stellar body provided")
+        pass
 
     data = {
         'system_name': '',
@@ -114,38 +163,67 @@ def system(stellar_body):
         'stars': [],
         'size': 0
     }
-
-    if body not in ['p', 'st', 'sy']:
-        # fail
-        pass
+    
+    name = ''
 
     with sqlite3.connect(DB) as conn:
         cursor = conn.cursor()
 
-        if body == 'p':
-            cursor.execute(f"""SELECT hostname FROM {TABLES[0]} WHERE pl_name='{body_name}'""")
-            body_name = cursor.fetchone()[0]
-        
-        if body in ['p', 'st']:
-            cursor.execute(f"""SELECT sy_name FROM {TABLES[2]} WHERE hostname='{body_name}'""")
+        # check planet table
+        cursor.execute(f"""
+            SELECT hostname
+              FROM {TABLES[0]}
+             WHERE LOWER(pl_name)='{stellar_body}';
+        """)
+        name = cursor.fetchone()
+        if name:
+            # check star table
+            cursor.execute(f"""
+                SELECT sy_name
+                  FROM {TABLES[2]}
+                 WHERE hostname='{name[0]}';
+            """)
             data['system_name'] = cursor.fetchone()[0]
-        
-        if body == 'sy':
-            data['system_name'] = body_name
+        # check star table
+        else:
+            cursor.execute(f"""
+                SELECT sy_name
+                  FROM {TABLES[2]}
+                 WHERE LOWER(hostname)='{stellar_body}';
+            """)
+            name = cursor.fetchone()
+            if name:
+                data['system_name'] = name[0]
+            #  check stellar_host table
+            else:
+                cursor.execute(f"""
+                    SELECT sy_name
+                      FROM {TABLES[1]}
+                     WHERE LOWER(sy_name)='{stellar_body}';
+                """)
+                name = cursor.fetchone()
+                if name:
+                    data['system_name'] = name[0]
+                else:
+                    # fail case
+                    # redirect to page with all alike planet, star and
+                    # system names for clicking to take to take back to system page 
+                    pass
 
 
         cursor.execute(f"""
             SELECT hostname
-            FROM {TABLES[2]}
-            WHERE sy_name='{data['system_name']}'
+              FROM {TABLES[2]}
+             WHERE sy_name='{data['system_name']}'
         """)
         stars = cursor.fetchall()
         data['stars'] = [i[0] for i in stars]
 
         query = f"""
-            SELECT pl_name, disc_pubdate
-            FROM {TABLES[0]}
-            WHERE hostname IN ({','.join('?' * len(data['stars']))})
+            SELECT pl_name, disc_pubdate, hostname
+              FROM {TABLES[0]}
+             WHERE hostname
+                    IN ({','.join('?' * len(data['stars']))});
         """
         cursor.execute(query, data['stars'])
         planets = cursor.fetchall()
@@ -154,7 +232,7 @@ def system(stellar_body):
 
         data['size'] = len(data['planets']) + len(data['stars']) + 1
 
-    return render_template("system.html", data=data)
+    return render_template("system.html", data=data, stellar_body=stellar_body)
 
 
 

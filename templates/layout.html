@@ -24,9 +24,24 @@
                     <li class="nav-item">Exoplanetary Systems</li>
                 </a>
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/discoveries">Discoveries</a></li>
-                <li class="nav-item"><a class="nav-link" href="/new">New Discoveries</a></li>
-                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="nav-link" href="{{ url_for('new', category='ps') }}">New Discoveries</a>
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('new', category='p') }}">Planets</a>
+                            <a href="{{ url_for('new', category='s') }}">Systems</a>
+                            <!-- <a href="/new">Systems</a> -->
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
+                <div class="search-container">
+                    <form action="{{ url_for('system') }}" method="get">
+                        <input type="text" placeholder="search..." name="search" maxlength="30">
+                        <button class='search' type="submit"><img src="{{ url_for('static', filename='icons/search_icon.png') }}" alt="search icon" width="12"/></button>
+                    </form>
+                </div>
             </ul>
         </nav>
 

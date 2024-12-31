@@ -6,66 +6,15 @@
 
 {% block main %}
 <h1>
-    New Discoveries
+    Discoveries
 </h1>
 
-<!-- <div>
-    <table class="center">
-        <thead>
-            <tr>
-                <th colspan="3"><h2>NEW SYSTEMS</h2></th>
-            </tr>
-        </thead>
-        <thead>
-            <tr>
-                <th>System Name</th>
-                <th>Star Count</th>
-                <th>Planet Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for system in new_systems %}
-            <tr>
-                <td>{{ system.sy_name }}</td>
-                <td>{{ system.sy_snum }}</td>
-                <td>{{ system.sy_pnum }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div> -->
+{% if category in ['s', 'ps'] %}
+{% include "system_updates.html" %}
+{% endif %}
 
-<div class="center">
-    <table>
-        <thead>
-            <tr>
-                <th colspan="7"><h2>NEW PLANETS</h2></th>
-            </tr>
-        </thead>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Planet Name</th>
-                <th>Host Name</th>
-                <th>System Star Count</th>
-                <th>System Planet Count</th>
-                <th>Circumbinary?</th>
-                <th>Public Discovery Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for planet in new_planets %}
-            <tr>
-                <td class="td-nowrap">{{ planet.planet_icos }}</td>
-                <td><a href="{{ url_for('system', stellar_body='p-' + planet.pl_name) }}">{{ planet.pl_name }}</a></td>
-                <td><a href="{{ url_for('system', stellar_body='st-' + planet.hostname) }}">{{ planet.hostname }}</a></td>
-                <td>{{ planet.sy_snum }}</td>
-                <td>{{ planet.sy_pnum }}</td>
-                <td>{{ planet.cb_flag }}</td>
-                <td>{{ planet.disc_pubdate }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+{% if category in ['p', 'ps'] %}
+{% include "new_planets.html" %}
+{% endif %}
+
 {% endblock %}

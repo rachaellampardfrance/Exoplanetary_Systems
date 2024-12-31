@@ -1,0 +1,27 @@
+<div class="center padded">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="4"><h2>SYSTEM UPDATES</h2></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th></th>
+                <th>System Name</th>
+                <th>Star Count</th>
+                <th>Planet Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for system in new_systems %}
+            <tr>
+                <td>{{ system.system_icos }}</td>
+                <td><a href="{{ url_for('system', stellar_body=system.sy_name) }}">{{ system.sy_name }}</a></td>
+                <td>{{ system.sy_snum }}</td>
+                <td>{{ system.sy_pnum }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

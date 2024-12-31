@@ -8,6 +8,7 @@
 <h1>
     System
 </h1>
+<p>{{ stellar_body }}</p>
 
 <div class="center">
     <table>
@@ -34,7 +35,7 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td>Name</td>
+                <td class="thick">Name</td>
                 {% for star in data.stars %}
                 <td>{{ star }}</td>
                 {% endfor %}
@@ -43,7 +44,16 @@
                 {% endfor %}
             </tr>
             <tr>
-                <td>Discovery Year<br>(Published)</td>
+                <td class="thick">Host Star</td>
+                {% for star in data.stars %}
+                <td></td>
+                {% endfor %}
+                {% for planet in data.planets %}
+                <td>{{ planet[2] }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="thick">Discovery Year<br>(Published)</td>
                 {% for star in data.stars %}
                 <td></td>
                 {% endfor %}
