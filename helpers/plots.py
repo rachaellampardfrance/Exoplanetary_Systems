@@ -3,8 +3,10 @@
 from matplotlib import pyplot as plt
 import matplotlib.figure
 import numpy as np
+import pandas as pd
 
 from helpers import format_name_for_file
+from database_helpers import get_stellar_hosts_db_data
 from save import save_dated_figure
 
 TEXT_COLOUR = '#581845'
@@ -30,11 +32,53 @@ STAR_COLOURS = [
     '#470000'
 ]
 
-def save_figures(systems_df, star_series, planet_to_star_df):
+def main():
+    # get dataframe from stellar_hosts database table
+    sh_df = get_stellar_hosts_db_data()
+    systems_df = create_systems_df(sh_df)
+
+    star_series = create_star_series(systems_df)
+    planet_to_star_df = create_planet_to_star_df(systems_df)
+
+    save_figures(
+        star_series=star_series,
+        planet_to_star_df=planet_to_star_df
+    )
+
+    print("figures saved")
+
+
+def create_systems_df(data: pd.DataFrame) -> pd.DataFrame:
+    return pd.DataFrame(data)
+
+def create_star_series(data: pd.DataFrame) -> pd.DataFrame:
+    """group df by sy_snum size all instance of star count are combined,
+    see the occurance of systems that contain any amount of planets
+    """
+    star_srs = data.groupby('sy_snum').size()
+    # see the series
+    print(star_srs)
+    # # see series index values
+    # print(star_srs.index.values)
+    # # see sum of data
+    # print(star_srs.sum())
+
+    return star_srs
+
+def create_planet_to_star_df(data):
+    planet_to_star_df = data.groupby(['sy_snum', 'sy_pnum']).size().unstack(fill_value=0)
+
+    # see visual dataframe representation
+    print(planet_to_star_df)
+
+    return planet_to_star_df
+
+
+def save_figures(star_series, planet_to_star_df):
     """save all figures"""
 
     # create figure
-    fig1, fig1_name = create_fig_star_pie(star_series=star_series, systems_df=systems_df)
+    fig1, fig1_name = create_fig_star_pie(star_series=star_series)
     # save figure
     save_fig(fig1, fig1_name)
 
@@ -56,7 +100,7 @@ def save_fig(fig: matplotlib.figure.Figure, fig_name: str) -> None:
     # save with datestamp to dated folder
     save_dated_figure(fig, fig_name, "png")
 
-def create_fig_star_pie(star_series, systems_df):
+def create_fig_star_pie(star_series):
     """generate Occurance of Exoplanetary Systems by Star System Type pie figure"""
 
     # create figure for chart and text to display on
@@ -98,21 +142,11 @@ def create_fig_star_pie(star_series, systems_df):
         fontsize=12
         )
 
-    # print count of rows from cleaned data as it will match systems with confirmed exoplanets
-    text1 = f"Confirmed exoplanet\nsystems:\n{systems_df['sy_pnum'].count()}"
-    # print sum of system planets column as all values will match the total amount of exoplanets
-    text2 = f"Confirmed exoplanets:\n{systems_df['sy_pnum'].sum()}"
-    fig.text(0, 0.9, text1, size=12)
-    fig.text(0, 0.8, text2, size=12)
-
     # file saving name reference
     fig_name = format_name_for_file(plt_title)
 
     return fig, fig_name
-    # # overwrite top level figure
-    # fig.savefig(("static/"+fig_name+".png"))
-    # # save with datestamp to dated folder
-    # save_dated_figure(fig, fig_name, "png")
+
 
 def create_fig_nested_bar(planet_to_star_df):
     """generate exoplanet_systems_by_star_count nested bar figure"""
@@ -170,10 +204,6 @@ def create_fig_nested_bar(planet_to_star_df):
 
     return fig, fig_name
 
-    # overwrite top level figure
-    # fig.savefig(("static/"+fig_name+".png"))
-    # # save with datestamp to dated folder
-    # save_dated_figure(fig, fig_name, "png")
 
 def create_fig_system_pies(planet_to_star_df):
     """generate Most Common Exoplanet Systems pies figure"""
@@ -181,8 +211,6 @@ def create_fig_system_pies(planet_to_star_df):
     # assign axes to automate axes columns for charts
     axes = len(planet_to_star_df)
     fig, ax = plt.subplots(1, axes, figsize=(16, 5))
-    # get planets in system counts as a list
-    fig_labels = planet_to_star_df.iloc[0].index.values
 
     # generate each ax automatically on star count
     i = 0
@@ -256,7 +284,7 @@ def create_fig_system_pies(planet_to_star_df):
     fig_name = format_name_for_file(fig_title)
 
     return fig, fig_name
-    # # overwrite top level figure
-    # fig.savefig(("static/"+fig_name+".png"))
-    # # save with datestamp to dated folder
-    # save_dated_figure(fig, fig_name, "png")
+
+
+if __name__ == "__main__":
+    main()

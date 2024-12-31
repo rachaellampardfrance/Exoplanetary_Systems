@@ -133,3 +133,22 @@ def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
             WHERE
                 stellar.sy_name != excluded.sy_name;
     """, data_to_insert)
+
+
+def get_last_updated(table) -> str:
+    with sqlite3.connect(DB_PATH) as conn:
+        c = conn.cursor()
+
+        c.execute("""
+            SELECT MAX(last_updated)
+            FROM {}
+        """.format(table))
+
+        return c.fetchone()
+
+ 
+def get_stellar_hosts_db_data():
+    with sqlite3.connect(DB_PATH) as conn:
+        # c = conn.cursor()
+        
+        return pd.read_sql_query("SELECT * FROM stellar_hosts", conn)

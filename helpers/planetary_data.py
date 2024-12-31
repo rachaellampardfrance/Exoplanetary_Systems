@@ -6,7 +6,8 @@ and updates the corrosponding dataframe.
 from database_helpers import upsert_planetary_data
 from helpers import (
     get_user_confirm, tap_request,
-    clean_data, show_cleaning
+    clean_data, show_cleaning,
+    print_last_updated
 )
 
 def main():
@@ -56,7 +57,10 @@ def main():
     # append new data to planetary_systems table in database and update existing if changes
     upsert_planetary_data(ps_df)
 
-    ps_df.to_csv("planetary_systems.csv", index=False)
+    # print max last updated value from planetary_systems table
+    print_last_updated("planetary_systems")
+
+    # ps_df.to_csv("planetary_systems.csv", index=False)
 
 if __name__ == '__main__':
     main()

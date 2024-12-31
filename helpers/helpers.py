@@ -4,6 +4,7 @@ from datetime import date
 from io import StringIO
 import os
 import re
+from database_helpers import get_last_updated
 
 from astroquery.utils.tap.core import TapPlus
 import pandas as pd
@@ -141,3 +142,9 @@ def show_cleaning(data: pd.DataFrame, data_colum: pd.DataFrame, column_name: str
     print(f"Number of non-duplicate systems: {data_colum.count().sum() - duplicates.sum()}")
     print(f"Number of duplicate systems: {duplicates.sum()}")
     print(f"Columns with null values:\n{data.isnull().sum()}")
+
+def print_last_updated(table):
+    date = get_last_updated(table)[0]
+
+    print("Last updated on {}".format(date))
+    

@@ -9,7 +9,7 @@ from database_helpers import upsert_stellar_data
 from helpers import (
     get_user_confirm,
     tap_request, clean_data,
-    show_cleaning
+    show_cleaning, print_last_updated
 )
 # from plots import save_figures
 
@@ -56,6 +56,9 @@ def main():
 
     # append new data to stellar_hosts table in database and update existing if changes
     upsert_stellar_data(s_df)
+
+    # print max last updated value from stellar table
+    print_last_updated("stellar")
 
 
 if __name__ == '__main__':
