@@ -8,7 +8,6 @@
 <h1>
     System
 </h1>
-<p>{{ stellar_body }}</p>
 
 <div class="center">
     <table>
@@ -40,7 +39,7 @@
                 <td>{{ star }}</td>
                 {% endfor %}
                 {% for planet in data.planets %}
-                <td>{{ planet[0] }}</td>
+                <td>{{ planet.pl_name }}</td>
                 {% endfor %}
             </tr>
             <tr>
@@ -49,7 +48,16 @@
                 <td></td>
                 {% endfor %}
                 {% for planet in data.planets %}
-                <td>{{ planet[2] }}</td>
+                <td>{{ planet.hostname }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td class="thick">Circumbinary</td>
+                {% for star in data.stars %}
+                <td></td>
+                {% endfor %}
+                {% for planet in data.planets %}
+                <td>{{ planet.cb_flag }}</td>
                 {% endfor %}
             </tr>
             <tr>
@@ -58,13 +66,10 @@
                 <td></td>
                 {% endfor %}
                 {% for planet in data.planets %}
-                <td>{{ planet[1] }}</td>
+                <td>{{ planet.disc_pubdate }}</td>
                 {% endfor %}
             </tr>
         </tbody>
     </table>
 </div>
-{{ yes }}
-<!-- <p>{{ star_count }}</p>
-<p>{{ planet_count }}</p> -->
 {% endblock %}

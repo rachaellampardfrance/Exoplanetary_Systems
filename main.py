@@ -145,8 +145,6 @@ def system(stellar_body=None):
     """Dynamically generate system page from planet, star or system name
     """
 
-    # if stellar_body == 's?':
-    #     stellar_body = request.form.get('search').lower()
     if 'search' in request.args:
         stellar_body = request.args.get('search').lower()
     elif stellar_body:
@@ -204,10 +202,6 @@ def system(stellar_body=None):
                     data['system_name'] = name[0]
                 else:
                     return redirect(url_for('suggestions', search=stellar_body), code=302)
-                    # return render_template("error.html", message="System not found")
-                    # fail case
-                    # redirect to page with all alike planet, star and
-                    # system names for clicking to take to take back to system page 
 
 
         cursor.execute(f"""
@@ -219,19 +213,34 @@ def system(stellar_body=None):
         data['stars'] = [i[0] for i in stars]
 
         query = f"""
-            SELECT pl_name, disc_pubdate, hostname
+            SELECT pl_name, disc_pubdate, hostname, cb_flag
               FROM {TABLES[0]}
              WHERE hostname
                     IN ({','.join('?' * len(data['stars']))});
         """
         cursor.execute(query, data['stars'])
         planets = cursor.fetchall()
-        data['planets'] = list(planets)
+
+        for planet in planets:
+            cb_flag = ""
+            if planet[3] == 1:
+                cb_flag = "Yes"
+            else:
+                cb_flag = "No"
+            
+            data['planets'].append(
+                {
+                    "pl_name": planet[0],
+                    "disc_pubdate": planet[1],
+                    "hostname": planet[2],
+                    "cb_flag": cb_flag,
+                }
+            )
 
 
         data['size'] = len(data['planets']) + len(data['stars']) + 1
 
-    return render_template("system.html", data=data, stellar_body=stellar_body)
+    return render_template("system.html", data=data)
 
 @app.route("/suggestions/<search>")
 def suggestions(search):
