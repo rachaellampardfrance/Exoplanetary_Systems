@@ -5,11 +5,13 @@
 {% endblock %}
 
 {% block main %}
-<h1>
-    Suggestions
-</h1>
+<div class="page-heading">
+    <h1>
+        Suggestions
+    </h1>
+</div>
 
-<div class="center-container">
+<div class="table-suggestions center-tables">
     {% if suggestions.planets or suggestions.stars or suggestions.systems %}
         {% if suggestions.planets %}
         <table class="suggestions">

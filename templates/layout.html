@@ -16,36 +16,39 @@
         <title>Exoplanetary Systems: {% block title %}{% endblock %}</title>
     </head>
 
-    <body class="txt">
-        <nav class="navbar">
+    <body class="center">
+
+        <nav id="navbar">
             <ul>
-                <a class="navbar-logo" href="/">
-                    <li class="nav-item"><img src="{{ url_for('static', filename='icons/star_system_white.png') }}" alt="Star system icon" width="30"></li>
-                    <li class="nav-item">Exoplanetary Systems</li>
-                </a>
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item">
+                    <a class="navbar-logo" href="/">
+                        <img src="{{ url_for('static', filename='icons/star_system_white.png') }}" alt="Star system icon" width="30"> Exoplanetary Systems
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
                     <div class="dropdown">
                         <a class="nav-link" href="{{ url_for('new', category='ps') }}">New Discoveries</a>
                         <div class="dropdown-content">
                             <a href="{{ url_for('new', category='p') }}">Planets</a>
                             <a href="{{ url_for('new', category='s') }}">Systems</a>
-                            <!-- <a href="/new">Systems</a> -->
                         </div>
                     </div>
+                    <a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a>
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
-                <div class="search-container">
+            </ul>
+            <ul>
+                <li class="nav-item search-container">
                     <form action="{{ url_for('system') }}" method="get">
                         <input type="text" placeholder="search..." name="search" maxlength="30">
-                        <button class='search' type="submit"><img src="{{ url_for('static', filename='icons/search_icon.png') }}" alt="search icon" width="12"/></button>
+                        <button class='search-icon' type="submit"><img src="{{ url_for('static', filename='icons/search_icon.png') }}" alt="search icon" width="12"/></button>
                     </form>
-                </div>
+                </li>
             </ul>
         </nav>
 
-        <main class="txt-padded">
+        <main id="content">
             {% block main %}{% endblock %}
         </main>
 
@@ -53,9 +56,6 @@
             <p>
                 Data provided by the <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA Exoplanet Archive</a>
             </p>
-            <!-- <div>
-                <img class="center" src="static\star_system_white.png" alt="Star system icon" width="30">
-            </div> -->
             <p>
                 Created by Rachael Lampard-France
                 <a href="https://www.linkedin.com/in/rachael-lampard-france-a5995b195" target="_blank"><img src="{{ url_for('static', filename='icons/linkedin_white.png') }}" alt="git hub logo" width="80" style="padding-right: 10px;"></a>
