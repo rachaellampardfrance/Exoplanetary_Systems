@@ -138,6 +138,23 @@ def new(category):
         category=category
     )
 
+@app.route("/randomiser")
+def randomiser():
+    """Redirects to system route with random planet as stellar body"""
+    stellar_body = ""
+
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(f"""
+            SELECT pl_name
+              FROM {TABLES[0]}
+             ORDER BY RANDOM()
+             LIMIT 1;
+        """)
+        stellar_body = cursor.fetchone()[0]
+
+    return redirect(url_for('system', stellar_body=stellar_body), code=302)
 
 @app.route("/system")
 @app.route("/system/<stellar_body>")
