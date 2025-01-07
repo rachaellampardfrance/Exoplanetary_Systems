@@ -13,7 +13,7 @@ body {
   background-color: #151922;
 }
 
-.center, .page-heading {
+.center, .page-heading, [class|="img"] {
   justify-content: center;
   display: block;
   margin-left: auto;
@@ -87,7 +87,7 @@ h2.padded-top-bottom {
 
 }
 
-.padded, table, .page-heading, #content {
+.padded, table, .page-heading, #content, [class|="img"] {
   padding: 20px;
 }
 
@@ -107,14 +107,14 @@ a:hover, a:active {
 } */
 
 #footer {
-  display: grid, flex;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   padding-left: 20px;
   padding-right: 20px;
-  position: relative; /* Default to non-fixed */
 }
 
 table {
@@ -124,7 +124,7 @@ table {
   width: auto;
 }
 
-.table-newplanets, .table-systemupdates, .table-suggestions, .table-home {
+[class|="table"] {
   overflow-x:auto;
   width: 100%;
 }
@@ -180,6 +180,14 @@ table.suggestions {
   width: 40%
 }
 
+#fig-pie {
+  width: 25%;
+}
+
+#fig-bars, #fig-pies {
+  width: 60%;
+}
+
 /* for computer */
 @media screen and (min-width: 501px) {
   #footer {
@@ -207,7 +215,7 @@ table.suggestions {
   }
 
   #footer {
-    position: relative; /* Ensure it's non-fixed for mobile */
+    position: relative;
     opacity: 1;
     text-wrap: wrap;
   }

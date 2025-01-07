@@ -9,7 +9,7 @@
 <div>
     <div>
         <h2 class="padded-top-bottom">Exoplanet System Type by Star Count</h2>
-        <img class="center padded" src="{{ url_for('static', filename='exoplanet_systems_by_star_count.png') }}" alt="Exoplanet Systems by Star Count Nested Bar Charts" width="80%">
+        <img class="img" id="fig-bars" src="{{ url_for('static', filename='exoplanet_systems_by_star_count.png') }}" alt="Exoplanet Systems by Star Count Nested Bar Charts">
         <div>
             <p>(represents all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system.)</p>
             <p><br></p>
@@ -20,7 +20,7 @@
     <div>
         <h2 class="padded-top-bottom">Most Common Exoplanet System Type by Star Count</h2>
         <p>A collection of pie charts which are independent of one another</p>
-        <img class="center padded" src="{{ url_for('static', filename='most_common_exoplanet_systems.png') }}" alt="Most Common Exoplanet Systems Pie Charts" width="80%">
+        <img class="img" id="fig-pies" src="{{ url_for('static', filename='most_common_exoplanet_systems.png') }}" alt="Most Common Exoplanet Systems Pie Charts">
         <p>(percentile of how many planets are in the occuring exoplanet systems (for each system type by increasing star count))</p>
         <p><br></p>
         <p><b>Pie charts -</b> Each pie chart represents the most common count of planets of occuring exoplanet systems in relation to it's systems star count</p>
@@ -31,7 +31,7 @@
     </div>
     <div>
         <h2 class="padded-top-bottom">Occurance of Exoplanetary Systems by Star Count</h2>
-        <img class="center padded" src="{{ url_for('static', filename='occurance_of_exoplanetary_systems_by_star_system_type.png') }}" alt="Occurance of Exoplanetary Systems by Star System Type Pie Chart" width="35%">
+        <img class="img" id="fig-pie" src="{{ url_for('static', filename='occurance_of_exoplanetary_systems_by_star_system_type.png') }}" alt="Occurance of Exoplanetary Systems by Star System Type Pie Chart">
         <P>(percentile of where exoplanetary systems occur in relation to count of stars present in the system)</P>
         <p><br></p>
     </div>
