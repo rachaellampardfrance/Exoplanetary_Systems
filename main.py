@@ -1,7 +1,12 @@
 """API Program for handling requests for website pages"""
 
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for
+from flask import (
+    Flask, render_template,
+    request, redirect,
+    url_for
+)
+import re
 
 # flask --app main run --debug
 
@@ -9,6 +14,7 @@ app = Flask(__name__)
 
 DB = "database.db"
 TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
+
 
 @app.route("/")
 def home():
@@ -34,10 +40,12 @@ def home():
 
     return render_template("home.html", exo_systems=exo_systems, planets=planets)
 
+
 @app.route("/statistics")
 def statistics():
     """Renders static page with plot images and descriptions"""
     return render_template("statistics.html")
+
 
 @app.route("/new/<category>")
 def new(category):
@@ -138,6 +146,7 @@ def new(category):
         category=category
     )
 
+
 @app.route("/randomiser")
 def randomiser():
     """Redirects to system route with random planet as stellar body"""
@@ -155,6 +164,7 @@ def randomiser():
         stellar_body = cursor.fetchone()[0]
 
     return redirect(url_for('system', stellar_body=stellar_body), code=302)
+
 
 @app.route("/system")
 @app.route("/system/<stellar_body>")
@@ -222,20 +232,39 @@ def system(stellar_body=None):
 
 
         cursor.execute(f"""
-            SELECT hostname
+            SELECT hostname, st_spectype
               FROM {TABLES[2]}
              WHERE sy_name='{data['system_name']}'
         """)
         stars = cursor.fetchall()
-        data['stars'] = [i[0] for i in stars]
+
+        for star in stars:
+            spec = ""
+            spec_details = {}
+            if star[1]:
+                spec = star[1]
+                spec_details = get_spec_type(spec)
+            else:
+                spec = "Unknown"
+
+            dictionary = {
+                "hostname": star[0],
+                "st_spectype": spec,
+            }
+            # merge dictionaries
+            new_dict = {**dictionary, **spec_details}
+            data['stars'].append(new_dict)
+
+        stars = [i[0] for i in stars]
+        # add in fetching host star and spectral type
 
         query = f"""
             SELECT pl_name, disc_pubdate, hostname, cb_flag
               FROM {TABLES[0]}
              WHERE hostname
-                    IN ({','.join('?' * len(data['stars']))});
+                    IN ({','.join('?' * len(stars))});
         """
-        cursor.execute(query, data['stars'])
+        cursor.execute(query, stars)
         planets = cursor.fetchall()
 
         for planet in planets:
@@ -258,6 +287,7 @@ def system(stellar_body=None):
         data['size'] = len(data['planets']) + len(data['stars']) + 1
 
     return render_template("system.html", data=data)
+
 
 @app.route("/suggestions/<search>")
 def suggestions(search):
@@ -287,6 +317,125 @@ def suggestions(search):
         suggestions['systems'].extend([system[0] for system in systems])
     return render_template("suggestions.html", suggestions=suggestions)
 
+
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+
+#  handling star class information
+# *******
+def get_spec_type(st_class: str) -> dict:
+    """Returns spectral type of star"""
+    st_class = st_class.upper()
+    default = "Unknown"
+
+    star_data = {}
+
+    star_data['luminosity'] = get_luminosity(st_class, default)
+
+    return {**star_data, **get_class(st_class, default)}
+
+
+def get_class(st_class: str, default: str) -> dict:
+    """returns star class, class heat and sub class heat 
+    if any identifiers are found in the string. Will return
+    first istances found
+    """
+    data = {
+        'class': default,
+        'heat': default,
+        'sub_heat': default
+    }
+
+    class_id = get_spectral_class_id(st_class)
+    if not class_id:
+        return data
+
+    data['class'], data['heat'] = get_class_details(class_id)
+
+    sub_heat = get_sub_class_heat(st_class)
+    if not sub_heat:
+        return data
+
+    data['sub_heat'] = " ".join([sub_heat, class_id, "type star"])
+    return data
+
+
+def get_spectral_class_id(st_class: str) -> str | None:
+    """Return char of class identifier if present"""
+    spec_pattern = r"[OBAFGKMLTY]"
+    spectral_type = re.search(spec_pattern, st_class)
+    if spectral_type:
+        return spectral_type.group()
+    return None
+
+
+def get_class_details(class_id: str) -> tuple:
+    spectral_classes = {
+        'O': ['Blue', '> 30,000'],
+        'B': ['Blue-white', '9,700 - 30,000'],
+        'A': ['White', '7,200 - 9,700'],
+        'F': ['Yellow-white', '5,700 - 7,200'],
+        'G': ['Yellow', '4,900 - 5,700'],
+        'K': ['Orange', '3,400 - 4,900'],
+        'M': ['Red', '2,100 - 3,400'],
+        'L': ['Brown dwarf', '1,300 - 2,400'],
+        'T': ['Brown dwarf', '< 1,600'],
+        'Y': ['Brown dwarf', '< 700']
+    }
+
+    star_class = spectral_classes[class_id][0]
+    class_heat_range = spectral_classes[class_id][1]
+
+    return star_class, class_heat_range
+
+def get_sub_class_heat(st_class: str) -> str:
+    """Return class"""
+    sub_class_heat_ranges = {
+        "0": "Hottest",
+        "1": "Hotter",
+        "2": "Hot",
+        "3": "High average",
+        "4": "Average",
+        "5": "Average",
+        "6": "Low average",
+        "7": "Cool",
+        "8": "Cooler",
+        "9": "Coolest"
+    }
+
+    sub_class = re.search(r"[0-9]", st_class)
+
+    if sub_class:
+        return sub_class_heat_ranges[sub_class.group()]
+    return None
+
+
+def get_luminosity(st_class: str, default: str) -> str:
+    """
+    Look for luminosity identifier in string
+
+    :param str st_class: string to search for luminosity identifier
+    :returns str: corresponding luminosity type i.e "white Dwarf"
+    """
+
+    luminosity = {
+        'IA-O': 'Extremely Luminous Hypergiant',
+        'IA': 'Hypergiant',
+        'IAB': 'Intermediate Luminous Hypergiant',
+        'IB': 'Lesser Hypergiant',
+        'II': 'Bright Giant',
+        'III': 'Giant',
+        'IV': 'Subgiant',
+        'V': 'Main Sequence Dwarf',
+        'VI': 'Subdwarf',
+        'VII': 'White Dwarf'
+    }
+
+    item = re.search(r"IA-O|IAB|IA|IB|III|II|IV|VII|VI|V", st_class)
+    if item:
+        # return the first match item
+        return luminosity[item.group()]
+    return default
+# *******

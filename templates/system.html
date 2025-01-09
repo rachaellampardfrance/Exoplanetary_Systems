@@ -13,61 +13,97 @@
     <table>
         <thead>
             <tr>
-                <th colspan="{{ data.size }}"><h2>{{ data.system_name }}</h2></th>
+                <th colspan="{{ data.size + 1 }}">
+                    <h2>
+                        🌌{{ data.system_name }}🌌<br>
+                        {% for star in data.stars %}
+                        ☀️
+                        {% endfor %}
+                        {% for planet in data.planets %}
+                        🪐
+                        {% endfor %}
+                    </h2>
+                </th>
             </tr>
         </thead>
         <thead>
             <tr>
-                <th></th>
-                <th colspan="{{ data.stars|length }}">Stars</th>
-                <th colspan="{{ data.planets|length }}">Planets</th>
+                <th colspan="{{ data.stars|length + 1}}">Stars</th>
+                <th colspan="{{ data.planets|length + 1 }}">Planets</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>🌌</td>
+                <td class="catagory"></td>
                 {% for star in data.stars %}
                 <td>☀️</td>
                 {% endfor %}
+                <td></td>
                 {% for planet in data.planets %}
                 <td>🪐</td>
                 {% endfor %}
             </tr>
             <tr>
-                <td class="thick">Name</td>
+                <td class="catagory">Name</td>
                 {% for star in data.stars %}
-                <td>{{ star }}</td>
+                <td>{{ star.hostname }}</td>
                 {% endfor %}
+                <td class="catagory">Name</td>
                 {% for planet in data.planets %}
                 <td>{{ planet.pl_name }}</td>
                 {% endfor %}
             </tr>
             <tr>
-                <td class="thick">Host Star</td>
+                <td class="catagory">Star Type</td>
                 {% for star in data.stars %}
-                <td></td>
+                <td>{{ star.st_spectype }}</td>
                 {% endfor %}
+                <td class="catagory">Host Star</td>
                 {% for planet in data.planets %}
                 <td>{{ planet.hostname }}</td>
                 {% endfor %}
             </tr>
             <tr>
-                <td class="thick">Circumbinary</td>
+                <td class="catagory">Spectral Class</td>
                 {% for star in data.stars %}
-                <td></td>
+                <td>
+                    {% if star.class %}
+                        {{ star.class }}<br>({{ star.heat }} Kelvin)
+                    {% endif %}
+                </td>
                 {% endfor %}
+                <td class="catagory">Circumbinary</td>
                 {% for planet in data.planets %}
                 <td>{{ planet.cb_flag }}</td>
                 {% endfor %}
             </tr>
             <tr>
-                <td class="thick">Discovery Year<br>(Published)</td>
+                <td class="catagory">Class heat<br>(0-9)</td>
                 {% for star in data.stars %}
-                <td></td>
+                <td>
+                    {% if star.sub_heat %}
+                        {{ star.sub_heat }}
+                    {% endif %}
+                </td>
                 {% endfor %}
+                <td class="catagory">Discovery Year<br>(Published)</td>
                 {% for planet in data.planets %}
                 <td>{{ planet.disc_pubdate }}</td>
                 {% endfor %}
+            </tr>
+            <tr>
+                <td class="catagory">Luminosity Class</td>
+                {% for star in data.stars %}
+                <td>
+                    {% if star.luminosity %}
+                        {{ star.luminosity }}
+                    {% endif %}
+                </td>
+                {% endfor %}
+                <td class="catagory"></td>
+                {% for planet in data.planets %}
+                <td></td>
+                {% endfor %}     
             </tr>
         </tbody>
     </table>

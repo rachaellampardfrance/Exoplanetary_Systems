@@ -139,7 +139,14 @@ td {
   padding-left: 20px;
   padding-right: 20px;
 }
-td.thick {
+/* td.thick {
+  font-weight: bold;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+} */
+td.catagory {
   font-weight: bold;
   padding-top: 10px;
   padding-bottom: 10px;
