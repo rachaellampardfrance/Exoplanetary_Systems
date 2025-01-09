@@ -11,7 +11,7 @@ def main():
         os.system("py helpers/stellar_data.py")
         os.system("py helpers/planetary_data.py")
 
-    message = "Create new figures? "
+    message = "Create new figures Y/N?  "
     if get_user_confirm(message):
         os.system("py helpers/plots.py")
 

@@ -134,6 +134,24 @@ def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
                 stellar.sy_name != excluded.sy_name;
     """, data_to_insert)
 
+def update_stellar_spectypes(data_frame: pd.DataFrame) -> None:
+    """update stellar table with new spectral types"""
+
+    data_to_insert = []
+    for _, row in data_frame.iterrows():
+        data_to_insert.append((
+            row['st_spectype'],
+            row['hostname'],
+        ))
+
+    with sqlite3.connect(DB_PATH) as connection:
+        connection.executemany("""
+            UPDATE stellar
+            SET st_spectype = ?
+            WHERE
+                stellar.hostname == ?;
+    """, data_to_insert)
+
 
 def get_last_updated(table) -> str:
     with sqlite3.connect(DB_PATH) as conn:
