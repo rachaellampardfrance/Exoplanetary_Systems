@@ -1,7 +1,7 @@
 import pytest
 from matplotlib import pyplot as plt
 
-from helpers.helpers import is_png_jpg_jpeg, is_valid_file_name
+from helpers import is_png_jpg_jpeg, is_valid_file_name
 
 DATAFRAME_FIGURE, ax = plt.subplots(figsize=(8, 6))
 valid_fig_name = "fig_name"
