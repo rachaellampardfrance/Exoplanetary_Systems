@@ -13,13 +13,13 @@
     <table>
         <thead>
             <tr>
-                <th colspan="{{ data.size + 1 }}">
+                <th colspan="{{ size + 2 }}">
                     <h2>
-                        🌌{{ data.system_name }}🌌<br>
-                        {% for star in data.stars %}
+                        🌌{{ system.name }}🌌<br>
+                        {% for star in system.stars %}
                         ☀️
                         {% endfor %}
-                        {% for planet in data.planets %}
+                        {% for planet in system.planets %}
                         🪐
                         {% endfor %}
                     </h2>
@@ -28,80 +28,80 @@
         </thead>
         <thead>
             <tr>
-                <th colspan="{{ data.stars|length + 1}}">Stars</th>
-                <th colspan="{{ data.planets|length + 1 }}">Planets</th>
+                <th colspan="{{ system.stars|length + 1}}">Stars</th>
+                <th colspan="{{ system.planets|length + 1 }}">Planets</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td class="catagory"></td>
-                {% for star in data.stars %}
+                {% for star in system.stars %}
                 <td>☀️</td>
                 {% endfor %}
                 <td></td>
-                {% for planet in data.planets %}
+                {% for planet in system.planets %}
                 <td>🪐</td>
                 {% endfor %}
             </tr>
             <tr>
                 <td class="catagory">Name</td>
-                {% for star in data.stars %}
-                <td>{{ star.hostname }}</td>
+                {% for star in system.stars %}
+                <td>{{ star.name }}</td>
                 {% endfor %}
                 <td class="catagory">Name</td>
-                {% for planet in data.planets %}
-                <td>{{ planet.pl_name }}</td>
+                {% for planet in system.planets %}
+                <td>{{ planet.name }}</td>
                 {% endfor %}
             </tr>
             <tr>
                 <td class="catagory">Star Type</td>
-                {% for star in data.stars %}
-                <td>{{ star.st_spectype }}</td>
+                {% for star in system.stars %}
+                <td>{{ star.full_class_id }}</td>
                 {% endfor %}
                 <td class="catagory">Host Star</td>
-                {% for planet in data.planets %}
+                {% for planet in system.planets %}
                 <td>{{ planet.hostname }}</td>
                 {% endfor %}
             </tr>
             <tr>
                 <td class="catagory">Spectral Class</td>
-                {% for star in data.stars %}
+                {% for star in system.stars %}
                 <td>
-                    {% if star.class %}
-                        {{ star.class }}<br>({{ star.heat }} Kelvin)
+                    {% if star.st_class %}
+                        {{ star.st_class}}<br>({{ star.heat }} Kelvin)
                     {% endif %}
                 </td>
                 {% endfor %}
                 <td class="catagory">Circumbinary</td>
-                {% for planet in data.planets %}
+                {% for planet in system.planets %}
                 <td>{{ planet.cb_flag }}</td>
                 {% endfor %}
             </tr>
             <tr>
                 <td class="catagory">Class heat<br>(0-9)</td>
-                {% for star in data.stars %}
+                {% for star in system.stars %}
                 <td>
-                    {% if star.sub_heat %}
-                        {{ star.sub_heat }}
+                    {% if star.sub_class %}
+                        {{ star.sub_class }}
                     {% endif %}
                 </td>
                 {% endfor %}
                 <td class="catagory">Discovery Year<br>(Published)</td>
-                {% for planet in data.planets %}
+                {% for planet in system.planets %}
                 <td>{{ planet.disc_pubdate }}</td>
                 {% endfor %}
             </tr>
             <tr>
                 <td class="catagory">Luminosity Class</td>
-                {% for star in data.stars %}
+                {% for star in system.stars %}
                 <td>
-                    {% if star.luminosity %}
-                        {{ star.luminosity }}
+                    {% if star.lumin %}
+                        {{ star.lumin }}
                     {% endif %}
                 </td>
                 {% endfor %}
                 <td class="catagory"></td>
-                {% for planet in data.planets %}
+                {% for planet in system.planets %}
                 <td></td>
                 {% endfor %}     
             </tr>
