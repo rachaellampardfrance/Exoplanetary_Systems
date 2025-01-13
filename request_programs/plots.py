@@ -128,7 +128,7 @@ def create_fig_star_pie(star_series):
     )
 
     # plt_title = "Star systems where\nexoplanets most commonly occur"
-    plt_title = "Occurance of Exoplanetary\nSystems by Star System Type"
+    plt_title = "Occurrence of Exoplanetary\nSystems by Star System Type"
 
     ax.set_title(
         plt_title,
