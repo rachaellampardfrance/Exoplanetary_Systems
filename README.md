@@ -81,7 +81,7 @@ A website application that represents planetary and system data to the user.
 ### Homepage
 Displays many planets and exoplanetary systems are confirmed
 
-<img src='static/readme_images/home.png' alt='Website Home Page'>
+<img src='static/readme_imgs/home.png' alt='Website Home Page'>
 
 ### New Discoveries
 Display newly discovered planets and recently updated systems.
@@ -90,23 +90,23 @@ Display newly discovered planets and recently updated systems.
     - System updates: an existing planetary system that has had a new planet discovered
 - Any of the planets, stars(hosts), or systems may be clicked on to lead the user to the dynamic '/system/<stellar_body>' page which will display information about the system the stellar body is in. 
 
-<img src='static/readme_images/new_disc_both.png' alt='Website New Discoveries Page with both tables'>
+<img src='static/readme_imgs/new_disc_both.png' alt='Website New Discoveries Page with both tables'>
 
-<img src='static/readme_images/new_disc_planets.png' alt='Website New Discoveries Page with planets table'>
+<img src='static/readme_imgs/new_disc_planets.png' alt='Website New Discoveries Page with planets table'>
 
 ### Statistics
 Display statistic figures created from the gathered database information
 
-<img src='static/readme_images/statistics.png' alt='Website Statistics Page with "Exoplanet System Type by Star Count" figure and explanation'>
+<img src='static/readme_imgs/statistics.png' alt='Website Statistics Page with "Exoplanet System Type by Star Count" figure and explanation'>
 
-<img src='static/readme_images/statistics_2.png' alt='Website Statistics Page with "Most Common Exoplanet System Type by Star Count" figure and explanation'>
+<img src='static/readme_imgs/statistics_2.png' alt='Website Statistics Page with "Most Common Exoplanet System Type by Star Count" figure and explanation'>
 
-<img src='static/readme_images/statistics_3.png' alt='Website Statistics Page with "Occurrence of Exoplanetary Systems by Star Count" figure and explanation'>
+<img src='static/readme_imgs/statistics_3.png' alt='Website Statistics Page with "Occurrence of Exoplanetary Systems by Star Count" figure and explanation'>
 
 ### About
 Description of project and Acknowledgments
 
-<img src='static/readme_images/about.png' alt='Website About Page'>
+<img src='static/readme_imgs/about.png' alt='Website About Page'>
 
 ### 🎲Randomise🎲
 This route generates a Redirect the user to the System page with a random 
@@ -114,7 +114,7 @@ This route generates a Redirect the user to the System page with a random
 ### System
 A page that displays System information to the user, either navigated to by the search bar or by clicking on a stellar body. This page will display the system of any given planet, star or system that is in the database.
 
-<img src='static/readme_images/system.png' alt='Website System Page'>
+<img src='static/readme_imgs/system.png' alt='Website System Page'>
 
 ### Suggestions
 If the users system search is unsuccessful (as in no planet, star or system is found to be a match) the user will be redirected to this 'Suggestions' page.
@@ -125,7 +125,7 @@ Page displays suggested planets, stars or systems. (If their text pattern is fou
 #### No match
 Page displays "No suggestions available"
 
-<img src='static/readme_images/suggestions.png' alt='Website Suggestions Page'>
+<img src='static/readme_imgs/suggestions.png' alt='Website Suggestions Page'>
 
 
 <a id='plots'></a>
@@ -150,7 +150,7 @@ Contents:
     - Additional exoplanet discovery data - *extra data displayed on the figure represents how many confirmed exoplanet systems have been discovered as well as individual exoplanets.*
 
 <p align="center">
-<img src='static\occurance_of_exoplanetary_systems_by_star_system_type.png' alt='"occurance of exoplanetary systems by star system type" pie chart' width='600'>
+<img src='static/occurrence_of_exoplanetary_systems_by_star_system_type.png' alt='"occurance of exoplanetary systems by star system type" pie chart' width='600'>
 </p>
 
 <a id='plot2'></a>
