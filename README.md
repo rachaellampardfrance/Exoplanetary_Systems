@@ -13,13 +13,11 @@
     - [🔧 built With](#built_with)
 2. [❔ Getting Started](#getting_started)
     - [🖥️ Installation](#installation)
-3. [🛰️ Usage](#usage)
-    - 📈 [Data Sets](#data_sets)
-    - 📉 [Plotted Graphs](#plotted_graphs)
-        - 🌍 [Occurance Of Exoplanetary Systems By Star System Type](#plot1)
-        - 🌏 [Exoplanet Systems by Star Count](#plot2)
-        - 🌎 [Most Common Exoplanet Systems](#plot3)
-4. [🗃️ Folder Automation](#folder_automation)
+3. [🕸️ Website](#website)
+4. [📉 Plotted Graphs](#plots)
+    - [🌍 Occurrence Of Exoplanetary Systems By Star System Type](#plot1)
+    - [🌏 Exoplanet Systems by Star Count](#plot2)
+    - [🌎 Most Common Exoplanet Systems](#plot3)
 5. [📡 Acknowledgements](#acknowledgements)
 6. [📧 Contact](#contact)
 
@@ -32,7 +30,14 @@
 <a id='summary'></a>
 
 ### 📋 Summary:
-This program is intended to get star system data from NASA's 'stellar hosts' database via TAP request using ADQL. Then the data is organised and cleaned down to the unique star systems required Ready for analysis, the data is then organised into new data frames to plot various visual graphs...
+This Project consists of multiple programs:
+#### Data Collection Program
+A program that runs multiple other programs, which gather planetary and stellar host data from various NASA's Exoplanet Archive tables via TAP request using ADQL which is then organised, cleaned and saved into relevant tables in a local sqlite3 database. Lastly a program that is made with pandas and matplotlib to analyse, visualise and save system data in figures.
+- Python, Astroquery (TapPlus), Sqlite3, Pandas, Matplotlib, Pytest, ADQL
+
+#### Web Program
+A website application that represents planetary and system data to the user.
+- Python, OOP, Flask, HTML, CSS, Pytest
 
 <a id='built_with'></a>
 
@@ -45,6 +50,9 @@ This program is intended to get star system data from NASA's 'stellar hosts' dat
 - 🔢 [Numpy](https://numpy.org/install/)
 - 🐼 [Pandas](https://pandas.pydata.org/docs/getting_started/install.html)
 - 🐍 [Python](https://www.python.org/downloads/)
+    - [Flask](https://flask.palletsprojects.com/en/stable/)
+    - [Pytest](https://docs.pytest.org/en/stable/)
+    - html & css
 - 💠 Visual Studio Code
 
 <a id='getting_started'></a>
@@ -55,78 +63,75 @@ This program is intended to get star system data from NASA's 'stellar hosts' dat
 
 ### 🖥️ Installation
 
-<details open>
+<details closed>
 <summary>Installation steps</summary>
 
-1. Install [Python](https://www.python.org/downloads/)
-    - Download Python3
-2. Install [Jupyter Notebooks](https://docs.jupyter.org/en/stable/install.html)
-
-        $pip install jupyter
-3. Fork this repository
+1. Fork this repository
     - git clone https://github.com/rachaellampardfrance/Exoplanetary_Systems
-4. Install requirements.txt
+2. Install requirements.txt
 
         $pip install -r requirements.txt
 </details>
 
-<!-- <a id='installation'></a>
 
-### Installation
-how to install the program...
+<a id="website"></a>
 
-    $ git clone   -->
+## 🕸️ Website
 
-<a id='usage'></a>
+### Homepage
+Displays many planets and exoplanetary systems are confirmed
 
-## 🛰️ Usage
+<img src='static/readme_images/home.png' alt='Website Home Page'>
 
-<details open>
-<summary>Usage</summary>
+### New Discoveries
+Display newly discovered planets and recently updated systems.
+- Page has the option to show new planets, system updates tables or both.
+    - New planets: planetary discoveries
+    - System updates: an existing planetary system that has had a new planet discovered
+- Any of the planets, stars(hosts), or systems may be clicked on to lead the user to the dynamic '/system/<stellar_body>' page which will display information about the system the stellar body is in. 
 
-This program is written in 'Jupyter NoteBooks' in Python and Markdown. The program is designed to make a request to NASA's astronomical Database using a TAPPlus request (TAP protocol is a standard for the astronomical community).
+<img src='static/readme_images/new_disc_both.png' alt='Website New Discoveries Page with both tables'>
+
+<img src='static/readme_images/new_disc_planets.png' alt='Website New Discoveries Page with planets table'>
+
+### Statistics
+Display statistic figures created from the gathered database information
+
+<img src='static/readme_images/statistics.png' alt='Website Statistics Page with "Exoplanet System Type by Star Count" figure and explanation'>
+
+<img src='static/readme_images/statistics_2.png' alt='Website Statistics Page with "Most Common Exoplanet System Type by Star Count" figure and explanation'>
+
+<img src='static/readme_images/statistics_3.png' alt='Website Statistics Page with "Occurrence of Exoplanetary Systems by Star Count" figure and explanation'>
+
+### About
+Description of project and Acknowledgments
+
+<img src='static/readme_images/about.png' alt='Website About Page'>
+
+### 🎲Randomise🎲
+This route generates a Redirect the user to the System page with a random 
+
+### System
+A page that displays System information to the user, either navigated to by the search bar or by clicking on a stellar body. This page will display the system of any given planet, star or system that is in the database.
+
+<img src='static/readme_images/system.png' alt='Website System Page'>
+
+### Suggestions
+If the users system search is unsuccessful (as in no planet, star or system is found to be a match) the user will be redirected to this 'Suggestions' page.
+
+#### Partial match
+Page displays suggested planets, stars or systems. (If their text pattern is found in any existing stellar body name.)
+
+#### No match
+Page displays "No suggestions available"
+
+<img src='static/readme_images/suggestions.png' alt='Website Suggestions Page'>
 
 
-Firstly a TapPlus class instance is created to carry out the TAP request to NASA's database. A query variable is made with an ADQL string. Then a synchronous job is carried out as a function on the TapPlus class instance, with the ADQL query passed in as an argument. This makes the ADQL request and returns a job object with a VOTable table format.
+<a id='plots'></a>
 
-
-For the first request it gets the schema of the database we are interested in getting data from, as there are over 100 columns to the 'Stellar Hosts' database the information is truncated. For this reason the program saves the table as a .csv file we can read so that we can search through to find the columns of data we will be interested in.
-> This request is synchronous as it is a smaller request of information. Asynchronous requests are made for larger amounts of data otherwise it would not receive all of the data
-
-
-Then the data is sorted alphabetically and any duplicate data is removed by system (as the database has a lot of repeated systems as it records individual stellar bodies within the systems)
-
-
-Once the data is cleaned three data sets are created...
-
-
-<a id='data_sets'></a>
-
-### 📈 data sets
-<a id='system_df'></a>
-- **system_df:**
-    - A large pandas dataframe containing all systems names, star number and planet number within the system.  
-    - Created from the cleaned data from NASA's 'Stellar Hosts' database
-   
-<a id='star_srs'></a>
-- **star_srs:**
-    - A small pandas series with the 'system star count' as the index and the occurrence that exoplanets have been observed in the system type *(not all exoplanets - the occurrence of a system containing exoplanets)*.
-    - Created from the 'system_df'
-
-<a id='planet_to_star_df'></a>
-- **planet_to_star_df:**
-    - A small pandas dataframe with the 'system star count' as the index and divided into additional 'exoplanet count' columns by system, the data relates to observed occurrences.
-    - Created from the 'system_df'
-
-Once the data required is organised three plots are visualised using the data...
-
-</details>
-
-
-<a id='plotted_graphs'></a>
-
-### 📉 Plotted Graphs
-<details open>
+## 📉 Plots
+<details closed>
 <summary>Plots</summary>
 The program creates three plot figures...
 
@@ -190,20 +195,15 @@ Contents:
 
 </details>
 
-<a id='folder_automation'></a>
-
-## 🗃️ Folder Automation
-
-This program has been designed so that when a new figure is created it attempt to create a folder within static named with the current date, and save the figure within this folder with the addition of a datestamp in the file name. The figure will also be saved to the top level of 'static/' without a date stamp and will overwrite the existing figure so that the figures remain up to date for this README. 
-- if a folder with the current date already exists the folder creation step will be skipped
-- if a file with the same name already exists in this folder the user will be asked if they want to overwrite the file. (This will happen if the same figure is generated again on the same day)
 
 <a id='acknowledgements'></a>
 
 ## 📡 Acknowledgements
 
-- 🚀 [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu): All data is gathered from NASA's 'Stellar Hosts' database 
-    - **DOI: 10.26133/NEA40**
+- 🚀 [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu)
+    - ***Stellar Hosts Table DOI:* 10.26133/NEA40**
+    - ***Planetary Systems Table DOI:* 10.26133/NEA12**
+
 
 - 🔭 [Astroquery](https://ui.adsabs.harvard.edu/abs/2019AJ....157...98G/abstract)
 
@@ -216,7 +216,7 @@ This program has been designed so that when a new figure is created it attempt t
 
 <!-- [![Linkedin Logo](linkedin.png)](https://www.linkedin.com/in/rachael-lampard-france-a5995b195/) -->
 
-<a href='https://www.linkedin.com/in/rachael-lampard-france-a5995b195/'><img src='static/linkedin.png' alt='Linkedin Logo' width='100'></a>
+<a href='https://www.linkedin.com/in/rachael-lampard-france-a5995b195/'><img src='static/icons/linkedin.png' alt='Linkedin Logo' width='100'></a>
 
 Project Link - https://github.com/rachaellampardfrance/Exoplanetary_Systems
 
