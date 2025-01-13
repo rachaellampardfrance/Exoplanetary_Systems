@@ -221,7 +221,7 @@ def suggestions(search):
         cursor.execute(f"SELECT sy_name FROM {TABLES[1]} WHERE LOWER(sy_name) LIKE ?", (f"%{search}%",))
         systems = cursor.fetchall()
         suggestions['systems'].extend([system[0] for system in systems])
-    return render_template("suggestions.html", suggestions=suggestions)
+    return render_template("suggestions.html", suggestions=suggestions, search=search)
 
 
 @app.route("/about")
