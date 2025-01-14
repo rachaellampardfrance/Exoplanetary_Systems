@@ -14,12 +14,13 @@
 2. [❔ Getting Started](#getting_started)
     - [🖥️ Installation](#installation)
 3. [🕸️ Website](#website)
-4. [📉 Plotted Graphs](#plots)
+4. [📱 Mobile Website \*\*in dev\*\*](#mobile_web)
+5. [📉 Plotted Graphs](#plots)
     - [🌍 Occurrence Of Exoplanetary Systems By Star System Type](#plot1)
     - [🌏 Exoplanet Systems by Star Count](#plot2)
     - [🌎 Most Common Exoplanet Systems](#plot3)
-5. [📡 Acknowledgements](#acknowledgements)
-6. [📧 Contact](#contact)
+6. [📡 Acknowledgements](#acknowledgements)
+7. [📧 Contact](#contact)
 
 <!-- 🌠☄️👩‍🚀👩‍💻👩‍🔬💬💭🥼📻🔍📷📃📝✒️📊📆🗃️🪐 -->
 </details>
@@ -53,6 +54,7 @@ A website application that represents planetary and system data to the user.
     - [Flask](https://flask.palletsprojects.com/en/stable/)
     - [Pytest](https://docs.pytest.org/en/stable/)
     - html & css
+- 🌿 [Sqlite3](https://www.sqlite.org/)
 - 💠 Visual Studio Code
 
 <a id='getting_started'></a>
@@ -127,6 +129,20 @@ Page displays "No suggestions available"
 
 <img src='static/readme_imgs/suggestions.png' alt='Website Suggestions Page'>
 
+<a id='mobile_web'></a>
+
+## Mobile \*\*In Development\*\*
+
+### <p align="center">Statistics page</p>
+<p align="center">
+<img src='static/readme_imgs/mobile_statistics.png' alt='Website Mobile Statistics Page - Top' width='200'>
+<img src='static/readme_imgs/mobile_statistics_2.png' alt='Website Mobile Statistics Page - Bottom' width='200'>
+</p>
+
+### <p align="center">System page</p>
+<p align="center">
+<img src='static/readme_imgs/mobile_system.png' alt='Website Mobile System Page' width='200'>
+</p>
 
 <a id='plots'></a>
 

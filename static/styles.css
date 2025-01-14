@@ -27,14 +27,8 @@ body {
   align-items: flex-start;
 }
 
-/* [class|="txt"] {
-  color: #f0f8ff;
-} */
-
 .txt-default, p {
   font-family: Lucida Console, Monospace;
-  /* font-family: 'Courier New', Courier, monospace; */
-  /* font-size: medium; */
   font-size: 1em;
   }
 
@@ -98,14 +92,6 @@ a:hover, a:active {
   text-decoration: underline;
 }
 
-/* #footer {
-  display: grid, flex;
-  justify-content: center;
-  left: 0;
-  width: 100%;
-  opacity: 0.5;
-} */
-
 #footer {
   display: flex;
   flex-direction: column;
@@ -139,13 +125,6 @@ td {
   padding-left: 20px;
   padding-right: 20px;
 }
-/* td.thick {
-  font-weight: bold;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-} */
 td.catagory {
   font-weight: bold;
   padding-top: 10px;
