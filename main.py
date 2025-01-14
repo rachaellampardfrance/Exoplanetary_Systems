@@ -55,7 +55,7 @@ def new(category):
     """
 
     if category not in ['p', 's', 'ps']:
-        return render_template("error.html", message="Page does not exist")
+        return render_template("error.html", message="Page does not exist"), 404
 
     if category in ['s', 'ps']:
         new_systems = []
@@ -182,7 +182,7 @@ def system(stellar_body=None):
 
     # if no search input in either entry case
     if not stellar_body:
-         return render_template("error.html", message=error_msg)
+         return render_template("error.html", message=error_msg), 404
     
     # Try to create system instance
     try:
