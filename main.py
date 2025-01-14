@@ -167,20 +167,22 @@ def randomiser():
     return redirect(url_for('system', stellar_body=stellar_body), code=302)
 
 
+# @app.route("/system", strict_slashes=False)
 @app.route("/system")
+@app.route("/system/")
 @app.route("/system/<stellar_body>")
 def system(stellar_body=None):
     """Dynamically generate system page from planet, star or system name
     """
     error_msg = "No search term or stellar body provided"
 
+    # if navigated through html form search bar
     if 'search' in request.args:
         stellar_body = request.args.get('search')
-    elif stellar_body:
-        stellar_body = stellar_body
-    else:
-        # fail case
-        return render_template("error.html", message=error_msg)
+
+    # if no search input in either entry case
+    if not stellar_body:
+         return render_template("error.html", message=error_msg)
     
     # Try to create system instance
     try:
