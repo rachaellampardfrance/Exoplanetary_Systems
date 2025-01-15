@@ -13,7 +13,7 @@
         <!-- google font AudioWide -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
 
-        <title>Exoplanetary Systems: {% block title %}{% endblock %}</title>
+        <title>Planetary Systems: {% block title %}{% endblock %}</title>
     </head>
 
     <body class="center">
@@ -21,12 +21,12 @@
         <nav id="navbar">
             <ul>
                 <li class="nav-item">
-                    <a class="navbar-logo" href="/">
-                        <img src="{{ url_for('static', filename='icons/star_system_white.png') }}" alt="Star system icon" width="30"> Exoplanetary Systems
+                    <a class="navbar-logo" href="{{ url_for('home') }}">
+                        <img src="{{ url_for('static', filename='icons/star_system_white.png') }}" alt="Star system icon" width="30"> Planetary Systems
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
                     <div class="dropdown">
                         <a class="nav-link" href="{{ url_for('new', category='ps') }}">New Discoveries</a>
                         <div class="dropdown-content">

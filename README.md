@@ -1,6 +1,6 @@
 <a id='top'></a>
 
-# 🌌 EXOPLANETARY SYSTEMS
+# 🌌 PLANETARY SYSTEMS
 
 <a id='table_of_contents'></a>
 
@@ -16,9 +16,9 @@
 3. [🕸️ Website](#website)
 4. [📱 Mobile Website \*\*in dev\*\*](#mobile_web)
 5. [📉 Plotted Graphs](#plots)
-    - [🌍 Occurrence Of Exoplanetary Systems By Star System Type](#plot1)
-    - [🌏 Exoplanet Systems by Star Count](#plot2)
-    - [🌎 Most Common Exoplanet Systems](#plot3)
+    - [🌍 Occurrence Of Planetary Systems By Star System Type](#plot1)
+    - [🌏 Planetary Systems by Star Count](#plot2)
+    - [🌎 Most Common Planetary Systems](#plot3)
 6. [📡 Acknowledgements](#acknowledgements)
 7. [📧 Contact](#contact)
 
@@ -81,7 +81,7 @@ A website application that represents planetary and system data to the user.
 ## 🕸️ Website
 
 ### Homepage
-Displays many planets and exoplanetary systems are confirmed
+Displays many planets and planetary systems are confirmed
 
 <img src='static/readme_imgs/home.png' alt='Website Home Page'>
 
@@ -99,11 +99,11 @@ Display newly discovered planets and recently updated systems.
 ### Statistics
 Display statistic figures created from the gathered database information
 
-<img src='static/readme_imgs/statistics.png' alt='Website Statistics Page with "Exoplanet System Type by Star Count" figure and explanation'>
+<img src='static/readme_imgs/statistics.png' alt='Website Statistics Page with "Planetary System Type by Star Count" figure and explanation'>
 
-<img src='static/readme_imgs/statistics_2.png' alt='Website Statistics Page with "Most Common Exoplanet System Type by Star Count" figure and explanation'>
+<img src='static/readme_imgs/statistics_2.png' alt='Website Statistics Page with "Most Common Planetary System Type by Star Count" figure and explanation'>
 
-<img src='static/readme_imgs/statistics_3.png' alt='Website Statistics Page with "Occurrence of Exoplanetary Systems by Star Count" figure and explanation'>
+<img src='static/readme_imgs/statistics_3.png' alt='Website Statistics Page with "Occurrence of Planetary Systems by Star Count" figure and explanation'>
 
 ### About
 Description of project and Acknowledgments
@@ -153,60 +153,60 @@ The program creates three plot figures...
 
 <a id='plot1'></a>
 
-#### 🌍**1. Occurance Of Exoplanetary Systems By Star System Type:**
+#### 🌍**1. Occurrence Of Planetary Systems By Star System Type:**
 
 
 Intent:
-A pie chart representation of what type of systems exoplanets most commonly occur in relation to how many stars are within the system.
+A pie chart representation of what type of systems planets most commonly occur in relation to how many stars are within the system.
 
 Contents:
 - Figure
-    - Pie chart - *represents data of what systems exoplanets most commonly occur in, related to how many stars are in the system.*
+    - Pie chart - *represents data of what systems planets most commonly occur in, related to how many stars are in the system.*
     - Legend - *displays how many stars are in each system on the pie chart related by color.*
-    - Additional exoplanet discovery data - *extra data displayed on the figure represents how many confirmed exoplanet systems have been discovered as well as individual exoplanets.*
+    - Additional planetary discovery data - *extra data displayed on the figure represents how many confirmed planetary systems have been discovered as well as individual exoplanets.*
 
 <p align="center">
-<img src='static/occurrence_of_exoplanetary_systems_by_star_system_type.png' alt='"occurance of exoplanetary systems by star system type" pie chart' width='600'>
+<img src='static/occurrence_of_planetary_systems_by_star_system_type.png' alt='"occurrence of planetary systems by star system type" pie chart' width='600'>
 </p>
 
 <a id='plot2'></a>
 
-#### 🌏**2. Exoplanet Systems by Star Count:**
+#### 🌏**2. Planetary Systems by Star Count:**
 
 Intent:
-A figure containing two nested bar charts that represent all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system. This is intended to show the frequency in which exoplanets/multiplanetary systems occur in relation to singular star and binary star systems.
+A figure containing two nested bar charts that represent all observations of exoplanet systems, nested by how many planets occur in each system and organised by how many stars are in the system. This is intended to show the frequency in which exoplanets/multi-planetary systems occur in relation to singular star and binary star systems.
 
-The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence of exoplanetary systems whereas 'log' is intended to help visualise small frequencies.
+The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence of planetary systems whereas 'log' is intended to help visualise small frequencies.
 
 Contents:
 - Figure
-    - Nested bar chart - *represents all observations of exoplanet systems, nested by how many exoplanets occur in each system and organised by how many stars are in the system.*
+    - Nested bar chart - *represents all observations of planetary systems, nested by how many planets occur in each system and organised by how many stars are in the system.*
     - Nested bar chart LOG - *represents the same data as above but in a log format to help visualise small data*
 
 <p align="center">
-<img src='static/exoplanet_systems_by_star_count.png' alt='exoplanet systems by star count figure image' width='900'>
+<img src='static/exoplanet_systems_by_star_count.png' alt='planetary systems by star count figure image' width='900'>
 </p>
 
 
 <a id='plot3'></a>
 
-#### 🌎**3. Most Common Exoplanet Systems:**
+#### 🌎**3. Most Common Planetary Systems:**
 
 Intent:
-A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of exoplanet systems in relation to the star system.
+A collection of pie charts which are independent of one another, each corresponding to a type of star/binary star system. Each pie chart represents which is the most common type of planetary system in relation to the star system.
 
->[!NOTE] These pie charts do not include any exoplanet systems that would fall in less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
+>[!NOTE] These pie charts do not include any planetary systems that would fall in less than 1% of the overall data (this is to prevent small data crowding the data: as this is a visual generalisation)
 >
 >Additionally note that data that falls in less than the 1% is completely left out of the data.
 
 
 Contents:
 - Figure
-    - Pie charts - *Each pie chart represents which is the most common types of exoplanet systems in relation to it's systems star count*
+    - Pie charts - *Each pie chart represents which is the most common type of planetary system in relation to it's systems star count*
     - Legend - *The legend visualises the planet count by color and applies to all pie charts*
 
 <p align="center">
-<img src='static/most_common_exoplanet_systems.png' alt='Most common exoplanet systems pie charts figure' width='900'>
+<img src='static/most_common_exoplanet_systems.png' alt='Most common planetary system pie charts figure' width='900'>
 </p>
 
 </details>

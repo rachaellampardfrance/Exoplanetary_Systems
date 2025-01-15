@@ -20,7 +20,7 @@ TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
 @app.route("/")
 def home():
     """Renders HTML home page with current exoplanet and
-    exoplanetary systems count
+    planetary systems count
     """
     exo_systems = 0
     planets = 0

@@ -103,7 +103,7 @@ def save_fig(fig: matplotlib.figure.Figure, fig_name: str) -> None:
     save_dated_figure(fig, fig_name, "png")
 
 def create_fig_star_pie(star_series):
-    """generate Occurance of Exoplanetary Systems by Star System Type pie figure"""
+    """generate Occurance of Planetary Systems by Star System Type pie figure"""
 
     # create figure for chart and text to display on
     fig, ax = plt.subplots(figsize=(8, 6))
@@ -127,8 +127,7 @@ def create_fig_star_pie(star_series):
             'weight': 'bold'}
     )
 
-    # plt_title = "Star systems where\nexoplanets most commonly occur"
-    plt_title = "Occurrence of Exoplanetary\nSystems by Star System Type"
+    plt_title = "Occurrence of Planetary\nSystems by Star System Type"
 
     ax.set_title(
         plt_title,
@@ -196,11 +195,11 @@ def create_fig_nested_bar(planet_to_star_df):
         ax[i].legend(title='Planets')
         i += 1
 
-    ax[0].set_title('Exoplanet Systems by Star Count (SCALE)')
+    ax[0].set_title('Planetary Systems by Star Count (SCALE)')
 
     # for visualisation of smaller data
     ax[1].set_yscale('log')
-    ax[1].set_title('Exoplanet Systems by Star Count (LOG)')
+    ax[1].set_title('Planetary Systems by Star Count (LOG)')
 
     fig_name = "exoplanet_systems_by_star_count"
 
@@ -277,8 +276,8 @@ def create_fig_system_pies(planet_to_star_df):
         loc=1,
     )
 
-    fig_title = "Most Common Exoplanet Systems"
-    fig_under_title = "(excluding Exoplanet Systems falling under 1%)"
+    fig_title = "Most Common Planetary Systems"
+    fig_under_title = "(excluding Planetary Systems falling under 1%)"
     fig.text(0.51, 0.95, fig_title, size=14, horizontalalignment='center')
     fig.text(0.51, 0.9, fig_under_title, size=10, horizontalalignment='center', fontstyle='italic')
 
