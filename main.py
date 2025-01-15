@@ -55,7 +55,7 @@ def new(category):
     """
 
     if category not in ['p', 's', 'ps']:
-        return render_template("error.html", message="Page does not exist"), 404
+        return render_template("404.html", error="Page does not exist"), 404
 
     if category in ['s', 'ps']:
         new_systems = []
@@ -174,7 +174,7 @@ def randomiser():
 def system(stellar_body=None):
     """Dynamically generate system page from planet, star or system name
     """
-    error_msg = "No search term or stellar body provided"
+    error_msg = "No search term or stellar body provided."
 
     # if navigated through html form search bar
     if 'search' in request.args:
@@ -182,7 +182,7 @@ def system(stellar_body=None):
 
     # if no search input in either entry case
     if not stellar_body:
-         return render_template("error.html", message=error_msg), 404
+         return render_template("404.html", error=error_msg), 404
     
     # Try to create system instance
     try:
@@ -229,3 +229,11 @@ def suggestions(search):
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.errorhandler(404)
+def page_not_found(error=404):
+    return render_template('404.html', error=error), 404
+
+@app.errorhandler(Exception)
+def handle_exception(error):
+    return render_template('500.html', error=error), 500

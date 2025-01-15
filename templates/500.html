@@ -11,9 +11,10 @@
     </h1>
 </div>
 
-<p>
-    {{ message }}
-</p>
+<div>
+    <p>Error code: {{ error.__class__.__name__ }} - 500</p>
+    <p>Oops! Something went wrong on the server. Please try again later.</p>
+</div>
+
 <img class="img" id="img-error" src="{{ url_for('static', filename='icons/blackhole.png') }}" alt="blackhole"/>
-<!-- at https://www.shutterstock.com/image-vector/deep-space-background-huge-black-hole-2370667685 -->
 {% endblock %}
