@@ -2,7 +2,8 @@
 
 import sqlite3
 from flask import (
-    Flask, render_template,
+    Flask, abort,
+    render_template,
     request, redirect,
     url_for
 )
@@ -55,7 +56,7 @@ def new(category):
     """
 
     if category not in ['p', 's', 'ps']:
-        return render_template("404.html", error="Page does not exist"), 404
+        abort(404)
 
     if category in ['s', 'ps']:
         new_systems = []
