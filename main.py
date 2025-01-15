@@ -183,14 +183,14 @@ def system(stellar_body=None):
 
     # if no search input in either entry case
     if not stellar_body:
-         return render_template("404.html", error=error_msg), 404
+        # render empty suggestions  
+        return render_template("suggestions.html", suggestions=None, search=None), 302
     
     # Try to create system instance
     try:
         system = System(stellar_body)
     except TypeError:
-        # if no reference to system by 
-        # planet/star/system name, redirect
+        # if no reference to system by redirect
         return redirect(url_for('suggestions', search=stellar_body), code=302)
 
     size = len(system.planets) + len(system.stars)

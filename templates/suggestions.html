@@ -9,7 +9,9 @@
     <h1>
         Suggestions
     </h1>
-    <h2>"{{ search }}"</h2>
+    {% if search %}
+    <h2>Stellar bodies similar to: "{{ search }}"</h2>
+    {% endif %}
 </div>
 
 <div class="table-suggestions center-tables">
