@@ -175,7 +175,6 @@ def randomiser():
 def system(stellar_body=None):
     """Dynamically generate system page from planet, star or system name
     """
-    error_msg = "No search term or stellar body provided."
 
     # if navigated through html form search bar
     if 'search' in request.args:
