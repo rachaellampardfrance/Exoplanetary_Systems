@@ -201,7 +201,7 @@ def create_fig_nested_bar(planet_to_star_df):
     ax[1].set_yscale('log')
     ax[1].set_title('Planetary Systems by Star Count (LOG)')
 
-    fig_name = "exoplanet_systems_by_star_count"
+    fig_name = "planetary_systems_by_star_count"
 
     return fig, fig_name
 

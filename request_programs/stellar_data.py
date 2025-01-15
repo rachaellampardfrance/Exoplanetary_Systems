@@ -7,7 +7,8 @@ import pandas as pd
 
 from database_helpers import (
     upsert_stellar_data,
-    update_stellar_spectypes
+    update_stellar_spectypes,
+    print_table_updated_count
 )
 from helpers import (
     get_user_confirm,
@@ -25,12 +26,13 @@ def main():
 
     update_stellar_schema(service_url)
 
-    update_stellarhosts_table(service_url)
+    update_stellar_table(service_url)
 
     update_sh_table_spectype(service_url)
 
     # print max last updated value from stellar table
     print_last_updated("stellar")
+    print_table_updated_count("stellar")
 
     print("Stellar Data requests and updates complete")
 # *******
@@ -73,7 +75,7 @@ def save_schema(schema: pd.DataFrame) -> None:
 
 
 # *******
-def update_stellarhosts_table(service_url: str) -> None:
+def update_stellar_table(service_url: str) -> None:
     """request stellarhosts table and upsert relevant data
     to stellarhosts table in local database
     """

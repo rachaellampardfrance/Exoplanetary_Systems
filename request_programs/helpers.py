@@ -145,12 +145,13 @@ def show_cleaning(data: pd.DataFrame, data_colum: pd.DataFrame, column_name: str
     """
     print(f"Rows in data: {data_colum.count().sum()}\n")
     duplicates = data.duplicated(subset=[column_name], keep='first')
-    print(f"Number of non-duplicate systems: {data_colum.count().sum() - duplicates.sum()}")
-    print(f"Number of duplicate systems: {duplicates.sum()}")
+    print(f"Number of non-duplicate data: {data_colum.count().sum() - duplicates.sum()}")
+    print(f"Number of duplicate data: {duplicates.sum()}")
     print(f"Columns with null values:\n{data.isnull().sum()}")
 
 def print_last_updated(table):
     date = get_last_updated(table)[0]
 
     print("Last updated on {}".format(date))
+
     

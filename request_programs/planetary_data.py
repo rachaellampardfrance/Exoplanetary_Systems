@@ -3,7 +3,10 @@ and updates the corrosponding dataframe.
 
 'ps' shorthand refers to planetary systems"""
 
-from database_helpers import upsert_planetary_data
+from database_helpers import (
+    upsert_planetary_data,
+    print_table_updated_count
+)
 from helpers import (
     get_user_confirm, tap_request,
     clean_data, show_cleaning,
@@ -61,6 +64,7 @@ def main():
 
     # print max last updated value from planetary_systems table
     print_last_updated("planetary_systems")
+    print_table_updated_count("planetary_systems")
 
     # ps_df.to_csv("planetary_systems.csv", index=False)
 

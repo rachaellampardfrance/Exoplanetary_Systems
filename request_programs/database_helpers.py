@@ -170,3 +170,20 @@ def get_stellar_hosts_db_data():
         # c = conn.cursor()
         
         return pd.read_sql_query("SELECT * FROM stellar_hosts", conn)
+
+def print_table_updated_count(table: str) -> None:
+    with sqlite3.connect(DB_PATH) as conn:
+        c = conn.cursor()
+
+        today = c.execute("SELECT DATE('now')").fetchone()[0]
+
+        c.execute(f"""
+            SELECT COUNT(*)
+            FROM {table}
+            WHERE DATE(last_updated) = '{today}';
+        """)
+
+        result = c.fetchone()
+        count = result[0] if result else 0
+
+        print(f"New updates to {table}: {count}")

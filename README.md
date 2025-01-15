@@ -184,7 +184,7 @@ Contents:
     - Nested bar chart LOG - *represents the same data as above but in a log format to help visualise small data*
 
 <p align="center">
-<img src='static/exoplanet_systems_by_star_count.png' alt='planetary systems by star count figure image' width='900'>
+<img src='static/planetary_systems_by_star_count.png' alt='planetary systems by star count figure image' width='900'>
 </p>
 
 
@@ -206,7 +206,7 @@ Contents:
     - Legend - *The legend visualises the planet count by color and applies to all pie charts*
 
 <p align="center">
-<img src='static/most_common_exoplanet_systems.png' alt='Most common planetary system pie charts figure' width='900'>
+<img src='static/most_common_planetary_systems.png' alt='Most common planetary system pie charts figure' width='900'>
 </p>
 
 </details>

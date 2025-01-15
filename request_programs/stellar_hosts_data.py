@@ -5,7 +5,10 @@ and updates the corrosponding dataframe.
 
 import pandas as pd
 
-from database_helpers import upsert_stellar_hosts_data
+from database_helpers import (
+    upsert_stellar_hosts_data,
+    print_table_updated_count
+)
 from helpers import (
     get_user_confirm,
     tap_request, clean_data,
@@ -63,6 +66,9 @@ def main():
 
     # print max last updated value from stellar_hosts table
     print_last_updated("stellar_hosts")
+    print_table_updated_count("stellar_hosts")
+
+    print("Stellar Hosts Data requests and updates complete")
 
 
 if __name__ == '__main__':
