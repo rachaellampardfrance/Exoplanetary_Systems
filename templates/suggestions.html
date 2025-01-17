@@ -17,7 +17,7 @@
 <div class="table-suggestions center-tables">
     {% if suggestions.planets or suggestions.stars or suggestions.systems %}
         {% if suggestions.planets %}
-        <table class="suggestions">
+        <table class="suggestions" id="sug-planets">
             <tbody>
                 <tr>
                     <td><h2>🪐 Planets 🪐</h2></td>
@@ -32,7 +32,7 @@
         {% endif %}
         
         {% if suggestions.stars %}
-        <table class="suggestions">
+        <table class="suggestions" id="sug-stars">
             <tbody>
                 <tr>
                     <td><h2>☀️ Stars ☀️</h2></td>
@@ -47,7 +47,7 @@
         {% endif %}
         
         {% if suggestions.systems %}
-        <table class="suggestions">
+        <table class="suggestions" id="sug-systems">
             <tbody>
                 <tr>
                     <td><h2>🌌 Systems 🌌</h2></td>
