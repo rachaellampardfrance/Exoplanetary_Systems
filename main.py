@@ -18,6 +18,29 @@ DB = "database.db"
 TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
 
 
+@app.after_request
+def add_security_headers(response):
+    """Add security headers to all responses"""
+
+    # prevent inline scripts from being executed - requires checking to get google font to apply 
+    # response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'none'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:;"
+    
+    # prevent MIME type sniffing - predicting what type a file is
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    # prevent clickjacking, control browser X-framing, pages cannot be embedded
+    response.headers['X-Frame-Options'] = 'DENY'
+    # enable browsers inbuilt XXS protection
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    # enable stricter CSP protection
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    # Controls the amount of referrer information with requests 
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin' #'no-referrer'
+
+    # # Enforces HTTPS connection - requires HTTPS served site 
+    # response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+
+    return response
+
 @app.route("/")
 def home():
     """Renders HTML home page with current exoplanet and
