@@ -73,7 +73,7 @@ class Star():
         cursor = conn.cursor()
         query = f"""
             SELECT st_spectype
-            FROM stellar
+            FROM stars
             WHERE hostname=?;
         """
         cursor.execute(query, (self.name,))

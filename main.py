@@ -15,7 +15,7 @@ from helpers.system import System
 app = Flask(__name__)
 
 DB = "database.db"
-TABLES = ['planets', 'systems', 'stellar']
+TABLES = ['planets', 'systems', 'stars']
 
 
 @app.after_request
@@ -51,9 +51,9 @@ def home():
     with sqlite3.connect(DB) as conn:
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(f"""
             SELECT COUNT(sy_name)
-              FROM systems
+              FROM {TABLES[1]};
         """)
         exo_systems = cursor.fetchone()[0]
 
@@ -86,12 +86,12 @@ def new(category):
         with sqlite3.connect(DB) as conn:
             cursor = conn.cursor()
 
-            modified = cursor.execute("""
+            modified = cursor.execute(f"""
                 SELECT *
-                  FROM systems
+                  FROM {TABLES[1]}
                  WHERE last_updated = (
                         SELECT MAX(last_updated)
-                          FROM systems
+                          FROM {TABLES[1]}
                 );
             """)
 

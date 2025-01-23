@@ -103,7 +103,7 @@ def upsert_systems_data(data_frame: pd.DataFrame) -> None:
     """, data_to_insert)
 
 
-def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
+def upsert_stars_data(data_frame: pd.DataFrame) -> None:
     """insert/update new pandas dataframe into the systems table"""
     
     data_to_insert = []
@@ -115,7 +115,7 @@ def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
 
     with sqlite3.connect(DB_PATH) as connection:
         connection.executemany("""
-            INSERT INTO stellar (
+            INSERT INTO stars (
                 sy_name,
                 hostname,
                 last_updated
@@ -126,16 +126,16 @@ def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
             ON CONFLICT(hostname)
             DO UPDATE SET
                 sy_name = CASE
-                    WHEN excluded.sy_name != stellar.sy_name
+                    WHEN excluded.sy_name != stars.sy_name
                     THEN excluded.sy_name
-                    ELSE stellar.sy_name END,
+                    ELSE stars.sy_name END,
                 last_updated = current_timestamp
             WHERE
-                stellar.sy_name != excluded.sy_name;
+                stars.sy_name != excluded.sy_name;
     """, data_to_insert)
 
-def update_stellar_spectypes(data_frame: pd.DataFrame) -> None:
-    """update stellar table with new spectral types"""
+def update_stars_spectypes(data_frame: pd.DataFrame) -> None:
+    """update stars table with new spectral types"""
 
     data_to_insert = []
     for _, row in data_frame.iterrows():
@@ -146,10 +146,10 @@ def update_stellar_spectypes(data_frame: pd.DataFrame) -> None:
 
     with sqlite3.connect(DB_PATH) as connection:
         connection.executemany("""
-            UPDATE stellar
+            UPDATE stars
             SET st_spectype = ?
             WHERE
-                stellar.hostname == ?;
+                stars.hostname == ?;
     """, data_to_insert)
 
 
