@@ -33,7 +33,7 @@ class Planet():
         """Gets details of planet by planet name"""
         query = f"""
             SELECT disc_pubdate, hostname, cb_flag
-              FROM planetary_systems
+              FROM planets
              WHERE pl_name=?;
         """
         cursor = conn.cursor()

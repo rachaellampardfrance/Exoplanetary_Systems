@@ -7,7 +7,7 @@ DB_PATH = "database.db"
 
 def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
 
-    """insert/update new pandas dataframe into the planetary_systems table"""
+    """insert/update new pandas dataframe into the planets table"""
     data_to_insert = []
     for _, row in data_frame.iterrows():
         data_to_insert.append((
@@ -21,7 +21,7 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
 
     with sqlite3.connect(DB_PATH) as connection:
         connection.executemany("""
-            INSERT INTO planetary_systems (
+            INSERT INTO planets (
                 pl_name,
                 hostname,
                 sy_snum,
@@ -36,27 +36,27 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
             ON CONFLICT(pl_name)
             DO UPDATE SET
                 hostname = CASE
-                    WHEN excluded.hostname != planetary_systems.hostname
+                    WHEN excluded.hostname != planets.hostname
                     THEN excluded.hostname
-                    ELSE planetary_systems.hostname END,
+                    ELSE planets.hostname END,
                 sy_snum = CASE
-                    WHEN excluded.sy_snum != planetary_systems.sy_snum
+                    WHEN excluded.sy_snum != planets.sy_snum
                     THEN excluded.sy_snum
-                    ELSE planetary_systems.sy_snum END,
+                    ELSE planets.sy_snum END,
                 sy_pnum = CASE
-                    WHEN excluded.sy_pnum != planetary_systems.sy_pnum
+                    WHEN excluded.sy_pnum != planets.sy_pnum
                     THEN excluded.sy_pnum
-                    ELSE planetary_systems.sy_pnum END,
+                    ELSE planets.sy_pnum END,
                 cb_flag = CASE
-                    WHEN excluded.cb_flag != planetary_systems.cb_flag
+                    WHEN excluded.cb_flag != planets.cb_flag
                     THEN excluded.cb_flag
-                    ELSE planetary_systems.cb_flag END,
+                    ELSE planets.cb_flag END,
                 last_updated = current_timestamp
             WHERE
-                planetary_systems.sy_snum != excluded.sy_snum
-                OR planetary_systems.sy_pnum != excluded.sy_pnum
-                OR planetary_systems.cb_flag != excluded.cb_flag 
-                OR planetary_systems.hostname != excluded.hostname;
+                planets.sy_snum != excluded.sy_snum
+                OR planets.sy_pnum != excluded.sy_pnum
+                OR planets.cb_flag != excluded.cb_flag 
+                OR planets.hostname != excluded.hostname;
     """, data_to_insert)
 
 

@@ -44,7 +44,7 @@ def main():
         )
 
         print("Fetching schema...")
-        ps_schema.to_csv("planetary_systems_schema.csv", index=False)
+        ps_schema.to_csv("planets_schema.csv", index=False)
         print("Finished fetching schema.")
 
     print("Fetching requested 'planetary systems' table data...")
@@ -59,14 +59,13 @@ def main():
     ps_df = clean_data(ps_df, sort_column)
     show_cleaning(ps_df, ps_df.pl_name, sort_column)
 
-    # append new data to planetary_systems table in database and update existing if changes
+    # append new data to planets table in database and update existing if changes
     upsert_planetary_data(ps_df)
 
-    # print max last updated value from planetary_systems table
-    print_last_updated("planetary_systems")
-    print_table_updated_count("planetary_systems")
+    # print max last updated value from planets table
+    print_last_updated("planets")
+    print_table_updated_count("planets")
 
-    # ps_df.to_csv("planetary_systems.csv", index=False)
 
 if __name__ == '__main__':
     main()

@@ -15,7 +15,7 @@ from helpers.system import System
 app = Flask(__name__)
 
 DB = "database.db"
-TABLES = ['planetary_systems', 'systems', 'stellar']
+TABLES = ['planets', 'systems', 'stellar']
 
 
 @app.after_request
@@ -57,9 +57,9 @@ def home():
         """)
         exo_systems = cursor.fetchone()[0]
 
-        cursor.execute("""
+        cursor.execute(f"""
             SELECT COUNT(pl_name)
-              FROM planetary_systems
+              FROM {TABLES[0]}
         """)
         planets = cursor.fetchone()[0]
 
@@ -74,7 +74,7 @@ def statistics():
 
 @app.route("/new/<category>")
 def new(category):
-    """Generate most recent planet discoveries from planetary_systems
+    """Generate most recent planet discoveries from planets
     database table from MAX disc_pubdate
     """
 
@@ -112,12 +112,12 @@ def new(category):
             cursor = conn.cursor()
 
             # List only most recently requested updates
-            modified = cursor.execute("""
+            modified = cursor.execute(f"""
                 SELECT *
-                FROM planetary_systems
+                FROM {TABLES[0]}
                 WHERE last_updated = (
                     SELECT MAX(last_updated)
-                    FROM planetary_systems
+                    FROM {TABLES[0]}
                 )
                 ORDER BY disc_pubdate DESC;
             """)
@@ -125,10 +125,10 @@ def new(category):
             # List only most recent disc_pubdate
             # modified = cursor.execute("""
             #     SELECT *
-            #     FROM planetary_systems
+            #     FROM {TABLES[0]}
             #     WHERE disc_pubdate = (
             #         SELECT MAX(disc_pubdate)
-            #         FROM planetary_systems
+            #         FROM {TABLES[0]}
             #     );
             # """)
 
