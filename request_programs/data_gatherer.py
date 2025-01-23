@@ -7,7 +7,7 @@ def main():
 
     message = "Request updated data Y/N? "
     if get_user_confirm(message):
-        os.system("py request_programs/stellar_hosts_data.py")
+        os.system("py request_programs/systems_data.py")
         os.system("py request_programs/stellar_data.py")
         os.system("py request_programs/planetary_data.py")
 

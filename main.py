@@ -15,7 +15,7 @@ from helpers.system import System
 app = Flask(__name__)
 
 DB = "database.db"
-TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
+TABLES = ['planetary_systems', 'systems', 'stellar']
 
 
 @app.after_request
@@ -53,7 +53,7 @@ def home():
 
         cursor.execute("""
             SELECT COUNT(sy_name)
-              FROM stellar_hosts
+              FROM systems
         """)
         exo_systems = cursor.fetchone()[0]
 
@@ -88,10 +88,10 @@ def new(category):
 
             modified = cursor.execute("""
                 SELECT *
-                  FROM stellar_hosts
+                  FROM systems
                  WHERE last_updated = (
                         SELECT MAX(last_updated)
-                          FROM stellar_hosts
+                          FROM systems
                 );
             """)
 

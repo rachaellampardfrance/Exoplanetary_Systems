@@ -60,8 +60,8 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
     """, data_to_insert)
 
 
-def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
-    """insert/update new pandas dataframe into the stellar_hosts table"""
+def upsert_systems_data(data_frame: pd.DataFrame) -> None:
+    """insert/update new pandas dataframe into the systems table"""
     
     data_to_insert = []
     for _, row in data_frame.iterrows():
@@ -73,7 +73,7 @@ def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
 
     with sqlite3.connect(DB_PATH) as connection:
         connection.executemany("""
-            INSERT INTO stellar_hosts (
+            INSERT INTO systems (
                 sy_name,
                 sy_snum,
                 sy_pnum,
@@ -85,26 +85,26 @@ def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
             ON CONFLICT(sy_name)
             DO UPDATE SET
                 sy_name = CASE
-                    WHEN excluded.sy_name != stellar_hosts.sy_name
+                    WHEN excluded.sy_name != systems.sy_name
                     THEN excluded.sy_name
-                    ELSE stellar_hosts.sy_name END,
+                    ELSE systems.sy_name END,
                 sy_snum = CASE
-                    WHEN excluded.sy_snum != stellar_hosts.sy_snum
+                    WHEN excluded.sy_snum != systems.sy_snum
                     THEN excluded.sy_snum
-                    ELSE stellar_hosts.sy_snum END,
+                    ELSE systems.sy_snum END,
                 sy_pnum = CASE
-                    WHEN excluded.sy_pnum != stellar_hosts.sy_pnum
+                    WHEN excluded.sy_pnum != systems.sy_pnum
                     THEN excluded.sy_pnum
-                    ELSE stellar_hosts.sy_pnum END,
+                    ELSE systems.sy_pnum END,
                 last_updated = current_timestamp
             WHERE
-                stellar_hosts.sy_snum != excluded.sy_snum
-                OR stellar_hosts.sy_pnum != excluded.sy_pnum;
+                systems.sy_snum != excluded.sy_snum
+                OR systems.sy_pnum != excluded.sy_pnum;
     """, data_to_insert)
 
 
 def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
-    """insert/update new pandas dataframe into the stellar_hosts table"""
+    """insert/update new pandas dataframe into the systems table"""
     
     data_to_insert = []
     for _, row in data_frame.iterrows():
@@ -165,11 +165,11 @@ def get_last_updated(table) -> str:
         return c.fetchone()
 
  
-def get_stellar_hosts_db_data():
+def get_systems_db_data():
     with sqlite3.connect(DB_PATH) as conn:
         # c = conn.cursor()
         
-        return pd.read_sql_query("SELECT * FROM stellar_hosts", conn)
+        return pd.read_sql_query("SELECT * FROM systems", conn)
 
 def print_table_updated_count(table: str) -> None:
     with sqlite3.connect(DB_PATH) as conn:

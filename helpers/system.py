@@ -6,7 +6,7 @@ from helpers.planet import Planet
 class System():
     """Class returns object of system when initialised with valid stellar body"""
     DB = "database.db"
-    TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
+    TABLES = ['planetary_systems', 'systems', 'stellar']
 
     def __init__(self, stellar_body):
         self._name: str = None

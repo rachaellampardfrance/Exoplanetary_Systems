@@ -6,7 +6,7 @@ and updates the corrosponding dataframe.
 import pandas as pd
 
 from database_helpers import (
-    upsert_stellar_hosts_data,
+    upsert_systems_data,
     print_table_updated_count
 )
 from helpers import (
@@ -19,7 +19,7 @@ from helpers import (
 
 def main():
     """collect updated data from archive and update the local database"""
-    render_figlet("Stellar Hosts Data Request Program...")
+    render_figlet("Systems Data Request Program...")
     
     service_url = "https://exoplanetarchive.ipac.caltech.edu/TAP"
     sh_schema_query = """
@@ -46,7 +46,7 @@ def main():
         # check if schema has changed since the last pull
             # report if updated and save
         print("Fetching schema...")
-        sh_schema.to_csv('stellar_hosts_schema.csv', index=False)
+        sh_schema.to_csv('systems_schema.csv', index=False)
         print("Finished fetching schema")
 
     print("Fetching requested 'stellar hosts' table data...")
@@ -61,14 +61,14 @@ def main():
     sh_df = clean_data(sh_df, sort_column)
     show_cleaning(sh_df, sh_df.sy_name, sort_column)
 
-    # append new data to stellar_hosts table in database and update existing if changes
-    upsert_stellar_hosts_data(sh_df)
+    # append new data to systems table in database and update existing if changes
+    upsert_systems_data(sh_df)
 
-    # print max last updated value from stellar_hosts table
-    print_last_updated("stellar_hosts")
-    print_table_updated_count("stellar_hosts")
+    # print max last updated value from systems table
+    print_last_updated("systems")
+    print_table_updated_count("systems")
 
-    print("Stellar Hosts Data requests and updates complete")
+    print("Systems data requests and updates complete")
 
 
 if __name__ == '__main__':
