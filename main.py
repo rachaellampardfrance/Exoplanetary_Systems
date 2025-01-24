@@ -96,13 +96,12 @@ def new(category):
             """)
 
         for mod in modified:
-            system_icos = ("☀️" * mod[1]) + ("🪐" * mod[2])
             new_systems.append(
                 {
                     "sy_name": mod[0],
                     "sy_snum": mod[1],
                     "sy_pnum": mod[2],
-                    "system_icos": system_icos
+                    "system_icos": ("☀️" * mod[1]) + ("🪐" * mod[2])
                 }
             )
 
@@ -110,27 +109,6 @@ def new(category):
         new_planets = []
         with sqlite3.connect(DB) as conn:
             cursor = conn.cursor()
-
-            # use to create a new updated planets table
-            # modified = cursor.execute(f"""
-            #     SELECT pl_name, hostname, cb_flag, disc_pubdate
-            #     FROM {TABLES[0]}
-            #     WHERE last_updated = (
-            #         SELECT MAX(last_updated)
-            #         FROM {TABLES[0]}
-            #     )
-            #     ORDER BY disc_pubdate DESC;
-            # """)
-
-            # List only most recent disc_pubdate
-            # modified = cursor.execute(f"""
-            #     SELECT pl_name, hostname, cb_flag, disc_pubdate
-            #     FROM {TABLES[0]}
-            #     WHERE disc_pubdate = (
-            #         SELECT MAX(disc_pubdate)
-            #         FROM {TABLES[0]}
-            #     );
-            # """)
 
             modified = cursor.execute(f"""
                 SELECT pl_name, hostname, cb_flag, disc_pubdate
@@ -143,11 +121,7 @@ def new(category):
             """)
 
         for mod in modified:
-            cb_flag = ""
-            if mod[2] == 1:
-                cb_flag = "Yes"
-            else:
-                cb_flag = "No"
+            cb_flag = 'Yes' if mod[2] else 'No'
 
             new_planets.append(
                 {
