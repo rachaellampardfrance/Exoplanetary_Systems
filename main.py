@@ -46,22 +46,8 @@ def home():
     """Renders HTML home page with current exoplanet and
     planetary systems count
     """
-    exo_systems = 0
-    planets = 0
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
-
-        cursor.execute(f"""
-            SELECT COUNT(sy_name)
-              FROM {TABLES[1]};
-        """)
-        exo_systems = cursor.fetchone()[0]
-
-        cursor.execute(f"""
-            SELECT COUNT(pl_name)
-              FROM {TABLES[0]}
-        """)
-        planets = cursor.fetchone()[0]
+    exo_systems = get_exo_system_count()
+    planets = get_planet_count()
 
     return render_template("home.html", exo_systems=exo_systems, planets=planets)
 
@@ -239,3 +225,38 @@ def page_not_found(error=404):
 # @app.errorhandler(Exception)
 # def handle_exception(error):
 #     return render_template('500.html', error=error), 500
+
+
+
+
+# home helper functions
+# ******************
+def get_exo_system_count():
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        query = f"""
+            SELECT COUNT(sy_name)
+                FROM {TABLES[1]};
+        """
+        cursor.execute(query)
+
+        return cursor.fetchone()[0]
+
+def get_planet_count():
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        query = f"""
+            SELECT COUNT(pl_name)
+              FROM {TABLES[0]}
+        """
+        cursor.execute(query)
+        return cursor.fetchone()[0]
+# ******************
+
+# .... helper functions
+# ******************
+# ******************
+
+# .... helper functions
+# ******************
+# ******************
