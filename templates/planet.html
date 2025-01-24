@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Discoveries
+{% endblock %}
+
+{% block main %}
+<div class="page-heading">
+    <h1>
+        ✨'{{ planet.name }}' Planet Data✨
+    </h1>
+</div>
+
+{% if planet.declassified == 'Yes' %}
+<p>
+    <b>'{{ planet.name }}'</b> was thought to orbit the star <b>'{{ planet.hostname }}'</b>. However, it has since been declassified.
+</p>
+{% else %}
+<p>
+    <b>'{{ planet.name }}'</b> orbits the star <b>'{{ planet.hostname }}'</b> and was discovered in {{ planet.disc_pubdate }}{% if planet.cv_flag == 'Yes' %} However it is considered a controversial discovery{% endif %}.
+</p>
+<p>
+    {% if planet.disc_method != 'Unknown' and planet.disc_instrument %}It was discovered by {{ planet.disc_method }} method using the {{ planet.disc_instrument }}.
+    {% elif planet.disc_method != 'Unknown' %}It was discovered by {{ planet.disc_method }} method.
+    {% elif planet.disc_instrument %}It was discovered with the {{ planet.disc_instrument }}.
+    {% endif %}
+</p>
+<p>
+    {% if planet.orbit_period != 'Unknown' %}Its orbit is thought to take {{ planet.orbit_period }} earth days.{% endif %}
+</p>
+<p>
+    {% if planet.mass != 'Unknown' and planet.radius != 'Unknown' %}In comparison to Earth its {{ planet.mass }} times the mass and its Radius is {{ planet.radius }} times the size.
+    {% elif planet.mass != 'Unknown' %}Its mass is {{ planet.mass }} times the mass of Earth.
+    {% elif planet.raduis != 'Unknown' %}Its radius is {{ planet.radius }} times the radius of Earth.
+    {% endif %}
+</p>
+{% endif %}
+
+<div class="table-planet center padded">
+    <table>
+        <thead>
+            <tr>
+                {% if planet.declassified == 'Yes' %}
+                <th colspan="12"><h2>⛔❗Declassified❗ 🪐{{ planet.name }}🪐 ❗Declassified❗⛔</h2></th>
+                {% else %}
+                <th colspan="12"><h2>🪐{{ planet.name }}🪐</h2></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th>Planet Name</th>
+                <th>Host Name</th>
+                <th>Public Discovery Date</th>
+                <th>Circumbinary?</th>
+                <th>Controversial?</th>
+                <th>Orbit Period</th>
+                <th>Mass</th>
+                <th>Radius</th>
+                <th>Insolation Flux</th>
+                <th>Equilibirum Temperature</th>
+                <th>Discovery Method</th>
+                <th>Discovery Instrument</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.name }}</a></td>
+                <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td>{{ planet.disc_pubdate }}</td>
+                <td>{{ planet.cb_flag }}</td>
+                <td>{{ planet.cv_flag }}</td>
+                <td>{{ planet.orbit_period }}<br>(earth days)</td>
+                <td>{{ planet.mass }}<br>(to earth)</td>
+                <td>{{ planet.radius }}<br>(to earth)</td>
+                <td>{{ planet.insol_flux }}<br>(to earth)</td>
+                <td>{{ planet.equlib_temp }}<br>(Kelvin)</td>
+                <td>{{ planet.disc_method }}</td>
+                <td>{{ planet.disc_instrument }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -186,6 +186,12 @@ def system(stellar_body=None):
     return render_template("system.html", system=system, size=size)
 
 
+@app.route("/planet/<planet_name>")
+def planet(planet_name):
+    planet = Planet(planet_name)
+    return render_template("planet.html", planet=planet)
+
+
 @app.route("/suggestions/<search>")
 def suggestions(search):
     """Renders page with stellar body search suggestions"""
