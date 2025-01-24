@@ -13,9 +13,15 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
         data_to_insert.append((
             row['pl_name'],
             row['hostname'],
-            row['sy_snum'],
-            row['sy_pnum'],
             row['cb_flag'],
+            row['pl_controv_flag'],
+            row['discoverymethod'],
+            row['disc_instrument'],
+            row['pl_orbper'],
+            row['pl_masse'],
+            row['pl_rade'],
+            row['pl_insol'],
+            row['pl_eqt'],
             row['disc_pubdate']
         ))
 
@@ -24,14 +30,20 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
             INSERT INTO planets (
                 pl_name,
                 hostname,
-                sy_snum,
-                sy_pnum,
                 cb_flag,
+                cv_flag,
+                disc_method,
+                disc_instrument,
+                orbit_period,
+                mass,
+                radius,
+                insol_flux,
+                equlib_temp,
                 disc_pubdate,
                 last_updated
             )
             VALUES (
-                ?, ?, ?, ?, ?, ?, current_timestamp
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp
             )
             ON CONFLICT(pl_name)
             DO UPDATE SET
@@ -39,24 +51,44 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
                     WHEN excluded.hostname != planets.hostname
                     THEN excluded.hostname
                     ELSE planets.hostname END,
-                sy_snum = CASE
-                    WHEN excluded.sy_snum != planets.sy_snum
-                    THEN excluded.sy_snum
-                    ELSE planets.sy_snum END,
-                sy_pnum = CASE
-                    WHEN excluded.sy_pnum != planets.sy_pnum
-                    THEN excluded.sy_pnum
-                    ELSE planets.sy_pnum END,
                 cb_flag = CASE
                     WHEN excluded.cb_flag != planets.cb_flag
                     THEN excluded.cb_flag
                     ELSE planets.cb_flag END,
+                cv_flag = CASE
+                    WHEN excluded.cv_flag != planets.cv_flag
+                    THEN excluded.cv_flag
+                    ELSE planets.cv_flag END,
+                orbit_period = CASE
+                    WHEN excluded.orbit_period != planets.orbit_period
+                    THEN excluded.orbit_period
+                    ELSE planets.orbit_period END,
+                mass = CASE
+                    WHEN excluded.mass != planets.mass
+                    THEN excluded.mass
+                    ELSE planets.mass END,
+                radius = CASE
+                    WHEN excluded.radius != planets.radius
+                    THEN excluded.radius
+                    ELSE planets.radius END,   
+                insol_flux = CASE
+                    WHEN excluded.insol_flux != planets.insol_flux
+                    THEN excluded.insol_flux
+                    ELSE planets.insol_flux END,
+                equlib_temp = CASE
+                    WHEN excluded.equlib_temp != planets.equlib_temp
+                    THEN excluded.equlib_temp
+                    ELSE planets.equlib_temp END,                                                                                       
                 last_updated = current_timestamp
             WHERE
-                planets.sy_snum != excluded.sy_snum
-                OR planets.sy_pnum != excluded.sy_pnum
-                OR planets.cb_flag != excluded.cb_flag 
-                OR planets.hostname != excluded.hostname;
+                planets.cb_flag != excluded.cb_flag 
+                OR planets.hostname != excluded.hostname
+                OR planets.cv_flag != excluded.cv_flag
+                OR planets.orbit_period != excluded.orbit_period
+                OR planets.mass != excluded.mass
+                OR planets.radius != excluded.radius
+                OR planets.insol_flux != excluded.insol_flux
+                OR planets.equlib_temp != excluded.equlib_temp;
     """, data_to_insert)
 
 
@@ -186,4 +218,4 @@ def print_table_updated_count(table: str) -> None:
         result = c.fetchone()
         count = result[0] if result else 0
 
-        print(f"New updates to {table}: {count}")
+        print(f"Todays new updates to {table}: {count}")

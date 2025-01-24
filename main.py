@@ -111,20 +111,20 @@ def new(category):
         with sqlite3.connect(DB) as conn:
             cursor = conn.cursor()
 
-            # List only most recently requested updates
-            modified = cursor.execute(f"""
-                SELECT *
-                FROM {TABLES[0]}
-                WHERE last_updated = (
-                    SELECT MAX(last_updated)
-                    FROM {TABLES[0]}
-                )
-                ORDER BY disc_pubdate DESC;
-            """)
+            # use to create a new updated planets table
+            # modified = cursor.execute(f"""
+            #     SELECT pl_name, hostname, cb_flag, disc_pubdate
+            #     FROM {TABLES[0]}
+            #     WHERE last_updated = (
+            #         SELECT MAX(last_updated)
+            #         FROM {TABLES[0]}
+            #     )
+            #     ORDER BY disc_pubdate DESC;
+            # """)
 
             # List only most recent disc_pubdate
-            # modified = cursor.execute("""
-            #     SELECT *
+            # modified = cursor.execute(f"""
+            #     SELECT pl_name, hostname, cb_flag, disc_pubdate
             #     FROM {TABLES[0]}
             #     WHERE disc_pubdate = (
             #         SELECT MAX(disc_pubdate)
@@ -132,24 +132,29 @@ def new(category):
             #     );
             # """)
 
+            modified = cursor.execute(f"""
+                SELECT pl_name, hostname, cb_flag, disc_pubdate
+                FROM {TABLES[0]}
+                WHERE disc_pubdate BETWEEN
+                    STRFTIME('%Y-%m', DATE('now', '-2 months'))
+                    AND
+                    STRFTIME('%Y-%m', DATE('now'))
+                ORDER BY disc_pubdate DESC;
+            """)
+
         for mod in modified:
             cb_flag = ""
-            if mod[4] == 1:
+            if mod[2] == 1:
                 cb_flag = "Yes"
             else:
                 cb_flag = "No"
-
-            planet_icos = ("☀️" * mod[2]) + ("🪐" * mod[3])
 
             new_planets.append(
                 {
                     "pl_name": mod[0],
                     "hostname": mod[1],
-                    "sy_snum": mod[2],
-                    "sy_pnum": mod[3],
                     "cb_flag": cb_flag,
-                    "disc_pubdate": mod[5],
-                    "planet_icos": planet_icos
+                    "disc_pubdate": mod[3],
                 }
             )
     if category == 'p':
@@ -257,6 +262,6 @@ def about():
 def page_not_found(error=404):
     return render_template('404.html', error=error), 404
 
-@app.errorhandler(Exception)
-def handle_exception(error):
-    return render_template('500.html', error=error), 500
+# @app.errorhandler(Exception)
+# def handle_exception(error):
+#     return render_template('500.html', error=error), 500

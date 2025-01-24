@@ -9,7 +9,6 @@ from database_helpers import (
 )
 from helpers import (
     get_user_confirm, tap_request,
-    clean_data, show_cleaning,
     print_last_updated, render_figlet
 )
 
@@ -22,21 +21,26 @@ def main():
         SELECT *
         FROM TAP_SCHEMA.columns
         WHERE table_name
-            LIKE 'ps'
+            LIKE 'pscomppars'
     """
     ps_query = """
         SELECT
             pl_name,
             hostname,
-            sy_snum,
-            sy_pnum,
             cb_flag,
+            pl_controv_flag,
+            discoverymethod,
+            disc_instrument,
+            pl_orbper,
+            pl_masse,
+            pl_rade,
+            pl_insol,
+            pl_eqt,
             disc_pubdate
         FROM ps
     """
-    sort_column = 'pl_name'
 
-    if get_user_confirm("request schema, Y/N? "):
+    if get_user_confirm("request 'Planetary System Composite Data' schema, Y/N? "):
         ps_schema = tap_request(
             service_url=service_url,
             query=ps_schema_query,
@@ -47,17 +51,12 @@ def main():
         ps_schema.to_csv("planets_schema.csv", index=False)
         print("Finished fetching schema.")
 
-    print("Fetching requested 'planetary systems' table data...")
+    print("Fetching requested 'Planetary System Composite Data' table data...")
     ps_df = tap_request(
         service_url=service_url,
         query=ps_query,
         sync_type="async"
     )
-
-    # clean data and show data before and after clean
-    show_cleaning(ps_df, ps_df.pl_name, sort_column)
-    ps_df = clean_data(ps_df, sort_column)
-    show_cleaning(ps_df, ps_df.pl_name, sort_column)
 
     # append new data to planets table in database and update existing if changes
     upsert_planetary_data(ps_df)
@@ -65,6 +64,9 @@ def main():
     # print max last updated value from planets table
     print_last_updated("planets")
     print_table_updated_count("planets")
+
+
+
 
 
 if __name__ == '__main__':
