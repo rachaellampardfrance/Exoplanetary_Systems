@@ -100,9 +100,13 @@
                     {% endif %}
                 </td>
                 {% endfor %}
-                <td class="catagory"></td>
+                <td class="catagory">Declassified</td>
                 {% for planet in system.planets %}
-                <td></td>
+                <td>
+                    {% if planet.declassified %}
+                        {{ planet.declassified }}
+                    {% endif %}
+                </td>
                 {% endfor %}     
             </tr>
         </tbody>

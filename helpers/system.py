@@ -89,6 +89,7 @@ class System():
     
     def _generate_stars(self):
         """Generate stars in system from self.name (system name)"""
+        stars = []
         with sqlite3.connect(System.DB) as conn:
             cursor = conn.cursor()
 
@@ -98,12 +99,15 @@ class System():
                 WHERE sy_name=?;
             """
             cursor.execute(query, (self.name,))
-            stars = cursor.fetchall()
+            results = cursor.fetchall()
             cursor.close()
 
-            for star in stars:
-                star_details = Star(star[0], conn)
-                self._stars.append(star_details)
+            for result in results:
+                stars.append(result[0])
+
+        for star in stars:
+            star_details = Star(star)
+            self._stars.append(star_details)
 # *****************************
 
 
@@ -115,9 +119,8 @@ class System():
     
     def _generate_planets(self):
         """Generate planets by stars from self.stars"""
+        planets = []
         with sqlite3.connect(System.DB) as conn:
-            planets = []
-
             for star in self.stars:
                 cursor = conn.cursor()
                 query = f"""
@@ -135,7 +138,7 @@ class System():
 
             # raise TypeError(f"planets = {planets}")
 
-            for planet in planets:
-                planet_details = Planet(planet, conn)
-                self._planets.append(planet_details)
+        for planet in planets:
+            planet_details = Planet(planet)
+            self._planets.append(planet_details)
 # *****************************

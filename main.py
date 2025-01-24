@@ -9,6 +9,7 @@ from flask import (
 )
 
 from helpers.system import System
+from helpers.planet import Planet
 
 # flask --app main run --debug
 
@@ -217,6 +218,28 @@ def suggestions(search):
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/declassed")
+def declassified():
+
+    planet_names = []
+
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT pl_name FROM planets
+            WHERE declassified = 1;
+        """)
+        planets = cursor.fetchall()
+        planet_names.extend(planet[0] for planet in planets)
+    
+    declassed = []
+
+    for planet_name in planet_names:
+        declassed.extend(Planet(planet_name))
+
+    return render_template("declassified.html", planet=declassed)
 
 @app.errorhandler(404)
 def page_not_found(error=404):

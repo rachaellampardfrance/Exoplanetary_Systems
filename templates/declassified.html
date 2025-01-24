@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Declassified
+{% endblock %}
+
+{% block main %}
+<div class="page-heading">
+    <h1>
+        Declassified Planets
+    </h1>
+</div>
+
+{% if planets %}
+<div class="table-declassedplanets center padded">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="5"><h2>✨NEW PLANETS✨</h2></th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Planet Name</th>
+                <th>Host Name</th>
+                <th>Circumbinary?</th>
+                <th>Public Discovery Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in new_planets %}
+            <tr>
+                <td class="nowrap">✨🪐✨</td>
+                <td><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.pl_name }}</a></td>
+                <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td>{{ planet.disc_pubdate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No Planets have been declassified since the making of this website...</p>
+{% endif %}
+{% endblock %}

@@ -3,6 +3,7 @@ import re
 import sqlite3
 
 class Star():
+    DB = "database.db"
     SPECTRAL_CLASSES = {
         'O': ['Blue', '> 30,000'],
         'B': ['Blue-white', '9,700 - 30,000'],
@@ -41,19 +42,17 @@ class Star():
     }
     DEFAULT = "Unknown"
 
-    def __init__(self, name, conn: sqlite3.Cursor):
+    def __init__(self, name):
         self.name = name
-        self.full_class_id = conn
-        # self._name = ""
-        # self._full_class_id = "" # "G2 III"
+
+        self._full_class_id = "" # "G2 III"
         self._class_id = "" # "G"
         self._st_class = "" # "Yellow"
         self._heat = "" # "4,900 - 5,700"
         self._sub_class = "" # "Average G type star"
         self._lumin = "" # "Giant"
 
-        # self.name = name
-        # self.full_class_id = cursor
+        self._get_full_class_id()
         self._get_details()
     
     @property
@@ -66,27 +65,6 @@ class Star():
     @property
     def full_class_id(self) -> str:
         return self._full_class_id
-    @full_class_id.setter
-    def full_class_id(self, conn: sqlite3.Connection):
-        """find star spectral type from database using star name
-        (hostname) and using passed in database connection"""
-        cursor = conn.cursor()
-        query = f"""
-            SELECT st_spectype
-            FROM stars
-            WHERE hostname=?;
-        """
-        cursor.execute(query, (self.name,))
-        full_class = cursor.fetchone()
-
-        if full_class[0]:
-            self._full_class_id = full_class[0]
-        else:
-            self._full_class_id = Star.DEFAULT
-
-        cursor.close()
-
-
     @property
     def class_id(self) -> str:
         return self._class_id
@@ -103,6 +81,25 @@ class Star():
     def lumin(self) -> str:
         return self._lumin
 
+    def _get_full_class_id(self):
+        """find star spectral type from database using star name
+        (hostname) and using passed in database connection"""
+        with sqlite3.connect(Star.DB) as conn:
+            cursor = conn.cursor()
+            query = f"""
+                SELECT st_spectype
+                FROM stars
+                WHERE hostname=?;
+            """
+            cursor.execute(query, (self.name,))
+            full_class = cursor.fetchone()
+
+            if full_class[0]:
+                self._full_class_id = full_class[0]
+            else:
+                self._full_class_id = Star.DEFAULT
+
+            cursor.close()
 
     def _get_details(self):
         """set star all instance variables"""
