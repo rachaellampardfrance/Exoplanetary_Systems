@@ -5,6 +5,28 @@ import pandas as pd
 
 DB_PATH = "database.db"
 
+def mark_declassified_planets(data_frame: pd.DataFrame) -> None:
+    """Any planets that exist in the local database and are
+    not within the planet names gathered from the tap request
+    will be marked as declassified
+    """
+    classified_planets = []
+    for _, row in data_frame.iterrows():
+        classified_planets.append(
+            row['pl_name'],
+    )
+    placeholders = ', '.join('?' for _ in classified_planets)
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(f"""
+            UPDATE planets
+            SET declassified = 1
+            WHERE pl_name NOT IN ({placeholders});
+        """, classified_planets)
+
+
 def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
 
     """insert/update new pandas dataframe into the planets table"""
@@ -25,8 +47,9 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
             row['disc_pubdate']
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
+    with sqlite3.connect(DB_PATH) as conn:
+
+        conn.executemany("""
             INSERT INTO planets (
                 pl_name,
                 hostname,
@@ -40,10 +63,11 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
                 insol_flux,
                 equlib_temp,
                 disc_pubdate,
-                last_updated
+                last_updated,
+                declassified
             )
             VALUES (
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, 0
             )
             ON CONFLICT(pl_name)
             DO UPDATE SET
@@ -79,7 +103,8 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
                     WHEN excluded.equlib_temp != planets.equlib_temp
                     THEN excluded.equlib_temp
                     ELSE planets.equlib_temp END,                                                                                       
-                last_updated = current_timestamp
+                last_updated = current_timestamp,
+                declassified = 0
             WHERE
                 planets.cb_flag != excluded.cb_flag 
                 OR planets.hostname != excluded.hostname
@@ -103,8 +128,8 @@ def upsert_systems_data(data_frame: pd.DataFrame) -> None:
             row['sy_pnum'],
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.executemany("""
             INSERT INTO systems (
                 sy_name,
                 sy_snum,
@@ -145,8 +170,8 @@ def upsert_stars_data(data_frame: pd.DataFrame) -> None:
             row['hostname'],
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.executemany("""
             INSERT INTO stars (
                 sy_name,
                 hostname,
@@ -176,8 +201,8 @@ def update_stars_spectypes(data_frame: pd.DataFrame) -> None:
             row['hostname'],
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.executemany("""
             UPDATE stars
             SET st_spectype = ?
             WHERE

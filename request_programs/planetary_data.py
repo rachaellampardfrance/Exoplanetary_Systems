@@ -5,7 +5,8 @@ and updates the corrosponding dataframe.
 
 from database_helpers import (
     upsert_planetary_data,
-    print_table_updated_count
+    print_table_updated_count,
+    mark_declassified_planets
 )
 from helpers import (
     get_user_confirm, tap_request,
@@ -58,6 +59,8 @@ def main():
         sync_type="async"
     )
 
+    # note planets that no longer occur in NASA PSCompPars table
+    mark_declassified_planets(ps_df)
     # append new data to planets table in database and update existing if changes
     upsert_planetary_data(ps_df)
 
