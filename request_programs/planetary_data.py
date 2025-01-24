@@ -37,7 +37,7 @@ def main():
             pl_insol,
             pl_eqt,
             disc_pubdate
-        FROM ps
+        FROM pscomppars
     """
 
     if get_user_confirm("request 'Planetary System Composite Data' schema, Y/N? "):
