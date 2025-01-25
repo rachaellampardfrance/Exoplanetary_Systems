@@ -13,7 +13,7 @@ body {
   background-color: #151922;
 }
 
-.center, .page-heading, [class|="img"] {
+.center, .page-heading, [class|="img"] [id|="about"] {
   justify-content: center;
   display: block;
   margin-left: auto;
@@ -32,7 +32,7 @@ body {
   font-size: 1em;
   }
 
-.txt-center, h1, p, h2, table {
+.txt-center, h1, p, h2, table, h3 {
   text-align: center;
 }
 
