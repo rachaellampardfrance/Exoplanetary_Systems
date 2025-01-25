@@ -16,10 +16,10 @@
         <tbody>
             {% for system in new_systems %}
             <tr>
-                <td>{{ system.system_icos }}</td>
-                <td><a href="{{ url_for('system', stellar_body=system.sy_name) }}">{{ system.sy_name }}</a></td>
-                <td>{{ system.sy_snum }}</td>
-                <td>{{ system.sy_pnum }}</td>
+                <td>{% for star in system.stars %}☀️{% endfor%}{% for planet in system.planets %}🪐{% endfor%}</td>
+                <td><a href="{{ url_for('system', stellar_body=system.name) }}">{{ system.name }}</a></td>
+                <td>{{ system.stars|length }}</td>
+                <td>{{ system.planets|length }}</td>
             </tr>
             {% endfor %}
         </tbody>

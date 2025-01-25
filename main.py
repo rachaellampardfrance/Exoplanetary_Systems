@@ -69,55 +69,13 @@ def new(category):
         abort(404)
 
     if category in ['s', 'ps']:
-        new_systems = []
-        with sqlite3.connect(DB) as conn:
-            cursor = conn.cursor()
+        new_systems = get_systems_from_max_updated()
 
-            modified = cursor.execute(f"""
-                SELECT *
-                  FROM {TABLES[1]}
-                 WHERE last_updated = (
-                        SELECT MAX(last_updated)
-                          FROM {TABLES[1]}
-                );
-            """)
-
-        for mod in modified:
-            new_systems.append(
-                {
-                    "sy_name": mod[0],
-                    "sy_snum": mod[1],
-                    "sy_pnum": mod[2],
-                    "system_icos": ("☀️" * mod[1]) + ("🪐" * mod[2])
-                }
-            )
 
     if category in ['p', 'ps']:
-        new_planets = []
-        with sqlite3.connect(DB) as conn:
-            cursor = conn.cursor()
+        new_planets = get_planets_from_month_disc(1)
 
-            modified = cursor.execute(f"""
-                SELECT pl_name, hostname, cb_flag, disc_pubdate
-                FROM {TABLES[0]}
-                WHERE disc_pubdate BETWEEN
-                    STRFTIME('%Y-%m', DATE('now', '-2 months'))
-                    AND
-                    STRFTIME('%Y-%m', DATE('now'))
-                ORDER BY disc_pubdate DESC;
-            """)
 
-        for mod in modified:
-            cb_flag = 'Yes' if mod[2] else 'No'
-
-            new_planets.append(
-                {
-                    "pl_name": mod[0],
-                    "hostname": mod[1],
-                    "cb_flag": cb_flag,
-                    "disc_pubdate": mod[3],
-                }
-            )
     if category == 'p':
         return render_template(
             "new.html",
@@ -282,8 +240,53 @@ def get_planet_count():
         return cursor.fetchone()[0]
 # ******************
 
-# .... helper functions
+# new helper functions
 # ******************
+def get_systems_from_max_updated() -> list:
+    """Returns a list of system objects that where the last updated"""
+    updated_systems = []
+
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        query = f"""
+            SELECT sy_name
+                FROM {TABLES[1]}
+                WHERE last_updated = (
+                    SELECT MAX(last_updated)
+                        FROM {TABLES[1]}
+            );
+        """
+        systems = cursor.execute(query)
+
+    for system in systems:
+        updated_systems.append(System(system[0]))
+
+    return updated_systems
+
+def get_planets_from_month_disc(month_var: int) -> list:
+    """Returns a list of planet instances from the most recent discoveries
+    going back x months (month_var)
+
+    :param month_var: int """
+    new_planets = []
+
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        query = f"""
+            SELECT pl_name
+            FROM {TABLES[0]}
+            WHERE disc_pubdate BETWEEN
+                STRFTIME('%Y-%m', DATE('now', '-{month_var} months'))
+                AND
+                STRFTIME('%Y-%m', DATE('now'))
+            ORDER BY disc_pubdate DESC;
+        """
+        planets = cursor.execute(query)
+
+    for planet in planets:
+        new_planets.append(Planet(planet[0]))
+
+    return new_planets
 # ******************
 
 # .... helper functions

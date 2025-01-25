@@ -18,7 +18,7 @@
             {% for planet in new_planets %}
             <tr>
                 <td class="nowrap">✨🪐✨</td>
-                <td><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.pl_name }}</a></td>
+                <td><a href="{{ url_for('system', stellar_body=planet.name) }}">{{ planet.name }}</a></td>
                 <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
                 <td>{{ planet.cb_flag }}</td>
                 <td>{{ planet.disc_pubdate }}</td>
