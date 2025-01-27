@@ -1,4 +1,4 @@
-<div class="table-newplanets center padded">
+<div class="table-newplanets">
     <table>
         <thead>
             <tr>
@@ -9,7 +9,8 @@
             <tr>
                 <th></th>
                 <th>Planet Name</th>
-                <th>Host Name</th>
+                <th>Host</th>
+                <th>System</th>
                 <th>Circumbinary?</th>
                 <th>Public Discovery Date</th>
             </tr>
@@ -18,8 +19,9 @@
             {% for planet in new_planets %}
             <tr>
                 <td class="nowrap">✨🪐✨</td>
-                <td><a href="{{ url_for('system', stellar_body=planet.name) }}">{{ planet.name }}</a></td>
+                <td><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
                 <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
                 <td>{{ planet.cb_flag }}</td>
                 <td>{{ planet.disc_pubdate }}</td>
             </tr>
