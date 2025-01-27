@@ -113,6 +113,7 @@ table {
 [class|="table"] {
   overflow-x:auto;
   width: 100%;
+  padding: 20px;
 }
 
 td, th {
