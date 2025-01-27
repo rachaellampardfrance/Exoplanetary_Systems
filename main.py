@@ -145,14 +145,35 @@ def system(stellar_body=None):
     return render_template("system.html", system=system, size=size)
 
 
+@app.route("/planet/")
 @app.route("/planet/<planet_name>")
-def planet(planet_name):
-    planet = Planet(planet_name)
+def planet(planet_name=None):
+    if not planet_name:
+        # render empty suggestions  
+        return render_template("suggestions.html", suggestions=None, search=None), 302
+
+    try:
+        planet = Planet(planet_name)
+    except TypeError:
+        # if no reference to system by redirect
+        return redirect(url_for("suggestions", search=planet_name))
+    
     return render_template("planet.html", planet=planet)
 
+
+@app.route("/planet/")
 @app.route("/star/<star_name>")
 def star(star_name):
-    star = Star(star_name)
+    if not star_name:
+        # render empty suggestions  
+        return render_template("suggestions.html", suggestions=None, search=None), 302
+
+    try:
+        star = Star(star_name)
+    except TypeError:
+        # if no reference to system by redirect
+        return redirect(url_for("suggestions", search=star_name))
+    
     return render_template("star.html", star=star)
 
 
