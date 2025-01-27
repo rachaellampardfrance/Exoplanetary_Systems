@@ -17,7 +17,7 @@
 </p>
 {% else %}
 <p>
-    <b>'{{ planet.name }}'</b> orbits the star <b>'{{ planet.hostname }}'</b> and was discovered in {{ planet.disc_pubdate }}{% if planet.cv_flag == 'Yes' %} However it is considered a controversial discovery{% endif %}.
+    <a href="{{ url_for('system', stellar_body=planet.name) }}"><b>'{{ planet.name }}'</b></a>orbits the star <a href="{{ url_for('system', stellar_body=planet.hostname) }}"><b>'{{ planet.hostname }}'</b></a>in the <a href="{{ url_for('system', stellar_body=planet.system) }}"><b>'{{ planet.system }}'</b></a>system, and was discovered in {{ planet.disc_pubdate }}{% if planet.cv_flag == 'Yes' %} However it is considered a controversial discovery{% endif %}.
 </p>
 <p>
     {% if planet.disc_method != 'Unknown' and planet.disc_instrument %}It was discovered by the {{ planet.disc_method }} method using {% if planet.disc_instrument != 'Multiple Instruments' %}the{% else %}{% endif %} {{ planet.disc_instrument }}.
@@ -26,7 +26,7 @@
     {% endif %}
 </p>
 <p>
-    {% if planet.orbit_period != 'Unknown' %}Its orbit is thought to take {{ planet.orbit_period }} earth days.{% endif %}
+    {% if planet.orbit_period != 'Unknown' %}{{ planet.name }}'s orbit is thought to take {{ planet.orbit_period }} earth days.{% endif %}
 </p>
 <p>
     {% if planet.mass != 'Unknown' and planet.radius != 'Unknown' %}In comparison to Earth, it is {{ planet.mass }} times the mass and it's radius is {{ planet.radius }} times that of Earths.
@@ -49,8 +49,6 @@
         </thead>
         <thead>
             <tr>
-                <th>Planet Name</th>
-                <th>Host</th>
                 <th>Public Discovery Date</th>
                 <th>Circumbinary?</th>
                 <th>Controversial?</th>
@@ -59,15 +57,10 @@
                 <th>Radius<br>(to earth)</th>
                 <th>Insolation Flux<br>(to earth)</th>
                 <th>Equilibirum Temperature<br>(Kelvin)</th>
-                <!-- <th>Discovery Method</th>
-                <th>Discovery Instrument</th> -->
-
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.name }}</a></td>
-                <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
                 <td>{{ planet.disc_pubdate }}</td>
                 <td>{{ planet.cb_flag }}</td>
                 <td>{{ planet.cv_flag }}</td>
@@ -76,8 +69,6 @@
                 <td>{{ planet.radius }}</td>
                 <td>{{ planet.insol_flux }}</td>
                 <td>{{ planet.equlib_temp }}</td>
-                <!-- <td>{{ planet.disc_method }}</td>
-                <td>{{ planet.disc_instrument }}</td> -->
             </tr>
         </tbody>
     </table>
