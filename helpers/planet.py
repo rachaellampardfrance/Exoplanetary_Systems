@@ -3,10 +3,12 @@ import sqlite3
 
 class Planet():
     DB = "database.db"
+    TABLES = ['planets', 'systems', 'stars']
     DEFAULT = "Unknown"
-    def __init__(self, planet_name: str):
+    def __init__(self, planet_name: str, system: str =None):
         self.name = planet_name
 
+        self._system = ""
         self._disc_pubdate = ""
         self._hostname = ""
         self._cb_flag = ""
@@ -20,7 +22,7 @@ class Planet():
         self._insol_flux = ""
         self._equlib_temp = ""
 
-        self._get_details()
+        self._get_details(system)
 
     @property
     def name(self):
@@ -29,6 +31,9 @@ class Planet():
     def name(self, planet_name:str):
         self._name = planet_name
 
+    @property
+    def system(self):
+        return self._system
     @property
     def disc_pubdate(self):
         return self._disc_pubdate
@@ -66,8 +71,9 @@ class Planet():
     def equlib_temp(self):
         return self._equlib_temp
 
-    def _get_details(self):
+    def _get_details(self, system: str =None) -> None:
         """Gets details of planet by planet name"""
+        
         with sqlite3.connect(Planet.DB) as conn:
             query = f"""
                 SELECT disc_pubdate, hostname, cb_flag,
@@ -93,6 +99,8 @@ class Planet():
             self._set_radius(details[9])
             self._set_insol_flux(details[10])
             self._set_equlib_temp(details[11])
+
+            self._set_system(cursor, system)
 
     
     def _set_disc_pubdate(self, pubdate):
@@ -130,6 +138,23 @@ class Planet():
 
     def _set_equlib_temp(self, equlib_temp):
         self._equlib_temp = _get_data_or_default(equlib_temp)
+
+    def _set_system(self, cursor: sqlite3.Cursor, system: str = None) -> None:
+        if not system == None:
+            self._system = system
+        else:
+            self._set_system_from_host(cursor)
+
+    def _set_system_from_host(self, cursor: sqlite3.Cursor) -> str:
+        """try search table for system name using hostname"""
+        query = f"""
+            SELECT sy_name
+              FROM {Planet.TABLES[2]}
+             WHERE LOWER(hostname)=?;
+        """
+        cursor.execute(query, (self.hostname.lower(),))
+
+        self._system = cursor.fetchone()[0]
 
 
 def _get_data_or_default(data):

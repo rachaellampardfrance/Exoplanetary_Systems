@@ -139,6 +139,6 @@ class System():
             # raise TypeError(f"planets = {planets}")
 
         for planet in planets:
-            planet_details = Planet(planet)
+            planet_details = Planet(planet, system=self.name)
             self._planets.append(planet_details)
 # *****************************
