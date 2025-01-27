@@ -16,7 +16,7 @@
     <table>
         <thead>
             <tr>
-                <th colspan="5"><h2>✨NEW PLANETS✨</h2></th>
+                <th colspan="4"><h2>👾Declassified Planets👾</h2></th>
             </tr>
         </thead>
         <thead>
@@ -24,16 +24,15 @@
                 <th></th>
                 <th>Planet Name</th>
                 <th>Host Name</th>
-                <th>Circumbinary?</th>
                 <th>Public Discovery Date</th>
             </tr>
         </thead>
         <tbody>
-            {% for planet in new_planets %}
+            {% for planet in planets %}
             <tr>
-                <td class="nowrap">✨🪐✨</td>
-                <td><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.pl_name }}</a></td>
-                <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td class="nowrap">🌑</td>
+                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.pl_name }}</a></td>
+                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
                 <td>{{ planet.disc_pubdate }}</td>
             </tr>
             {% endfor %}
