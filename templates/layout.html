@@ -30,8 +30,12 @@
                     <div class="dropdown">
                         <a class="nav-link" href="{{ url_for('new', category='ps') }}">New Discoveries</a>
                         <div class="dropdown-content">
-                            <a href="{{ url_for('new', category='p') }}">Planets</a>
-                            <a href="{{ url_for('new', category='s') }}">Systems</a>
+                            <div>
+                                <a href="{{ url_for('new', category='p') }}">Planets</a>
+                            </div>
+                            <div>
+                                <a href="{{ url_for('new', category='s') }}">Systems</a>
+                            </div>
                         </div>
                     </div>
                     <a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a>
