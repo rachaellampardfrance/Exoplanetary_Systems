@@ -20,7 +20,7 @@
             <tr>
                 <td class="nowrap">✨🪐✨</td>
                 <td><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
-                <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
                 <td><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
                 <td>{{ planet.cb_flag }}</td>
                 <td>{{ planet.disc_pubdate }}</td>

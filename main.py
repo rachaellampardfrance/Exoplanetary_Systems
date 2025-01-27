@@ -10,6 +10,7 @@ from flask import (
 
 from helpers.system import System
 from helpers.planet import Planet
+from helpers.star import Star
 
 # flask --app main run --debug
 
@@ -148,6 +149,11 @@ def system(stellar_body=None):
 def planet(planet_name):
     planet = Planet(planet_name)
     return render_template("planet.html", planet=planet)
+
+@app.route("/star/<star_name>")
+def star(star_name):
+    star = Star(star_name)
+    return render_template("star.html", star=star)
 
 
 @app.route("/suggestions/<search>")

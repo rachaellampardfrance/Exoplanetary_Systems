@@ -46,7 +46,7 @@
             <tr>
                 <td class="catagory">Name</td>
                 {% for star in system.stars %}
-                <td>{{ star.name }}</td>
+                <td><a href="{{ url_for('star', star_name=star.name) }}">{{ star.name }}</a></td>
                 {% endfor %}
                 <td class="catagory">Name</td>
                 {% for planet in system.planets %}
