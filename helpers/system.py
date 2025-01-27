@@ -106,7 +106,7 @@ class System():
                 stars.append(result[0])
 
         for star in stars:
-            star_details = Star(star)
+            star_details = Star(star, system=self.name)
             self._stars.append(star_details)
 # *****************************
 
