@@ -46,12 +46,12 @@
             <tr>
                 <td class="catagory">Name</td>
                 {% for star in system.stars %}
-                <td><a href="{{ url_for('star', star_name=star.name) }}">{{ star.name }}</a></td>
+                <td class="nowrap"><a href="{{ url_for('star', star_name=star.name) }}">{{ star.name }}</a></td>
                 {% endfor %}
                 <td class="catagory">Name</td>
                 {% for planet in system.planets %}
                 {% if planet.declassified != 'Yes' %}
-                <td><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
                 {% endif %}
                 {% endfor %}
             </tr>

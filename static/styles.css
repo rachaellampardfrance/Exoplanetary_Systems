@@ -104,6 +104,7 @@ a:hover, a:active {
 }
 
 table {
+  overflow-x:auto;
   margin-left: auto;
   margin-right: auto;
   border-collapse: collapse;
@@ -113,7 +114,6 @@ table {
 [class|="table"] {
   overflow-x:auto;
   width: 100%;
-  padding: 20px;
 }
 
 td, th {
