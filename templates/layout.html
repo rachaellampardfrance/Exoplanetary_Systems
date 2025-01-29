@@ -27,28 +27,31 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                            <a class="nav-link" href="{{ url_for('home') }}">🌍Home🌏</a>
                             <div class="dropdown">
-                                <a class="nav-link" href="{{ url_for('new', category='ps') }}">New Discoveries</a>
+                                <a class="nav-link" href="{{ url_for('new', category='ps') }}">✨Discoveries✨</a>
                                 <div class="dropdown-content">
-                                    <div>
-                                        <a href="{{ url_for('new', category='p') }}">Planets</a>
+                                    <div class="dropdown-item">
+                                        <a href="{{ url_for('new', category='p') }}">🪐New Planets🪐</a>
                                     </div>
-                                    <div>
-                                        <a href="{{ url_for('new', category='s') }}">Systems</a>
+                                    <div class="dropdown-item">
+                                        <a href="{{ url_for('new', category='s') }}">🌌System Updates🌌</a>
+                                    </div>
+                                    <div class="dropdown-item">
+                                        <a href="{{ url_for('declassified') }}">👾Declassified Planets👾</a>
                                     </div>
                                 </div>
                             </div>
-                            <a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a>
-                            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                            <a class="nav-link" href="{{ url_for('statistics') }}">📡Planetary Systems stats📡</a>
+                            <a class="nav-link" href="{{ url_for('about') }}">❔About❔</a>
                             <a class="nav-link" href="{{ url_for('randomiser') }}">🎲Randomise🎲</a>
-                            <a class="nav-link" href="{{ url_for('declassified') }}">Declassified Planets</a>
                         </li>
                     </ul>
                     <ul>
                         <li class="nav-item search-container">
                             <form action="{{ url_for('system') }}" method="get">
-                                <input type="text" placeholder="search..." name="search" maxlength="30">
+                                <div>System search</div>
+                                <input type="text" placeholder="planet/star/system..." name="search" maxlength="30">
                                 <button class='search-icon' type="submit"><img src="{{ url_for('static', filename='icons/search_icon.png') }}" alt="search icon" width="12"/></button>
                             </form>
                         </li>

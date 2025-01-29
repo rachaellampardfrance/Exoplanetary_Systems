@@ -152,17 +152,20 @@ td.nowrap {
 .dropdown {
   position: relative;
   display: inline-block;
-  /* text-align: center; */
 }
 
 .dropdown-content {
+  display: flex;
   display: none;
   position: absolute;
-  z-index: 1;
-  min-width: 140px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.dropdown-item {
+  white-space: nowrap;
   text-align: center;
+  padding: 2px;
 }
 
 table.suggestions {
