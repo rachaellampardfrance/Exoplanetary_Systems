@@ -1,15 +1,26 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+article {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
 body {
-  margin: 0px;
-  /* margin-bottom: 100px; */
   background-color: #1d2230;
   font-family: Audiowide, sans-serif;
   color: #f0f8ff;
-
-  min-height: 100vh;
+}
+main {
+  flex-grow: 1;
+}
+header, main, footer {
+  flex-shrink: 0;
 }
 
-
-#navbar, .search-icon, #footer, .dropdown-content {
+#navbar, .search-icon, footer, .dropdown-content {
   background-color: #151922;
 }
 
@@ -32,7 +43,7 @@ body {
   font-size: 1em;
   }
 
-.txt-center, h1, p, h2, table, h3 {
+.txt-center, h1, p, h2, table, h3, div {
   text-align: center;
 }
 
@@ -43,45 +54,37 @@ h2.padded-top-bottom {
 
 #navbar {
   list-style: none;
-  display: grid;
+
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 20px;
+  padding: 15px;
   position: relative;
+  box-sizing: border-box;
 }
-
 #navbar > ul {
   margin: 0;
   padding: 0;
 }
-
 .navbar-logo {
-  /* font-size: xx-large; */
   font-size: 2em;
-  padding-right: 10px;
   /* text-wrap: nowrap; */
 }
 .navbar-logo:hover, a:link, a:visited {
   text-decoration: none;
 }
-
 .nav-item {
   display: inline-block;
 }
-
-.nav-link {
+.nav-item, .nav-link {
   padding-right: 10px;
 }
+/* .search-container {
+} */
 
-.search-container {
-  padding-right: 20px;
-
-}
-
-.padded, table, .page-heading, #content, [class|="img"] {
+.padded, table, .page-heading, main, [class|="img"] {
   padding: 20px;
 }
 
@@ -92,15 +95,16 @@ a:hover, a:active {
   text-decoration: underline;
 }
 
-#footer {
+footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding-top: 2px;
+  /* padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 20px; */
+  box-sizing: border-box;
 }
 
 table {
@@ -182,18 +186,6 @@ table.suggestions {
 
 /* for computer */
 @media screen and (min-width: 501px) {
-  #footer {
-    position: fixed;
-    bottom: 0;
-    opacity: 0.5;
-  }
-  #footer:hover {
-    opacity: 1;
-  }
-
-  #content {
-    margin-bottom: 100px;
-  }
 }
 
 /* for small screens */
@@ -204,15 +196,5 @@ table.suggestions {
 
   #img-error {
     width: 100%;
-  }
-
-  #footer {
-    position: relative;
-    opacity: 1;
-    text-wrap: wrap;
-  }
-
-  #content {
-    margin-bottom: 0px;
   }
 }
