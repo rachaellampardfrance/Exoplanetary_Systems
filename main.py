@@ -65,16 +65,17 @@ def new(category):
     """Generate most recent planet discoveries from planets
     database table from MAX disc_pubdate
     """
+    month_going_back = 1
 
     if category not in ['p', 's', 'ps']:
         abort(404)
 
     if category in ['s', 'ps']:
-        new_systems = get_systems_from_max_updated()
+        new_systems = get_systems_from_max_updated(month_going_back)
 
 
     if category in ['p', 'ps']:
-        new_planets = get_planets_from_month_disc(1)
+        new_planets = get_planets_from_month_disc(month_going_back)
 
 
     if category == 'p':
@@ -100,20 +101,9 @@ def new(category):
 @app.route("/randomiser")
 def randomiser():
     """Redirects to system route with random planet as stellar body"""
-    stellar_body = ""
+    random_planet = get_random_planet_name()
 
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
-
-        cursor.execute(f"""
-            SELECT pl_name
-              FROM {TABLES[0]}
-             ORDER BY RANDOM()
-             LIMIT 1;
-        """)
-        stellar_body = cursor.fetchone()[0]
-
-    return redirect(url_for('system', stellar_body=stellar_body), code=302)
+    return redirect(url_for('system', stellar_body=random_planet), code=302)
 
 
 # @app.route("/system", strict_slashes=False)
@@ -269,26 +259,15 @@ def get_planet_count():
 
 # new helper functions
 # ******************
-def get_systems_from_max_updated() -> list:
+def get_systems_from_max_updated(month_var: int) -> list:
     """Returns a list of system objects that where the last updated"""
+    new_planets = get_planet_names_from_month_disc(month_var)
     updated_systems = []
 
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
-        query = f"""
-            SELECT sy_name
-                FROM {TABLES[1]}
-                WHERE last_updated = (
-                    SELECT MAX(last_updated)
-                        FROM {TABLES[1]}
-            );
-        """
-        systems = cursor.execute(query)
+    for planet in new_planets:
+        updated_systems.append(System(planet[0]))
 
-    for system in systems:
-        updated_systems.append(System(system[0]))
-
-    return updated_systems
+    return set(updated_systems)
 
 def get_planets_from_month_disc(month_var: int) -> list:
     """Returns a list of planet instances from the most recent discoveries
@@ -297,6 +276,19 @@ def get_planets_from_month_disc(month_var: int) -> list:
     :param month_var: int """
     new_planets = []
 
+    planets = get_planet_names_from_month_disc(month_var)
+
+    for planet in planets:
+        new_planets.append(Planet(planet[0]))
+
+    return new_planets
+
+def get_planet_names_from_month_disc(month_var: int) -> list:
+    """Returns a list of tuples from sql query of planets
+    discovered going back x months (month_var)
+
+    planet name will be [0] of each
+"""
     with sqlite3.connect(DB) as conn:
         cursor = conn.cursor()
         query = f"""
@@ -308,12 +300,22 @@ def get_planets_from_month_disc(month_var: int) -> list:
                 STRFTIME('%Y-%m', DATE('now'))
             ORDER BY disc_pubdate DESC;
         """
-        planets = cursor.execute(query)
+        return cursor.execute(query)
+# ******************
 
-    for planet in planets:
-        new_planets.append(Planet(planet[0]))
+# randomiser helper functions
+# ******************
+def get_random_planet_name():
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
 
-    return new_planets
+        cursor.execute(f"""
+            SELECT pl_name
+                FROM {TABLES[0]}
+                ORDER BY RANDOM()
+                LIMIT 1;
+        """)
+        return cursor.fetchone()[0]
 # ******************
 
 # .... helper functions

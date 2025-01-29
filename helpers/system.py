@@ -9,13 +9,23 @@ class System():
     TABLES = ['planets', 'systems', 'stars']
 
     def __init__(self, stellar_body):
-        self._name: str = None
+        self.name: str = stellar_body
         self._stars: list = []
         self._planets: list = []
 
-        self.name: str = stellar_body
         self._generate_stars()
         self._generate_planets()
+
+    # used for checking equality in a set
+    def __hash__(self):
+        return hash(self.name)
+    def __eq__(self, other):
+        if isinstance(other, System):
+            return self.name == other.name
+        return False
+    
+    def __repr__(self):
+        return f"System(name={self.name})"
 
 
 # Set system.name

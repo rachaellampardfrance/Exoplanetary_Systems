@@ -24,6 +24,17 @@ class Planet():
 
         self._get_details(system)
 
+    # used for checking equality in a set
+    def __hash__(self):
+        return hash((self.name, self.disc_pubdate))
+    def __eq__(self, other):
+        if isinstance(other, Planet):
+            return (self.name, self.disc_pubdate) == (other.name, other.disc_pubdate)
+        return False
+    
+    def __repr__(self):
+        return f"Planet(name={self.name})"
+
     @property
     def name(self):
         return self._name

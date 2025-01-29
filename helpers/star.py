@@ -56,7 +56,18 @@ class Star():
 
         self._get_full_class_id()
         self._get_details(system)
+
+    # used for checking equality in a set
+    def __hash__(self):
+        return hash(self.name)
+    def __eq__(self, other):
+        if isinstance(other, Star):
+            return self.name == other.name
+        return False
     
+    def __repr__(self):
+        return f"Star(name={self.name})"
+
     @property
     def name(self) -> str:
         return self._name
