@@ -5,63 +5,120 @@ import pandas as pd
 
 DB_PATH = "database.db"
 
+def mark_declassified_planets(data_frame: pd.DataFrame) -> None:
+    """Any planets that exist in the local database and are
+    not within the planet names gathered from the tap request
+    will be marked as declassified
+    """
+    classified_planets = []
+    for _, row in data_frame.iterrows():
+        classified_planets.append(
+            row['pl_name'],
+    )
+    placeholders = ', '.join('?' for _ in classified_planets)
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(f"""
+            UPDATE planets
+            SET declassified = 1
+            WHERE pl_name NOT IN ({placeholders});
+        """, classified_planets)
+
+
 def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
 
-    """insert/update new pandas dataframe into the planetary_systems table"""
+    """insert/update new pandas dataframe into the planets table"""
     data_to_insert = []
     for _, row in data_frame.iterrows():
         data_to_insert.append((
             row['pl_name'],
             row['hostname'],
-            row['sy_snum'],
-            row['sy_pnum'],
             row['cb_flag'],
+            row['pl_controv_flag'],
+            row['discoverymethod'],
+            row['disc_instrument'],
+            row['pl_orbper'],
+            row['pl_masse'],
+            row['pl_rade'],
+            row['pl_insol'],
+            row['pl_eqt'],
             row['disc_pubdate']
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
-            INSERT INTO planetary_systems (
+    with sqlite3.connect(DB_PATH) as conn:
+
+        conn.executemany("""
+            INSERT INTO planets (
                 pl_name,
                 hostname,
-                sy_snum,
-                sy_pnum,
                 cb_flag,
+                cv_flag,
+                disc_method,
+                disc_instrument,
+                orbit_period,
+                mass,
+                radius,
+                insol_flux,
+                equlib_temp,
                 disc_pubdate,
-                last_updated
+                last_updated,
+                declassified
             )
             VALUES (
-                ?, ?, ?, ?, ?, ?, current_timestamp
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, 0
             )
             ON CONFLICT(pl_name)
             DO UPDATE SET
                 hostname = CASE
-                    WHEN excluded.hostname != planetary_systems.hostname
+                    WHEN excluded.hostname != planets.hostname
                     THEN excluded.hostname
-                    ELSE planetary_systems.hostname END,
-                sy_snum = CASE
-                    WHEN excluded.sy_snum != planetary_systems.sy_snum
-                    THEN excluded.sy_snum
-                    ELSE planetary_systems.sy_snum END,
-                sy_pnum = CASE
-                    WHEN excluded.sy_pnum != planetary_systems.sy_pnum
-                    THEN excluded.sy_pnum
-                    ELSE planetary_systems.sy_pnum END,
+                    ELSE planets.hostname END,
                 cb_flag = CASE
-                    WHEN excluded.cb_flag != planetary_systems.cb_flag
+                    WHEN excluded.cb_flag != planets.cb_flag
                     THEN excluded.cb_flag
-                    ELSE planetary_systems.cb_flag END,
-                last_updated = current_timestamp
+                    ELSE planets.cb_flag END,
+                cv_flag = CASE
+                    WHEN excluded.cv_flag != planets.cv_flag
+                    THEN excluded.cv_flag
+                    ELSE planets.cv_flag END,
+                orbit_period = CASE
+                    WHEN excluded.orbit_period != planets.orbit_period
+                    THEN excluded.orbit_period
+                    ELSE planets.orbit_period END,
+                mass = CASE
+                    WHEN excluded.mass != planets.mass
+                    THEN excluded.mass
+                    ELSE planets.mass END,
+                radius = CASE
+                    WHEN excluded.radius != planets.radius
+                    THEN excluded.radius
+                    ELSE planets.radius END,   
+                insol_flux = CASE
+                    WHEN excluded.insol_flux != planets.insol_flux
+                    THEN excluded.insol_flux
+                    ELSE planets.insol_flux END,
+                equlib_temp = CASE
+                    WHEN excluded.equlib_temp != planets.equlib_temp
+                    THEN excluded.equlib_temp
+                    ELSE planets.equlib_temp END,                                                                                       
+                last_updated = current_timestamp,
+                declassified = 0
             WHERE
-                planetary_systems.sy_snum != excluded.sy_snum
-                OR planetary_systems.sy_pnum != excluded.sy_pnum
-                OR planetary_systems.cb_flag != excluded.cb_flag 
-                OR planetary_systems.hostname != excluded.hostname;
+                planets.cb_flag != excluded.cb_flag 
+                OR planets.hostname != excluded.hostname
+                OR planets.cv_flag != excluded.cv_flag
+                OR planets.orbit_period != excluded.orbit_period
+                OR planets.mass != excluded.mass
+                OR planets.radius != excluded.radius
+                OR planets.insol_flux != excluded.insol_flux
+                OR planets.equlib_temp != excluded.equlib_temp;
     """, data_to_insert)
 
 
-def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
-    """insert/update new pandas dataframe into the stellar_hosts table"""
+def upsert_systems_data(data_frame: pd.DataFrame) -> None:
+    """insert/update new pandas dataframe into the systems table"""
     
     data_to_insert = []
     for _, row in data_frame.iterrows():
@@ -71,9 +128,9 @@ def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
             row['sy_pnum'],
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
-            INSERT INTO stellar_hosts (
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.executemany("""
+            INSERT INTO systems (
                 sy_name,
                 sy_snum,
                 sy_pnum,
@@ -85,26 +142,26 @@ def upsert_stellar_hosts_data(data_frame: pd.DataFrame) -> None:
             ON CONFLICT(sy_name)
             DO UPDATE SET
                 sy_name = CASE
-                    WHEN excluded.sy_name != stellar_hosts.sy_name
+                    WHEN excluded.sy_name != systems.sy_name
                     THEN excluded.sy_name
-                    ELSE stellar_hosts.sy_name END,
+                    ELSE systems.sy_name END,
                 sy_snum = CASE
-                    WHEN excluded.sy_snum != stellar_hosts.sy_snum
+                    WHEN excluded.sy_snum != systems.sy_snum
                     THEN excluded.sy_snum
-                    ELSE stellar_hosts.sy_snum END,
+                    ELSE systems.sy_snum END,
                 sy_pnum = CASE
-                    WHEN excluded.sy_pnum != stellar_hosts.sy_pnum
+                    WHEN excluded.sy_pnum != systems.sy_pnum
                     THEN excluded.sy_pnum
-                    ELSE stellar_hosts.sy_pnum END,
+                    ELSE systems.sy_pnum END,
                 last_updated = current_timestamp
             WHERE
-                stellar_hosts.sy_snum != excluded.sy_snum
-                OR stellar_hosts.sy_pnum != excluded.sy_pnum;
+                systems.sy_snum != excluded.sy_snum
+                OR systems.sy_pnum != excluded.sy_pnum;
     """, data_to_insert)
 
 
-def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
-    """insert/update new pandas dataframe into the stellar_hosts table"""
+def upsert_stars_data(data_frame: pd.DataFrame) -> None:
+    """insert/update new pandas dataframe into the systems table"""
     
     data_to_insert = []
     for _, row in data_frame.iterrows():
@@ -113,9 +170,9 @@ def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
             row['hostname'],
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
-            INSERT INTO stellar (
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.executemany("""
+            INSERT INTO stars (
                 sy_name,
                 hostname,
                 last_updated
@@ -126,16 +183,16 @@ def upsert_stellar_data(data_frame: pd.DataFrame) -> None:
             ON CONFLICT(hostname)
             DO UPDATE SET
                 sy_name = CASE
-                    WHEN excluded.sy_name != stellar.sy_name
+                    WHEN excluded.sy_name != stars.sy_name
                     THEN excluded.sy_name
-                    ELSE stellar.sy_name END,
+                    ELSE stars.sy_name END,
                 last_updated = current_timestamp
             WHERE
-                stellar.sy_name != excluded.sy_name;
+                stars.sy_name != excluded.sy_name;
     """, data_to_insert)
 
-def update_stellar_spectypes(data_frame: pd.DataFrame) -> None:
-    """update stellar table with new spectral types"""
+def update_stars_spectypes(data_frame: pd.DataFrame) -> None:
+    """update stars table with new spectral types"""
 
     data_to_insert = []
     for _, row in data_frame.iterrows():
@@ -144,12 +201,12 @@ def update_stellar_spectypes(data_frame: pd.DataFrame) -> None:
             row['hostname'],
         ))
 
-    with sqlite3.connect(DB_PATH) as connection:
-        connection.executemany("""
-            UPDATE stellar
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.executemany("""
+            UPDATE stars
             SET st_spectype = ?
             WHERE
-                stellar.hostname == ?;
+                stars.hostname == ?;
     """, data_to_insert)
 
 
@@ -165,11 +222,11 @@ def get_last_updated(table) -> str:
         return c.fetchone()
 
  
-def get_stellar_hosts_db_data():
+def get_systems_db_data():
     with sqlite3.connect(DB_PATH) as conn:
         # c = conn.cursor()
         
-        return pd.read_sql_query("SELECT * FROM stellar_hosts", conn)
+        return pd.read_sql_query("SELECT * FROM systems", conn)
 
 def print_table_updated_count(table: str) -> None:
     with sqlite3.connect(DB_PATH) as conn:
@@ -186,4 +243,4 @@ def print_table_updated_count(table: str) -> None:
         result = c.fetchone()
         count = result[0] if result else 0
 
-        print(f"New updates to {table}: {count}")
+        print(f"Todays new updates to {table}: {count}")

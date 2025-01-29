@@ -17,51 +17,59 @@
     </head>
 
     <body class="center">
+        <article>
+            <header>
+                <nav id="navbar">
+                    <ul>
+                        <li class="nav-item">
+                            <a class="navbar-logo" href="{{ url_for('home') }}">
+                                <img src="{{ url_for('static', filename='icons/star_system_white.png') }}" alt="Star system icon" width="30"> Planetary Systems
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                            <div class="dropdown">
+                                <a class="nav-link" href="{{ url_for('new', category='ps') }}">New Discoveries</a>
+                                <div class="dropdown-content">
+                                    <div>
+                                        <a href="{{ url_for('new', category='p') }}">Planets</a>
+                                    </div>
+                                    <div>
+                                        <a href="{{ url_for('new', category='s') }}">Systems</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a>
+                            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                            <a class="nav-link" href="{{ url_for('randomiser') }}">🎲Randomise🎲</a>
+                            <a class="nav-link" href="{{ url_for('declassified') }}">Declassified Planets</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-item search-container">
+                            <form action="{{ url_for('system') }}" method="get">
+                                <input type="text" placeholder="search..." name="search" maxlength="30">
+                                <button class='search-icon' type="submit"><img src="{{ url_for('static', filename='icons/search_icon.png') }}" alt="search icon" width="12"/></button>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
 
-        <nav id="navbar">
-            <ul>
-                <li class="nav-item">
-                    <a class="navbar-logo" href="{{ url_for('home') }}">
-                        <img src="{{ url_for('static', filename='icons/star_system_white.png') }}" alt="Star system icon" width="30"> Planetary Systems
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-                    <div class="dropdown">
-                        <a class="nav-link" href="{{ url_for('new', category='ps') }}">New Discoveries</a>
-                        <div class="dropdown-content">
-                            <a href="{{ url_for('new', category='p') }}">Planets</a>
-                            <a href="{{ url_for('new', category='s') }}">Systems</a>
-                        </div>
-                    </div>
-                    <a class="nav-link" href="{{ url_for('statistics') }}">Statistics</a>
-                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
-                    <a class="nav-link" href="{{ url_for('randomiser') }}">🎲Randomise🎲</a>
-                </li>
-            </ul>
-            <ul>
-                <li class="nav-item search-container">
-                    <form action="{{ url_for('system') }}" method="get">
-                        <input type="text" placeholder="search..." name="search" maxlength="30">
-                        <button class='search-icon' type="submit"><img src="{{ url_for('static', filename='icons/search_icon.png') }}" alt="search icon" width="12"/></button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
+            <main>
+                {% block main %}{% endblock %}
+            </main>
 
-        <main id="content">
-            {% block main %}{% endblock %}
-        </main>
-
-        <footer id="footer" class="txt-default">
-            <p>
-                Data provided by the <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA Exoplanet Archive</a>
-            </p>
-            <p>
-                Created by Rachael Lampard-France
-                <a href="https://www.linkedin.com/in/rachael-lampard-france-a5995b195" target="_blank"><img src="{{ url_for('static', filename='icons/linkedin_white.png') }}" alt="git hub logo" width="80" style="padding-right: 10px;"></a>
-                <a href="https://github.com/rachaellampardfrance" target="_blank"><img src="{{ url_for('static', filename='icons/github_icon_white.png') }}" alt="git hub logo" width="30" style="padding-right: 10px;"></a>
-            </p>
-        </footer>
+            <footer class="txt-default">
+                <p>
+                    Data provided by the <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA Exoplanet Archive</a>
+                </p>
+                <p>
+                    Created by Rachael Lampard-France
+                    <a href="https://www.linkedin.com/in/rachael-lampard-france-a5995b195" target="_blank"><img src="{{ url_for('static', filename='icons/linkedin_white.png') }}" alt="git hub logo" width="80" style="padding-right: 10px;"></a>
+                    <a href="https://github.com/rachaellampardfrance" target="_blank"><img src="{{ url_for('static', filename='icons/github_icon_white.png') }}" alt="git hub logo" width="30" style="padding-right: 10px;"></a>
+                </p>
+            </footer>
+        </article>
     </body>
 </html>

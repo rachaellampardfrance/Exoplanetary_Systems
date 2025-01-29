@@ -9,13 +9,15 @@ from flask import (
 )
 
 from helpers.system import System
+from helpers.planet import Planet
+from helpers.star import Star
 
 # flask --app main run --debug
 
 app = Flask(__name__)
 
 DB = "database.db"
-TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
+TABLES = ['planets', 'systems', 'stars']
 
 
 @app.after_request
@@ -46,22 +48,8 @@ def home():
     """Renders HTML home page with current exoplanet and
     planetary systems count
     """
-    exo_systems = 0
-    planets = 0
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
-
-        cursor.execute("""
-            SELECT COUNT(sy_name)
-              FROM stellar_hosts
-        """)
-        exo_systems = cursor.fetchone()[0]
-
-        cursor.execute("""
-            SELECT COUNT(pl_name)
-              FROM planetary_systems
-        """)
-        planets = cursor.fetchone()[0]
+    exo_systems = get_exo_system_count()
+    planets = get_planet_count()
 
     return render_template("home.html", exo_systems=exo_systems, planets=planets)
 
@@ -74,84 +62,22 @@ def statistics():
 
 @app.route("/new/<category>")
 def new(category):
-    """Generate most recent planet discoveries from planetary_systems
+    """Generate most recent planet discoveries from planets
     database table from MAX disc_pubdate
     """
+    month_going_back = 1
 
     if category not in ['p', 's', 'ps']:
         abort(404)
 
     if category in ['s', 'ps']:
-        new_systems = []
-        with sqlite3.connect(DB) as conn:
-            cursor = conn.cursor()
+        new_systems = get_systems_from_max_updated(month_going_back)
 
-            modified = cursor.execute("""
-                SELECT *
-                  FROM stellar_hosts
-                 WHERE last_updated = (
-                        SELECT MAX(last_updated)
-                          FROM stellar_hosts
-                );
-            """)
-
-        for mod in modified:
-            system_icos = ("☀️" * mod[1]) + ("🪐" * mod[2])
-            new_systems.append(
-                {
-                    "sy_name": mod[0],
-                    "sy_snum": mod[1],
-                    "sy_pnum": mod[2],
-                    "system_icos": system_icos
-                }
-            )
 
     if category in ['p', 'ps']:
-        new_planets = []
-        with sqlite3.connect(DB) as conn:
-            cursor = conn.cursor()
+        new_planets = get_planets_from_month_disc(month_going_back)
 
-            # List only most recently requested updates
-            modified = cursor.execute("""
-                SELECT *
-                FROM planetary_systems
-                WHERE last_updated = (
-                    SELECT MAX(last_updated)
-                    FROM planetary_systems
-                )
-                ORDER BY disc_pubdate DESC;
-            """)
 
-            # List only most recent disc_pubdate
-            # modified = cursor.execute("""
-            #     SELECT *
-            #     FROM planetary_systems
-            #     WHERE disc_pubdate = (
-            #         SELECT MAX(disc_pubdate)
-            #         FROM planetary_systems
-            #     );
-            # """)
-
-        for mod in modified:
-            cb_flag = ""
-            if mod[4] == 1:
-                cb_flag = "Yes"
-            else:
-                cb_flag = "No"
-
-            planet_icos = ("☀️" * mod[2]) + ("🪐" * mod[3])
-
-            new_planets.append(
-                {
-                    "pl_name": mod[0],
-                    "hostname": mod[1],
-                    "sy_snum": mod[2],
-                    "sy_pnum": mod[3],
-                    "cb_flag": cb_flag,
-                    "disc_pubdate": mod[5],
-                    "planet_icos": planet_icos
-                }
-            )
     if category == 'p':
         return render_template(
             "new.html",
@@ -175,20 +101,9 @@ def new(category):
 @app.route("/randomiser")
 def randomiser():
     """Redirects to system route with random planet as stellar body"""
-    stellar_body = ""
+    random_planet = get_random_planet_name()
 
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
-
-        cursor.execute(f"""
-            SELECT pl_name
-              FROM {TABLES[0]}
-             ORDER BY RANDOM()
-             LIMIT 1;
-        """)
-        stellar_body = cursor.fetchone()[0]
-
-    return redirect(url_for('system', stellar_body=stellar_body), code=302)
+    return redirect(url_for('system', stellar_body=random_planet), code=302)
 
 
 # @app.route("/system", strict_slashes=False)
@@ -218,6 +133,38 @@ def system(stellar_body=None):
     size = len(system.planets) + len(system.stars)
 
     return render_template("system.html", system=system, size=size)
+
+
+@app.route("/planet/")
+@app.route("/planet/<planet_name>")
+def planet(planet_name=None):
+    if not planet_name:
+        # render empty suggestions  
+        return render_template("suggestions.html", suggestions=None, search=None), 302
+
+    try:
+        planet = Planet(planet_name)
+    except TypeError:
+        # if no reference to system by redirect
+        return redirect(url_for("suggestions", search=planet_name))
+    
+    return render_template("planet.html", planet=planet)
+
+
+@app.route("/planet/")
+@app.route("/star/<star_name>")
+def star(star_name):
+    if not star_name:
+        # render empty suggestions  
+        return render_template("suggestions.html", suggestions=None, search=None), 302
+
+    try:
+        star = Star(star_name)
+    except TypeError:
+        # if no reference to system by redirect
+        return redirect(url_for("suggestions", search=star_name))
+    
+    return render_template("star.html", star=star)
 
 
 @app.route("/suggestions/<search>")
@@ -253,10 +200,124 @@ def suggestions(search):
 def about():
     return render_template("about.html")
 
+@app.route("/declassed")
+def declassified():
+
+    planet_names = []
+
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT pl_name FROM planets
+            WHERE declassified = 1;
+        """)
+        planets = cursor.fetchall()
+        planet_names.extend(planet[0] for planet in planets)
+    
+    declassed = []
+
+    for planet_name in planet_names:
+        declassed.extend(Planet(planet_name))
+
+    return render_template("declassified.html", planet=declassed)
+
 @app.errorhandler(404)
 def page_not_found(error=404):
     return render_template('404.html', error=error), 404
 
-@app.errorhandler(Exception)
-def handle_exception(error):
-    return render_template('500.html', error=error), 500
+# @app.errorhandler(Exception)
+# def handle_exception(error):
+#     return render_template('500.html', error=error), 500
+
+
+
+
+# home helper functions
+# ******************
+def get_exo_system_count():
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        query = f"""
+            SELECT COUNT(sy_name)
+                FROM {TABLES[1]};
+        """
+        cursor.execute(query)
+
+        return cursor.fetchone()[0]
+
+def get_planet_count():
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        query = f"""
+            SELECT COUNT(pl_name)
+              FROM {TABLES[0]}
+        """
+        cursor.execute(query)
+        return cursor.fetchone()[0]
+# ******************
+
+# new helper functions
+# ******************
+def get_systems_from_max_updated(month_var: int) -> list:
+    """Returns a list of system objects that where the last updated"""
+    new_planets = get_planet_names_from_month_disc(month_var)
+    updated_systems = []
+
+    for planet in new_planets:
+        updated_systems.append(System(planet[0]))
+
+    return set(updated_systems)
+
+def get_planets_from_month_disc(month_var: int) -> list:
+    """Returns a list of planet instances from the most recent discoveries
+    going back x months (month_var)
+
+    :param month_var: int """
+    new_planets = []
+
+    planets = get_planet_names_from_month_disc(month_var)
+
+    for planet in planets:
+        new_planets.append(Planet(planet[0]))
+
+    return new_planets
+
+def get_planet_names_from_month_disc(month_var: int) -> list:
+    """Returns a list of tuples from sql query of planets
+    discovered going back x months (month_var)
+
+    planet name will be [0] of each
+"""
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+        query = f"""
+            SELECT pl_name
+            FROM {TABLES[0]}
+            WHERE disc_pubdate BETWEEN
+                STRFTIME('%Y-%m', DATE('now', '-{month_var} months'))
+                AND
+                STRFTIME('%Y-%m', DATE('now'))
+            ORDER BY disc_pubdate DESC;
+        """
+        return cursor.execute(query)
+# ******************
+
+# randomiser helper functions
+# ******************
+def get_random_planet_name():
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(f"""
+            SELECT pl_name
+                FROM {TABLES[0]}
+                ORDER BY RANDOM()
+                LIMIT 1;
+        """)
+        return cursor.fetchone()[0]
+# ******************
+
+# .... helper functions
+# ******************
+# ******************
