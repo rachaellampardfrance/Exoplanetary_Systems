@@ -130,7 +130,7 @@ def system(stellar_body=None):
         # if no reference to system by redirect
         return redirect(url_for('suggestions', search=stellar_body), code=302)
 
-    size = len(system.planets) + len(system.stars)
+    size = system.num_planets + len(system.stars)
 
     return render_template("system.html", system=system, size=size)
 

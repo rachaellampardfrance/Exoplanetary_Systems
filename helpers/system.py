@@ -11,10 +11,10 @@ class System():
     def __init__(self, stellar_body):
         self.name: str = stellar_body
         self._stars: list = []
-        self._planets: list = []
+        self._num_planets = 0
 
         self._generate_stars()
-        self._generate_planets()
+        self._set_num_planets()
 
     # used for checking equality in a set
     def __hash__(self):
@@ -121,34 +121,15 @@ class System():
 # *****************************
 
 
-# Set: system.planets
+# Set: system._num_planets
 # *****************************
     @property
-    def planets(self) -> list:
-        return self._planets
+    def num_planets(self) -> int:
+        return self._num_planets
     
-    def _generate_planets(self):
-        """Generate planets by stars from self.stars"""
-        planets = []
-        with sqlite3.connect(System.DB) as conn:
-            for star in self.stars:
-                cursor = conn.cursor()
-                query = f"""
-                    SELECT pl_name
-                    FROM {System.TABLES[0]}
-                    WHERE hostname=?;
-                """
-                cursor.execute(query, (star.name,))
-                results = cursor.fetchall()
-
-                for result in results:
-                    planets.append(result[0])
-
-                cursor.close()
-
-            # raise TypeError(f"planets = {planets}")
-
-        for planet in planets:
-            planet_details = Planet(planet, system=self.name)
-            self._planets.append(planet_details)
+    def _set_num_planets(self) -> None:
+        count = 0
+        for star in self.stars:
+            count += len(star.planets)
+        self._num_planets = count
 # *****************************

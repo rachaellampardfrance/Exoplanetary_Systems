@@ -2,6 +2,8 @@
 import re
 import sqlite3
 
+from helpers.planet import Planet
+
 class Star():
     DB = "database.db"
     TABLES = ['planets', 'systems', 'stars']
@@ -45,6 +47,7 @@ class Star():
 
     def __init__(self, name:str, system:str =None):
         self.name = name
+        self._planets: list = []
 
         self._system = ""
         self._full_class_id = "" # "G2 III"
@@ -56,6 +59,7 @@ class Star():
 
         self._get_full_class_id()
         self._get_details(system)
+        self._generate_planets()
 
     # used for checking equality in a set
     def __hash__(self):
@@ -188,3 +192,36 @@ class Star():
             self._lumin = Star.LUMINOSITY[lumin.group()]
         else:
             self._lumin = Star.DEFAULT
+
+
+# Set: system.planets
+# *****************************
+    @property
+    def planets(self) -> list:
+        return self._planets
+    
+    def _generate_planets(self):
+        """Generate planets by stars from self.stars"""
+        planets = []
+        with sqlite3.connect(Star.DB) as conn:
+            cursor = conn.cursor()
+
+            query = f"""
+                SELECT pl_name
+                FROM {Star.TABLES[0]}
+                WHERE hostname=?;
+            """
+            cursor.execute(query, (self.name,))
+            results = cursor.fetchall()
+
+            for result in results:
+                planets.append(result[0])
+
+            cursor.close()
+
+            # raise TypeError(f"planets = {planets}")
+
+        for planet in planets:
+            planet_details = Planet(planet, system=self.system)
+            self._planets.append(planet_details)
+# *****************************
