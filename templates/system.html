@@ -17,11 +17,9 @@
                     <h2>
                         🌌{{ system.name }}🌌<br>
                         {% for star in system.stars %}
-                        ☀️
+                            ☀️
                         {% endfor %}
-                        {% for planet in system.planets %}
-                        🪐
-                        {% endfor %}
+                        {{ '🪐' * system.num_planets }}
                     </h2>
                 </th>
             </tr>
@@ -29,7 +27,7 @@
         <thead>
             <tr>
                 <th colspan="{{ system.stars|length + 1}}">Stars</th>
-                <th colspan="{{ system.planets|length + 1 }}">Planets</th>
+                <th colspan="{{ system.num_planets + 1 }}">Planets</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +37,7 @@
                 <td>☀️</td>
                 {% endfor %}
                 <td></td>
-                {% for planet in system.planets %}
+                {% for _ in range(system.num_planets) %}
                 <td>🪐</td>
                 {% endfor %}
             </tr>
@@ -49,10 +47,12 @@
                 <td class="nowrap"><a href="{{ url_for('star', star_name=star.name) }}">{{ star.name }}</a></td>
                 {% endfor %}
                 <td class="catagory">Name</td>
-                {% for planet in system.planets %}
-                {% if planet.declassified != 'Yes' %}
-                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
-                {% endif %}
+                {% for star in system.stars %}
+                    {% for planet in star.planets %}
+                        {% if planet.declassified != 'Yes' %}
+                            <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                        {% endif %}
+                    {% endfor%}
                 {% endfor %}
             </tr>
             <tr>
@@ -61,10 +61,12 @@
                 <td>{{ star.full_class_id }}</td>
                 {% endfor %}
                 <td class="catagory">Host Star</td>
-                {% for planet in system.planets %}
-                {% if planet.declassified != 'Yes' %}
-                <td>{{ planet.hostname }}</td>
-                {% endif %}
+                {% for star in system.stars %}
+                    {% for planet in star.planets %}
+                        {% if planet.declassified != 'Yes' %}
+                            <td>{{ planet.hostname }}</td>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </tr>
             <tr>
@@ -77,10 +79,12 @@
                 </td>
                 {% endfor %}
                 <td class="catagory">Circumbinary</td>
-                {% for planet in system.planets %}
-                {% if planet.declassified != 'Yes' %}
-                <td>{{ planet.cb_flag }}</td>
-                {% endif %}
+                {% for star in system.stars %}
+                    {% for planet in star.planets %}
+                        {% if planet.declassified != 'Yes' %}
+                            <td>{{ planet.cb_flag }}</td>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </tr>
             <tr>
@@ -93,10 +97,12 @@
                 </td>
                 {% endfor %}
                 <td class="catagory">Discovery Year<br>(Published)</td>
-                {% for planet in system.planets %}
-                {% if planet.declassified != 'Yes' %}
-                <td>{{ planet.disc_pubdate }}</td>
-                {% endif %}
+                {% for star in system.stars %}
+                    {% for planet in star.planets %}
+                        {% if planet.declassified != 'Yes' %}
+                            <td>{{ planet.disc_pubdate }}</td>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </tr>
             <tr>
@@ -109,12 +115,13 @@
                 </td>
                 {% endfor %}
                 <td class="catagory"></td>
-                {% for planet in system.planets %}
-                {% if planet.declassified != 'Yes' %}
-                <td>
-                </td>
-                {% endif %}
-                {% endfor %}     
+                {% for star in system.stars %}
+                    {% for planet in star.planets %}
+                        {% if planet.declassified != 'Yes' %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}    
             </tr>
         </tbody>
     </table>

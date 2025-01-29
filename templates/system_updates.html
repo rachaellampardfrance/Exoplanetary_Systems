@@ -8,18 +8,18 @@
         <thead>
             <tr>
                 <th></th>
-                <th>System Name</th>
-                <th>Star Count</th>
-                <th>Planet Count</th>
+                <th>🌌System Name🌌</th>
+                <th>☀️Star Count☀️</th>
+                <th>🪐Planet Count🪐</th>
             </tr>
         </thead>
         <tbody>
             {% for system in new_systems %}
             <tr>
-                <td class="nowrap">{% for star in system.stars %}☀️{% endfor%}{% for planet in system.planets %}🪐{% endfor%}</td>
+                <td class="nowrap">{% for star in system.stars %}☀️{% endfor%}{% for _ in range(system.num_planets) %}🪐{% endfor%}</td>
                 <td class="nowrap"><a href="{{ url_for('system', stellar_body=system.name) }}">{{ system.name }}</a></td>
                 <td>{{ system.stars|length }}</td>
-                <td>{{ system.planets|length }}</td>
+                <td>{{ system.num_planets }}</td>
             </tr>
             {% endfor %}
         </tbody>

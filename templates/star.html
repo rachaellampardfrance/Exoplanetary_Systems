@@ -14,9 +14,9 @@
 <div>
     <p>
         {% if star.name == star.system %}
-            <b>'{{ star.name }}'</b> is the main star in its <a href="{{ url_for('system', stellar_body=star.system) }}">system.</a>
+            <b>'{{ star.name }}'</b> is the main star in its system <a href="{{ url_for('system', stellar_body=star.system) }}"><b>'{{ star.name }}'.</b></a>
         {% else %}
-            <b>'{{ star.name }}'</b> is found in the <a href="{{ url_for('system', stellar_body=star.system) }}"><b>'{{ star.system }}'</b></a>System.
+            <b>'{{ star.name }}'</b> is found in the <a href="{{ url_for('system', stellar_body=star.system) }}"><b>'{{ star.system }}'</b></a> system.
         {% endif %}
     </p>
 </div>
@@ -59,4 +59,25 @@
         </tbody>
     </table>
 </div>
+<br>
+{% if star.planets %}
+<div class="table-star-planets">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <h3>🪐Planets🪐</h3>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in star.planets %}
+            <tr>
+                <td><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
 {% endblock %}
