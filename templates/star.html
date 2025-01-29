@@ -4,13 +4,11 @@
     Star
 {% endblock %}
 
-{% block main %}
-<div class="page-heading">
-    <h1>
-        ✨Star {{ star.name }}✨
-    </h1>
-</div>
+{% block pagehead %}
+    ✨Star {{ star.name }}✨
+{% endblock %}
 
+{% block main %}
 <div>
     <p>
         {% if star.name == star.system %}

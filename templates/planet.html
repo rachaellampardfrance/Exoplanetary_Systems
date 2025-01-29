@@ -4,13 +4,11 @@
     Planet
 {% endblock %}
 
-{% block main %}
-<div class="page-heading">
-    <h1>
-        ✨Planet {{ planet.name }}✨
-    </h1>
-</div>
+{% block pagehead %}
+    ✨Planet {{ planet.name }}✨
+{% endblock %}
 
+{% block main %}
 {% if planet.declassified == 'Yes' %}
 <p>
     <b>'{{ planet.name }}'</b> was thought to orbit the star <b>'{{ planet.hostname }}'</b>. However, it has since been declassified.
