@@ -4,13 +4,11 @@
     Error
 {% endblock %}
 
-{% block main %}
-<div class="page-heading">
-    <h1>
-        Error {{ error.code }}
-    </h1>
-</div>
+{% block pagehead %}
+    Error {{ error.code }}
+{% endblock %}
 
+{% block main %}
 <div>
     <p>Sorry, the page you were looking for could not be found.</p>
 </div>

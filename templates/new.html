@@ -4,16 +4,13 @@
     New Discoveries
 {% endblock %}
 
-{% block main %}
-<div class="page-heading">
-    <h1>
-        Discoveries
-    </h1>
-</div>
+{% block pagehead %}
+    Discoveries
+{% endblock %}
 
+{% block main %}
 {% if category in ['s', 'ps'] %}
 {% include "system_updates.html" %}
-<br>
 {% endif %}
 {% if category in ['p', 'ps'] %}
 {% include "new_planets.html" %}

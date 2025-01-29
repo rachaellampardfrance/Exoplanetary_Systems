@@ -4,13 +4,11 @@
     Error
 {% endblock %}
 
-{% block main %}
-<div class="page-heading">
-    <h1>
-        Error
-    </h1>
-</div>
+{% block pagehead %}
+    Error
+{% endblock %}
 
+{% block main %}
 <div>
     <p>Error code: {{ error.__class__.__name__ }} - 500</p>
     <p>Oops! Something went wrong on the server. Please try again later.</p>

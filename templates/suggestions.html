@@ -4,11 +4,12 @@
     Suggestions
 {% endblock %}
 
+{% block pagehead %}
+    Suggestions
+{% endblock %}
+
 {% block main %}
-<div class="page-heading">
-    <h1>
-        Suggestions
-    </h1>
+<div>
     {% if search %}
     <h2>Stellar bodies similar to: "{{ search }}"</h2>
     {% endif %}

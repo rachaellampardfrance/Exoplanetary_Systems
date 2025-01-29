@@ -60,6 +60,11 @@
             </header>
 
             <main>
+                <div class="page-heading">
+                    <h1>
+                        {% block pagehead %}{% endblock %}
+                    </h1>
+                </div>
                 {% block main %}{% endblock %}
             </main>
 

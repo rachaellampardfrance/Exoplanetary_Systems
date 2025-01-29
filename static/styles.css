@@ -35,6 +35,11 @@ header, main, footer {
   align-items: center;
   }
 
+.page-heading {
+  margin: 30px;
+  font-size: 1.3em;
+}
+
 .center-tables {
   display: flex;
   justify-content: center;
@@ -50,9 +55,14 @@ header, main, footer {
   text-align: center;
 }
 
-h2.padded-top-bottom {
-  padding-top: 30px;
-  padding-bottom: 20px;
+#statistics h2 {
+  margin-bottom: 35px;
+}
+#statistics > div:first-of-type > h2 {
+    margin-top: 40px;
+}
+#statistics > div:not(:first-of-type) > h2 {
+  margin-top: 80px;
 }
 
 #navbar {
@@ -87,8 +97,8 @@ h2.padded-top-bottom {
 /* .search-container {
 } */
 
-.padded, table, .page-heading, main, [class|="img"] {
-  padding: 20px;
+.padded, table, main, [class|="img"] {
+  margin: 20px;
 }
 
 a:link, a:visited {
