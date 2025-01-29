@@ -6,26 +6,16 @@ from helpers.planet import Planet
 class System():
     """Class returns object of system when initialised with valid stellar body"""
     DB = "database.db"
-    TABLES = ['planets', 'systems', 'stars']
+    TABLES = ['planetary_systems', 'stellar_hosts', 'stellar']
 
     def __init__(self, stellar_body):
-        self.name: str = stellar_body
+        self._name: str = None
         self._stars: list = []
         self._planets: list = []
 
+        self.name: str = stellar_body
         self._generate_stars()
         self._generate_planets()
-
-    # used for checking equality in a set
-    def __hash__(self):
-        return hash(self.name)
-    def __eq__(self, other):
-        if isinstance(other, System):
-            return self.name == other.name
-        return False
-    
-    def __repr__(self):
-        return f"System(name={self.name})"
 
 
 # Set system.name
@@ -99,7 +89,6 @@ class System():
     
     def _generate_stars(self):
         """Generate stars in system from self.name (system name)"""
-        stars = []
         with sqlite3.connect(System.DB) as conn:
             cursor = conn.cursor()
 
@@ -109,15 +98,12 @@ class System():
                 WHERE sy_name=?;
             """
             cursor.execute(query, (self.name,))
-            results = cursor.fetchall()
+            stars = cursor.fetchall()
             cursor.close()
 
-            for result in results:
-                stars.append(result[0])
-
-        for star in stars:
-            star_details = Star(star, system=self.name)
-            self._stars.append(star_details)
+            for star in stars:
+                star_details = Star(star[0], conn)
+                self._stars.append(star_details)
 # *****************************
 
 
@@ -129,8 +115,9 @@ class System():
     
     def _generate_planets(self):
         """Generate planets by stars from self.stars"""
-        planets = []
         with sqlite3.connect(System.DB) as conn:
+            planets = []
+
             for star in self.stars:
                 cursor = conn.cursor()
                 query = f"""
@@ -148,7 +135,7 @@ class System():
 
             # raise TypeError(f"planets = {planets}")
 
-        for planet in planets:
-            planet_details = Planet(planet, system=self.name)
-            self._planets.append(planet_details)
+            for planet in planets:
+                planet_details = Planet(planet, conn)
+                self._planets.append(planet_details)
 # *****************************

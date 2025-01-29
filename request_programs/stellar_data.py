@@ -1,13 +1,13 @@
 """gets stellar data from the NASA exoplanet archive
 and updates the corrosponding dataframe.
 
-'s' shorthand refers to stars"""
+'s' shorthand refers to stellar"""
 
 import pandas as pd
 
 from database_helpers import (
-    upsert_stars_data,
-    update_stars_spectypes,
+    upsert_stellar_data,
+    update_stellar_spectypes,
     print_table_updated_count
 )
 from helpers import (
@@ -26,13 +26,13 @@ def main():
 
     update_stellar_schema(service_url)
 
-    update_stars_table(service_url)
+    update_stellar_table(service_url)
 
     update_sh_table_spectype(service_url)
 
     # print max last updated value from stellar table
-    print_last_updated("stars")
-    print_table_updated_count("stars")
+    print_last_updated("stellar")
+    print_table_updated_count("stellar")
 
     print("Stellar Data requests and updates complete")
 # *******
@@ -75,7 +75,7 @@ def save_schema(schema: pd.DataFrame) -> None:
 
 
 # *******
-def update_stars_table(service_url: str) -> None:
+def update_stellar_table(service_url: str) -> None:
     """request stellarhosts table and upsert relevant data
     to stellarhosts table in local database
     """
@@ -85,7 +85,7 @@ def update_stars_table(service_url: str) -> None:
     df = clean_gathered_data(df)
 
     # append new data to stellar_hosts table in database and update existing if changes
-    upsert_stars_data(df)
+    upsert_stellar_data(df)
 
 
 def get_stellar_data(service_url: str) -> pd.DataFrame:
@@ -127,7 +127,7 @@ def update_sh_table_spectype(service_url: str) -> None:
 
     df = clean_spectypes_df(df)
 
-    update_stars_spectypes(df)
+    update_stellar_spectypes(df)
 
 
 def get_spectypes(service_url: str) -> pd.DataFrame:

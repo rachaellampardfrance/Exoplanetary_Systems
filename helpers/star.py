@@ -3,8 +3,6 @@ import re
 import sqlite3
 
 class Star():
-    DB = "database.db"
-    TABLES = ['planets', 'systems', 'stars']
     SPECTRAL_CLASSES = {
         'O': ['Blue', '> 30,000'],
         'B': ['Blue-white', '9,700 - 30,000'],
@@ -43,31 +41,21 @@ class Star():
     }
     DEFAULT = "Unknown"
 
-    def __init__(self, name:str, system:str =None):
+    def __init__(self, name, conn: sqlite3.Cursor):
         self.name = name
-
-        self._system = ""
-        self._full_class_id = "" # "G2 III"
+        self.full_class_id = conn
+        # self._name = ""
+        # self._full_class_id = "" # "G2 III"
         self._class_id = "" # "G"
         self._st_class = "" # "Yellow"
         self._heat = "" # "4,900 - 5,700"
         self._sub_class = "" # "Average G type star"
         self._lumin = "" # "Giant"
 
-        self._get_full_class_id()
-        self._get_details(system)
-
-    # used for checking equality in a set
-    def __hash__(self):
-        return hash(self.name)
-    def __eq__(self, other):
-        if isinstance(other, Star):
-            return self.name == other.name
-        return False
+        # self.name = name
+        # self.full_class_id = cursor
+        self._get_details()
     
-    def __repr__(self):
-        return f"Star(name={self.name})"
-
     @property
     def name(self) -> str:
         return self._name
@@ -76,11 +64,29 @@ class Star():
         self._name = name
 
     @property
-    def system(self) -> str:
-        return self._system
-    @property
     def full_class_id(self) -> str:
         return self._full_class_id
+    @full_class_id.setter
+    def full_class_id(self, conn: sqlite3.Connection):
+        """find star spectral type from database using star name
+        (hostname) and using passed in database connection"""
+        cursor = conn.cursor()
+        query = f"""
+            SELECT st_spectype
+            FROM stellar
+            WHERE hostname=?;
+        """
+        cursor.execute(query, (self.name,))
+        full_class = cursor.fetchone()
+
+        if full_class[0]:
+            self._full_class_id = full_class[0]
+        else:
+            self._full_class_id = Star.DEFAULT
+
+        cursor.close()
+
+
     @property
     def class_id(self) -> str:
         return self._class_id
@@ -97,29 +103,11 @@ class Star():
     def lumin(self) -> str:
         return self._lumin
 
-    def _get_full_class_id(self):
-        """find star spectral type from database using star name
-        (hostname) and using passed in database connection"""
-        with sqlite3.connect(Star.DB) as conn:
-            cursor = conn.cursor()
-            query = f"""
-                SELECT st_spectype
-                FROM stars
-                WHERE hostname=?;
-            """
-            cursor.execute(query, (self.name,))
-            full_class = cursor.fetchone()
 
-            if full_class[0]:
-                self._full_class_id = full_class[0]
-            else:
-                self._full_class_id = Star.DEFAULT
-
-            cursor.close()
-
-    def _get_details(self, system:str =None) -> None:
+    def _get_details(self):
         """set star all instance variables"""
-        self._set_system(system)
+        # self._set_full_class_id(cursor)
+        # if self.full_class_id is None:
 
         if self.full_class_id == Star.DEFAULT:
             return
@@ -130,26 +118,7 @@ class Star():
         self._set_sub_class()
         self._set_lumin()
 
-    def _set_system(self, system:str =None) -> None:
-        if not system == None:
-            self._system = system
-        else:
-            self._set_system_from_star()
-
-    def _set_system_from_star(self):
-        """try search table for system name using hostname"""
-        with sqlite3.connect(Star.DB) as conn:
-            cursor = conn.cursor()
-            query = f"""
-                SELECT sy_name
-                FROM {Star.TABLES[2]}
-                WHERE LOWER(hostname)=?;
-            """
-            cursor.execute(query, (self.name.lower(),))
-
-            self._system = cursor.fetchone()[0]
-
-    def _set_class_id(self) -> None:
+    def _set_class_id(self):
         """Return char of class identifier if present"""
         spec_pattern = r"[OBAFGKMLTY]"
         spectral_type = re.search(spec_pattern, self.full_class_id)
@@ -158,21 +127,21 @@ class Star():
         else:
             self._class_id = Star.DEFAULT
 
-    def _set_st_class(self) -> None:
+    def _set_st_class(self):
         """sets st_class by class_id if exists"""
         if self.class_id == Star.DEFAULT:
             self._st_class = Star.DEFAULT
             return
         self._st_class = Star.SPECTRAL_CLASSES[self.class_id][0]
 
-    def _set_heat(self) -> None:
+    def _set_heat(self):
         """sets st_heat by class_id if exists"""
         if self.class_id == Star.DEFAULT:
             self._heat = Star.DEFAULT
             return
         self._heat = Star.SPECTRAL_CLASSES[self.class_id][1]
 
-    def _set_sub_class(self) -> None:
+    def _set_sub_class(self):
         sub_class = re.search(r"[0-9]", self.full_class_id)
 
         if sub_class:
@@ -181,7 +150,7 @@ class Star():
         else:
             self._sub_class = Star.DEFAULT
 
-    def _set_lumin(self) -> None:
+    def _set_lumin(self):
         lumin = re.search(r"IA-O|IAB|IA|IB|III|II|IV|VII|VI|V", self.full_class_id)
         if lumin:
             # return the first match item

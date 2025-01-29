@@ -1,16 +1,17 @@
-<div class="table-newplanets">
+<div class="table-newplanets center padded">
     <table>
         <thead>
             <tr>
-                <th colspan="6"><h2>✨NEW PLANETS✨</h2></th>
+                <th colspan="7"><h2>NEW PLANETS</h2></th>
             </tr>
         </thead>
         <thead>
             <tr>
                 <th></th>
                 <th>Planet Name</th>
-                <th>Host</th>
-                <th>System</th>
+                <th>Host Name</th>
+                <th>System Star Count</th>
+                <th>System Planet Count</th>
                 <th>Circumbinary?</th>
                 <th>Public Discovery Date</th>
             </tr>
@@ -18,10 +19,11 @@
         <tbody>
             {% for planet in new_planets %}
             <tr>
-                <td class="nowrap">✨🪐✨</td>
-                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
+                <td class="nowrap">{{ planet.planet_icos }}</td>
+                <td><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.pl_name }}</a></td>
+                <td><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td>{{ planet.sy_snum }}</td>
+                <td>{{ planet.sy_pnum }}</td>
                 <td>{{ planet.cb_flag }}</td>
                 <td>{{ planet.disc_pubdate }}</td>
             </tr>
