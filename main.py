@@ -151,7 +151,7 @@ def planet(planet_name=None):
     return render_template("planet.html", planet=planet)
 
 
-@app.route("/planet/")
+@app.route("/star/")
 @app.route("/star/<star_name>")
 def star(star_name):
     if not star_name:

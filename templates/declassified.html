@@ -21,7 +21,8 @@
             <tr>
                 <th></th>
                 <th>Planet Name</th>
-                <th>Host Name</th>
+                <th>☀️Host Star☀️</th>
+                <th>🌌System🌌</th>
                 <th>Public Discovery Date</th>
             </tr>
         </thead>
@@ -29,8 +30,9 @@
             {% for planet in planets %}
             <tr>
                 <td class="nowrap">🌑</td>
-                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.pl_name) }}">{{ planet.pl_name }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                <td class="nowrap"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
                 <td>{{ planet.disc_pubdate }}</td>
             </tr>
             {% endfor %}
