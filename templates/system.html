@@ -9,7 +9,7 @@
     System
 </h1>
 
-<div class="table-system center">
+<div class="table-system">
     <table>
         <thead>
             <tr>
@@ -46,11 +46,13 @@
             <tr>
                 <td class="catagory">Name</td>
                 {% for star in system.stars %}
-                <td>{{ star.name }}</td>
+                <td class="nowrap"><a href="{{ url_for('star', star_name=star.name) }}">{{ star.name }}</a></td>
                 {% endfor %}
                 <td class="catagory">Name</td>
                 {% for planet in system.planets %}
-                <td>{{ planet.name }}</td>
+                {% if planet.declassified != 'Yes' %}
+                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                {% endif %}
                 {% endfor %}
             </tr>
             <tr>
@@ -60,7 +62,9 @@
                 {% endfor %}
                 <td class="catagory">Host Star</td>
                 {% for planet in system.planets %}
+                {% if planet.declassified != 'Yes' %}
                 <td>{{ planet.hostname }}</td>
+                {% endif %}
                 {% endfor %}
             </tr>
             <tr>
@@ -74,7 +78,9 @@
                 {% endfor %}
                 <td class="catagory">Circumbinary</td>
                 {% for planet in system.planets %}
+                {% if planet.declassified != 'Yes' %}
                 <td>{{ planet.cb_flag }}</td>
+                {% endif %}
                 {% endfor %}
             </tr>
             <tr>
@@ -88,7 +94,9 @@
                 {% endfor %}
                 <td class="catagory">Discovery Year<br>(Published)</td>
                 {% for planet in system.planets %}
+                {% if planet.declassified != 'Yes' %}
                 <td>{{ planet.disc_pubdate }}</td>
+                {% endif %}
                 {% endfor %}
             </tr>
             <tr>
@@ -102,7 +110,10 @@
                 {% endfor %}
                 <td class="catagory"></td>
                 {% for planet in system.planets %}
-                <td></td>
+                {% if planet.declassified != 'Yes' %}
+                <td>
+                </td>
+                {% endif %}
                 {% endfor %}     
             </tr>
         </tbody>
