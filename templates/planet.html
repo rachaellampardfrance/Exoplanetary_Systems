@@ -34,14 +34,14 @@
 </p>
 {% endif %}
 
-<div class="table-planet">
-    <table>
+<div id="table-container-planet">
+    <table class="data-table">
         <thead>
             <tr>
                 {% if planet.declassified == 'Yes' %}
-                <th colspan="12"><h2>⛔❗Declassified❗ 🪐{{ planet.name }}🪐 ❗Declassified❗⛔</h2></th>
+                <th colspan="12">⛔❗Declassified❗ 🪐{{ planet.name }}🪐 ❗Declassified❗⛔</th>
                 {% else %}
-                <th colspan="12"><h2>🪐{{ planet.name }}🪐</h2></th>
+                <th colspan="12">🪐{{ planet.name }}🪐</th>
                 {% endif %}
             </tr>
         </thead>

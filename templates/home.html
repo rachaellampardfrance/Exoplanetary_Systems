@@ -9,22 +9,22 @@
 {% endblock %}
 
 {% block main %}
-<div class="center">
-    <table>
+<div id="table-container-home">
+    <table class="data-table">
         <thead>
             <tr>
-                <th colspan="2"><h2>🛰️ CONFIRMED DISCOVERIES 🛰️</h2></th>
+                <th colspan="2">🛰️ CONFIRMED DISCOVERIES 🛰️</th>
             </tr>
         </thead>
         <thead>
             <tr>
-                <th><h2>🌌 Planetary Systems 🌌</h2></th>
-                <th><h2>🌍🪐 Planets 🪐🌏</h2></th>
+                <th>🌌 Planetary Systems 🌌</th>
+                <th>🌍🪐 Planets 🪐🌏</th>
             </tr>
         </thead>
         <tr>
-            <td><h1>✨ {{ exo_systems }} ✨</h1></td>
-            <td><h1>✨ {{ planets }} ✨</h1></td>
+            <td>✨ {{ exo_systems }} ✨</td>
+            <td>✨ {{ planets }} ✨</td>
         </tr>
     </table>
 </div>

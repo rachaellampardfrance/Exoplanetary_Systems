@@ -1,8 +1,8 @@
-<div class="table-newplanets">
-    <table>
+<div id="table-container-newplanets">
+    <table class="data-table">
         <thead>
             <tr>
-                <th colspan="6"><h2>✨NEW PLANETS✨</h2></th>
+                <th colspan="6">✨NEW PLANETS✨</th>
             </tr>
         </thead>
         <thead>
@@ -18,10 +18,10 @@
         <tbody>
             {% for planet in new_planets %}
             <tr>
-                <td class="nowrap">✨🪐✨</td>
-                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
+                <td>✨🪐✨</td>
+                <td><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                <td><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
                 <td>{{ planet.cb_flag }}</td>
                 <td>{{ planet.disc_pubdate }}</td>
             </tr>

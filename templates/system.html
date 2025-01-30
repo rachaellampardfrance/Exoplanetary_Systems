@@ -9,30 +9,30 @@
 {% endblock %}
 
 {% block main %}
-<div class="table-system">
-    <table>
+<div id="table-container-system">
+    <table class="data-table">
         <thead>
             <tr>
                 <th colspan="{{ size + 2 }}">
-                    <h2>
-                        🌌{{ system.name }}🌌<br>
-                        {% for star in system.stars %}
-                            ☀️
-                        {% endfor %}
-                        {{ '🪐' * system.num_planets }}
-                    </h2>
+                    🌌{{ system.name }}🌌<br>
+                    {% for star in system.stars %}
+                        ☀️
+                    {% endfor %}
+                    {{ '🪐' * system.num_planets }}
                 </th>
             </tr>
         </thead>
         <thead>
             <tr>
-                <th colspan="{{ system.stars|length + 1 }}"><h3>Stars</h3></th>
-                <th colspan="{{ system.num_planets + 1 }}"><h3>Planets</h3></th>
+                <th></th>
+                <th colspan="{{ system.stars|length }}">☀️Stars☀️</th>
+                <th></th>
+                <th colspan="{{ system.num_planets }}">🪐Planets🪐</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="catagory"></td>
+                <td></td>
                 {% for star in system.stars %}
                 <td>☀️</td>
                 {% endfor %}
@@ -44,13 +44,13 @@
             <tr>
                 <td class="catagory">Name</td>
                 {% for star in system.stars %}
-                <td class="nowrap"><a href="{{ url_for('star', star_name=star.name) }}">{{ star.name }}</a></td>
+                <td><a href="{{ url_for('star', star_name=star.name) }}">{{ star.name }}</a></td>
                 {% endfor %}
                 <td class="catagory">Name</td>
                 {% for star in system.stars %}
                     {% for planet in star.planets %}
                         {% if planet.declassified != 'Yes' %}
-                            <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                            <td><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
                         {% endif %}
                     {% endfor%}
                 {% endfor %}
