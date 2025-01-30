@@ -19,11 +19,11 @@
     </p>
 </div>
 
-<div class="table-star">
-    <table>
+<div id="table-container-star">
+    <table class="data-table">
         <thead>
             <tr>
-                <th colspan="6"><h2>☀️{{ star.name }}☀️</h2></th>
+                <th colspan="6">☀️{{ star.name }}☀️</th>
             </tr>
         </thead>
         <thead>
@@ -32,7 +32,6 @@
                 <th>Spectral Class</th>
                 <th>Class heat<br>(0-9)</th>
                 <th>Luminosity Class</th>
-
             </tr>
         </thead>
         <tbody>
@@ -59,19 +58,21 @@
 </div>
 <br>
 {% if star.planets %}
-<div class="table-star-planets">
-    <table>
+<div id="table-container-star-planets">
+    <table class="data-table">
         <thead>
             <tr>
                 <th>
-                    <h3>🪐Planets🪐</h3>
+                    🪐Planets🪐
                 </th>
             </tr>
         </thead>
         <tbody>
             {% for planet in star.planets %}
             <tr>
-                <td><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                <td>
+                    <a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

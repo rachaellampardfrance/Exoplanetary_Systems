@@ -22,8 +22,8 @@
             occur in relation to singular star and binary star systems.<br>
         </p>
         <p>
-            The same data is shown in two formats: scale and log. 'Scale' helps visualise<br>
-            the actual occurrence of planetary systems whereas 'log' is intended to help visualise small frequencies.
+            The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence<br>
+            of planetary systems whereas 'log' is intended to help visualise small frequencies.
         </p>
     </div>
     <div>
@@ -31,20 +31,30 @@
         <p>A collection of pie charts which are independent of one another</p>
         <img class="img" id="fig-pies" src="{{ url_for('static', filename='most_common_planetary_systems.png') }}" alt="Most Common Planetary Systems Pie Charts">
         <p>(percentile of how many planets occur (for each system type by increasing star count))</p>
-        <div>
-            <p>
-                <b>Pie charts -</b> Each pie chart represents the most common count of planets<br>
-                of occurring planetary systems in relation to it's systems star count.<br>
-            </p>
-            <p>
-                <b>Legend -</b> The legend visualises the planet count by color and applies to all pie charts.<br>
-            </p>
-            <p>
-                <b>NOTE:</b> pie charts do not include any planetary system planet count that would occur<br>
-                less than 1% (this is to prevent small data crowding the data: as this is a visual generalisation).<br>
-                Additionally note that data that falls in less than the 1% is completely left out of the data. So percentages may not add up to 100%.
-            </p>
-        </div>
+        <table id="fig2-description">
+            <tr>
+                <td>
+                    Pie charts -
+                </td>
+                <td>
+                    Each pie chart represents the most common count of planets of occurring<br>
+                    planetary systems in relation to it's systems star count.
+                </td>
+            </tr>
+            <tr>
+                <td>                        
+                    Legend -
+                </td>
+                <td>                        
+                    The legend visualises the planet count by color and applies to all pie charts.
+                </td>
+            </tr>
+        </table>
+        <p>
+            <b>NOTE:</b> pie charts do not include any planetary system planet count that would occur less than 1% (this is to<br>
+            prevent small data crowding the data: as this is a visual generalisation). Additionally note that data that<br>
+            falls in less than the 1% is completely left out of the data. So percentages may not add up to 100%.
+        </p>
     </div>
     <div>
         <h2>Occurrence of Planetary Systems by Star Count</h2>
