@@ -13,30 +13,43 @@
     <div>
         <h2>Planetary System Type by Star Count</h2>
         <img class="img" id="fig-bars" src="{{ url_for('static', filename='planetary_systems_by_star_count.png') }}" alt="Planetary Systems by Star Count Nested Bar Charts">
-        <div>
-            <p>(represents all observations of planetary systems, nested by how many planets occur in each system and organised by how many stars are in the system.)</p>
-            <p><br></p>
-            <p>Intended to show the frequency in which planets/multi-planetary systems occur in relation to singular star and binary star systems.</p>
-            <p>The same data is shown in two formats: scale and log. 'Scale' helps visualise the actual occurrence of planetary systems whereas 'log' is intended to help visualise small frequencies.</p>
-        </div>
+        <p>
+            (represents all observations of planetary systems, nested by how many planets occur in each<br>
+            system and organised by how many stars are in the system.)
+        </p>
+        <p>
+            Intended to show the frequency in which planets/multi-planetary systems<br>
+            occur in relation to singular star and binary star systems.<br>
+        </p>
+        <p>
+            The same data is shown in two formats: scale and log. 'Scale' helps visualise<br>
+            the actual occurrence of planetary systems whereas 'log' is intended to help visualise small frequencies.
+        </p>
     </div>
     <div>
         <h2>Most Common Planetary System Type by Star Count</h2>
         <p>A collection of pie charts which are independent of one another</p>
         <img class="img" id="fig-pies" src="{{ url_for('static', filename='most_common_planetary_systems.png') }}" alt="Most Common Planetary Systems Pie Charts">
         <p>(percentile of how many planets occur (for each system type by increasing star count))</p>
-        <p><br></p>
-        <p><b>Pie charts -</b> Each pie chart represents the most common count of planets of occurring planetary systems in relation to it's systems star count</p>
-        <p><b>Legend -</b> The legend visualises the planet count by color and applies to all pie charts</p>
-        <p><br></p>
-        <p><b>NOTE:</b> pie charts do not include any planetary system planet count that would occur less than 1% (this is to prevent small data crowding the data: as this is a visual generalisation)</p>
-        <p>Additionally note that data that falls in less than the 1% is completely left out of the data. So percentages may not add up to 100%</p>
+        <div>
+            <p>
+                <b>Pie charts -</b> Each pie chart represents the most common count of planets<br>
+                of occurring planetary systems in relation to it's systems star count.<br>
+            </p>
+            <p>
+                <b>Legend -</b> The legend visualises the planet count by color and applies to all pie charts.<br>
+            </p>
+            <p>
+                <b>NOTE:</b> pie charts do not include any planetary system planet count that would occur<br>
+                less than 1% (this is to prevent small data crowding the data: as this is a visual generalisation).<br>
+                Additionally note that data that falls in less than the 1% is completely left out of the data. So percentages may not add up to 100%.
+            </p>
+        </div>
     </div>
     <div>
         <h2>Occurrence of Planetary Systems by Star Count</h2>
         <img class="img" id="fig-pie" src="{{ url_for('static', filename='occurrence_of_planetary_systems_by_star_system_type.png') }}" alt="Occurrence of Planetary Systems by Star System Type Pie Chart">
         <P>(percentile of where planetary systems occur in relation to count of stars present in the system)</P>
-        <p><br></p>
     </div>
 </div>
 {% endblock %}
