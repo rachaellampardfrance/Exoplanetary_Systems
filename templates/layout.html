@@ -50,7 +50,7 @@
                     <ul>
                         <li class="nav-item search-container">
                             <form action="{{ url_for('system') }}" method="get">
-                                <div>System search</div>
+                                <div id="search-head">🌌System search</div>
                                 <input type="text" placeholder="planet/star/system..." name="search" maxlength="30">
                                 <button class='search-icon' type="submit"><img src="{{ url_for('static', filename='icons/search_icon.png') }}" alt="search icon" width="12"/></button>
                             </form>

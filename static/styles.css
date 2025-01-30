@@ -83,19 +83,24 @@ header, main, footer {
 }
 .navbar-logo {
   font-size: 2em;
-  /* text-wrap: nowrap; */
+  text-wrap: nowrap;
 }
 .navbar-logo:hover, a:link, a:visited {
   text-decoration: none;
 }
 .nav-item {
   display: inline-block;
+  padding-bottom: 10px;
 }
 .nav-item, .nav-link {
-  padding-right: 10px;
+  padding-right: 8px;
 }
-/* .search-container {
-} */
+.nav-link {
+  white-space: nowrap;
+}
+#search-head {
+  text-align: left;
+}
 
 .padded, table, main, [class|="img"] {
   margin: 20px;
