@@ -46,12 +46,14 @@ header, main, footer {
   align-items: flex-start;
 }
 
-.txt-default, p {
+p {
   font-family: Lucida Console, Monospace;
+  line-height: 16pt;
   font-size: 1em;
+  margin-bottom: 26pt;
   }
 
-.txt-center, h1, p, h2, table, h3, div {
+h1, p, h2, table, h3, div {
   text-align: center;
 }
 
