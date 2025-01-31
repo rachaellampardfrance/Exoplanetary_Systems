@@ -70,7 +70,6 @@
     margin-bottom: 26pt;
 }
 .text-table td:first-of-type {
-    text-wrap: nowrap;
     text-align: right;
     font-weight: bold;
 }
@@ -141,9 +140,20 @@
 
 /* Specific ID styles */
 /* ********************** */
+/* Images */
+/* ********************** */
 #img-error {
     width: 40%
   }
+
+#fig-pie {
+    width: 25%;
+}
+
+#fig-bars, #fig-pies {
+    width: 60%;
+}
+/* ********************** */
 /* ********************** */
 
 

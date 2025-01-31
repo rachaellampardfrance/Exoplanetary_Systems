@@ -63,13 +63,26 @@ table {
         justify-content: left;
     }
 
-    #img-error {
-        width: 100%;
+    .img {
+        width: 90% !important;
     }
 
     .data-table th, .data-table td, .suggestion-table th, .suggestion-table td {
         padding: 5px;
         font-size: 0.7em;
+    }
+
+    .padded, table, main, [class|="img"] {
+        margin: 15px;
+    }
+
+    footer p {
+        font-size: 0.8em;
+        text-wrap: wrap !important;
+    }
+
+    #navbar {
+        font-size: 0.9em;
     }
 }
 
@@ -80,14 +93,28 @@ table {
         justify-content: left;
     }
 
-    #img-error {
-        width: 100%;
+    .img {
+        width: 90% !important;
     }
 
     .data-table th, .data-table td, .suggestion-table th, .suggestion-table td {
         padding: 5px;
         font-size: 0.5em;
     }
+
+    .padded, table, main, [class|="img"] {
+        margin: 10px;
+    }
+
+    footer p {
+        font-size: 0.7em;
+        text-wrap: wrap !important;
+    }
+
+    #navbar {
+        font-size: 0.7em;
+    }
+        
 }
 /* ********************** */
 

@@ -27,6 +27,8 @@ header, main, footer {
 }
 
 p {
+    font-size: 1em;
+
     line-height: 16pt;
     margin-bottom: 26pt;
     /* margin-bottom: 1rem; */
