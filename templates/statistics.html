@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block main %}
-<div class="txt-block-content">
+<div>
     <div>
         <h2>Planetary System Type by Star Count</h2>
         <img class="img" id="fig-bars" src="{{ url_for('static', filename='planetary_systems_by_star_count.png') }}" alt="Planetary Systems by Star Count Nested Bar Charts">
@@ -27,25 +27,25 @@
         </p>
     </div>
     <div>
-        <h2>Most Common Planetary System Type by Star Count</h2>
+        <h2 class="xlarge-spacing">Most Common Planetary System Type by Star Count</h2>
         <p>A collection of pie charts which are independent of one another</p>
         <img class="img" id="fig-pies" src="{{ url_for('static', filename='most_common_planetary_systems.png') }}" alt="Most Common Planetary Systems Pie Charts">
         <p>(percentile of how many planets occur (for each system type by increasing star count))</p>
         <table class="text-table" id="statstics-text-table">
-            <tr>
-                <td>
+            <tr class="align-top">
+                <td class="text-table-head">
                     Pie charts -
                 </td>
-                <td>
+                <td class="text-table-txt">
                     Each pie chart represents the most common count of planets of occurring<br>
                     planetary systems in relation to it's systems star count.
                 </td>
             </tr>
-            <tr>
-                <td>                        
+            <tr class="align-top">
+                <td class="text-table-head">                        
                     Legend -
                 </td>
-                <td>                        
+                <td class="text-table-txt">                        
                     The legend visualises the planet count by color and applies to all pie charts.
                 </td>
             </tr>
@@ -57,7 +57,7 @@
         </p>
     </div>
     <div>
-        <h2>Occurrence of Planetary Systems by Star Count</h2>
+        <h2 class="xlarge-spacing">Occurrence of Planetary Systems by Star Count</h2>
         <img class="img" id="fig-pie" src="{{ url_for('static', filename='occurrence_of_planetary_systems_by_star_system_type.png') }}" alt="Occurrence of Planetary Systems by Star System Type Pie Chart">
         <P>(percentile of where planetary systems occur in relation to count of stars present in the system)</P>
     </div>

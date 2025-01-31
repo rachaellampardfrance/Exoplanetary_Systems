@@ -23,31 +23,31 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th colspan="6">☀️{{ star.name }}☀️</th>
+                <th class="table-header" colspan="6">☀️{{ star.name }}☀️</th>
             </tr>
         </thead>
         <thead>
             <tr>
-                <th>Star Type</th>
-                <th>Spectral Class</th>
-                <th>Class heat<br>(0-9)</th>
-                <th>Luminosity Class</th>
+                <th class="column-header-s">Star Type</th>
+                <th class="column-header-s">Spectral Class</th>
+                <th class="column-header-s">Class heat<br>(0-9)</th>
+                <th class="column-header-s">Luminosity Class</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ star.full_class_id }}</td>
-                <td>
+                <td class="table-data">{{ star.full_class_id }}</td>
+                <td class="table-data">
                     {% if star.st_class %}
                         {{ star.st_class}}<br>({{ star.heat }} Kelvin)
                     {% endif %}
                 </td>
-                <td>
+                <td class="table-data">
                     {% if star.sub_class %}
                         {{ star.sub_class }}
                     {% endif %}
                 </td>
-                <td>
+                <td class="table-data">
                     {% if star.lumin %}
                         {{ star.lumin }}
                     {% endif %}
@@ -62,7 +62,7 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th>
+                <th class="column-header">
                     🪐Planets🪐
                 </th>
             </tr>
@@ -70,7 +70,7 @@
         <tbody>
             {% for planet in star.planets %}
             <tr>
-                <td>
+                <td class="table-data">
                     <a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a>
                 </td>
             </tr>

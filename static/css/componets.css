@@ -1,7 +1,6 @@
 /* Styles for specific and reusable elements */
 @import url('variables.css');
 
-
 /* Nav bar styles */
 /* ********************** */
 /* Nav bar */
@@ -13,11 +12,11 @@
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 15px;
+    padding: var(--small-spacing);
     position: relative;
 }
 .navbar-logo {
-    font-size: 2em;
+    font-size: var(--font-size-xxlarge);
     text-wrap: nowrap;
 }
 .navbar-logo:hover, a:link, a:visited {
@@ -25,10 +24,10 @@
 }
 .nav-item {
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: var(--small-spacing);
 }
 .nav-item, .nav-link {
-    padding-right: 8px;
+    padding-right: var(--xsmall-spacing);
 }
 .nav-link {
     white-space: nowrap;
@@ -53,9 +52,10 @@
     transform: translateX(-50%);
 }
 .dropdown-item {
+    font-size: var(--font-size-small);
     white-space: nowrap;
     text-align: center;
-    padding: 2px;
+    padding: 0.2em;
 }
 /* ********************** */
 
@@ -65,75 +65,59 @@
 /* text tables */
 .text-table td {
     font-family: var(--text-font);
-    padding: 5px;
-    line-height: 16pt;
-    margin-bottom: 26pt;
+    padding: var(--xsmall-spacing);
 }
-.text-table td:first-of-type {
+.text-table-head {
     text-align: right;
     font-weight: bold;
 }
-.text-table td:not(:first-of-type) {
-    text-align: left;
-}
-/* *** */
-#statstics-text-table td {
-    vertical-align: top;
-}
-/* *** */
-#about-DOI-table td {
-    vertical-align: bottom;
-}
-
-/* planet table */
-#table-container-planet thead:not(:first-of-type) {
-    font-size: 1em;
+.text-table-txt {
+    text-align: left; 
 }
 
 
 /* suggestion table */
-#suggestion-tables td {
-    vertical-align: top;
-}
 .suggestion-table {
-    margin: 10px;
+    margin: var(--small-spacing);
 }
-
 
 /* various tables */
 .data-table, .suggestion-table {
     white-space: nowrap;
 }
-.data-table td, .data-table th, .suggestion-table td, .suggestion-table th {
-    background-color: #191d28;
-    border: 4px solid rgb(14, 15, 28);
+.data-table th, .data-table td, .suggestion-table td, .suggestion-table th {
+    border: 4px solid var(--data-table-border-colour);
 }
-.data-table td, .suggestion-table td {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
+.table-header {
+    font-size: var(--font-size-xlarge);
+    padding-top: var(--base-spacing);
+    padding-bottom: var(--base-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
 }
-.data-table th, .suggestion-table th {
+.column-header {
+    font-size: var(--font-size-large);
     vertical-align: top;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
 }
-.data-table thead:first-of-type {
-    font-size: 1.5em;
+.column-header-s {
+    font-size: var(--font-size-base);
+    vertical-align: top;
 }
-.data-table thead:not(:first-of-type), .suggestion-table th {
-    font-size: 1.2em;
+[class|="table-data"], [class|="column-header"] {
+    padding-top: var(--xsmall-spacing);
+    padding-bottom: var(--xsmall-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
+
 }
-.data-table td.catagory {
+[class|="table-data"] {
+    font-size: var(--font-size-small);
+}
+.table-data-catagory {
     font-weight: bold;
-    background-color: #1c202a;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
+    background-color: var(--data-table-cat-bg-colour);
+    padding-top: var(--small-spacing);
+    padding-bottom: var(--small-spacing);
 }
 /* ********************** */
 

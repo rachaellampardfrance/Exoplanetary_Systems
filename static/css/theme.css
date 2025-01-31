@@ -1,7 +1,6 @@
 @import url('variables.css');
 
 /* Elements */
-/* ********************** */
 body {
     background-color: var(--background-colour);
     font-family: var(--heading-font);
@@ -11,19 +10,18 @@ body {
 #navbar, .search-icon, footer, .dropdown-content {
     background-color: var(--secondary-colour);
 }
-/* ********************** */
 
+.data-table, .suggestion-table {
+    background-color: var(--table-background-colour);
+}
 
 /* Text */
-/* ********************** */
 p {
     font-family: var(--text-font);
 }
-/* ********************** */
 
 
 /* Links */
-/* ********************** */
 a:link, a:visited {
     color: var(--text-colour);
 }
@@ -31,10 +29,3 @@ a:link, a:visited {
 a:hover, a:active {
     text-decoration: underline;
 }
-/* ********************** */
-
-
-/* ... */
-/* ********************** */
-
-/* ********************** */
