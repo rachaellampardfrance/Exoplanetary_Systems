@@ -18,19 +18,19 @@
 <div id="table-container-suggestions">
     {% if suggestions.planets or suggestions.stars or suggestions.systems %}
     <table id="suggestion-tables">
-        <tr>
+        <tr class="align-top">
             {% if suggestions.planets %}
             <td>
-                <table class="suggestion-table" id="sug-planets">
+                <table class="suggestion-table" id="sug-table-planets">
                     <thead>
                         <tr>
-                            <th>🪐 Planets 🪐</th>
+                            <th class="column-header">🪐 Planets 🪐</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for planet in suggestions.planets %}
                         <tr>
-                            <td><a href="{{ url_for('system', stellar_body=planet) }}">{{ planet }}</a></td>
+                            <td class="table-data"><a href="{{ url_for('system', stellar_body=planet) }}">{{ planet }}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -39,16 +39,16 @@
             {% endif %}
             {% if suggestions.stars %}
             <td>
-                <table class="suggestion-table" id="sug-stars">
+                <table class="suggestion-table" id="sug-table-stars">
                     <thead>
                         <tr>
-                            <th>☀️ Stars ☀️</th>
+                            <th class="column-header">☀️ Stars ☀️</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for star in suggestions.stars %}
                         <tr>
-                            <td><a href="{{ url_for('system', stellar_body=star) }}">{{ star }}</a></td>
+                            <td class="table-data"><a href="{{ url_for('system', stellar_body=star) }}">{{ star }}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -57,16 +57,16 @@
             {% endif %}
             {% if suggestions.systems %}
             <td>
-                <table class="suggestion-table" id="sug-systems">
+                <table class="suggestion-table" id="sug-table-systems">
                     <thead>
                         <tr>
-                            <th>🌌 Systems 🌌</th>
+                            <th class="column-header">🌌 Systems 🌌</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for system in suggestions.systems %}
                         <tr>
-                            <td><a href="{{ url_for('system', stellar_body=system) }}">{{ system }}</a></td>
+                            <td class="table-data"><a href="{{ url_for('system', stellar_body=system) }}">{{ system }}</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

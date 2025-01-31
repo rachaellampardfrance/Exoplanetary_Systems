@@ -67,71 +67,57 @@
     font-family: var(--text-font);
     padding: var(--xsmall-spacing);
 }
-.text-table td:first-of-type {
+.text-table-head {
     text-align: right;
     font-weight: bold;
 }
-.text-table td:not(:first-of-type) {
-    text-align: left;
-}
-/* *** */
-#statstics-text-table td {
-    vertical-align: top;
-}
-/* *** */
-#about-DOI-table td {
-    vertical-align: bottom;
-}
-
-/* planet table */
-#table-container-planet thead:not(:first-of-type) {
-    font-size: var(--font-size-base);
+.text-table-txt {
+    text-align: left; 
 }
 
 
 /* suggestion table */
-#suggestion-tables td {
-    vertical-align: top;
-}
 .suggestion-table {
     margin: var(--small-spacing);
 }
-
 
 /* various tables */
 .data-table, .suggestion-table {
     white-space: nowrap;
 }
-.data-table td, .data-table th, .suggestion-table td, .suggestion-table th {
+.data-table th, .data-table td, .suggestion-table td, .suggestion-table th {
     border: 4px solid var(--data-table-border-colour);
 }
-.data-table td, .suggestion-table td {
-    font-size: var(--font-size-base);
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-.data-table th, .suggestion-table th {
-    vertical-align: top;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-.data-table thead:first-of-type {
+.table-header {
     font-size: var(--font-size-xlarge);
+    padding-top: var(--base-spacing);
+    padding-bottom: var(--base-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
 }
-.data-table thead:not(:first-of-type), .suggestion-table th {
+.column-header {
     font-size: var(--font-size-large);
+    vertical-align: top;
 }
-.data-table td.catagory {
+.column-header-s {
+    font-size: var(--font-size-base);
+    vertical-align: top;
+}
+[class|="table-data"], [class|="column-header"] {
+    padding-top: var(--xsmall-spacing);
+    padding-bottom: var(--xsmall-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
+
+}
+[class|="table-data"] {
+    font-size: var(--font-size-small);
+}
+.table-data-catagory {
     font-weight: bold;
     background-color: var(--data-table-cat-bg-colour);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-top: var(--small-spacing);
+    padding-bottom: var(--small-spacing);
 }
 /* ********************** */
 

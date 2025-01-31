@@ -4,4 +4,16 @@
 .xlarge-spacing {
     margin-top: var(--xlarge-spacing);
 }
+
+.left {
+    text-align: left;
+}
+
+.align-top {
+    vertical-align: top;
+}
+
+.align-bottom {
+    vertical-align: bottom;
+}
 /* ********************** */
