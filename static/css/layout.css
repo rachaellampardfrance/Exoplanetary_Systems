@@ -3,8 +3,8 @@
 /* Layout styles */
 /* ********************** */
 .page-heading {
-    margin: var(--large-spacing);
-    font-size: var(--font-size-large);
+    margin: var(--base-spacing);
+    font-size: var(--font-size-xxlarge);
 }
 
 .center, .page-heading, [class|="img"] [id|="about"] {
@@ -54,7 +54,7 @@ table {
 /* Media Queries */
 /* ********************** */
 /* for computer */
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 901px) {
     :root {
         font-size: 16px;
     }

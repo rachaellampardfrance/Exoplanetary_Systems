@@ -6,13 +6,16 @@
 /* Nav bar */
 #navbar {
     list-style: none;
+    font-size: var(--font-size-xsmall);
 
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    padding: var(--small-spacing);
+    padding-top: var(--small-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
     position: relative;
 }
 .navbar-logo {
