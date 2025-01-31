@@ -1,0 +1,20 @@
+/* Styles Specifically for the statistics page */
+
+/* Figure displays */
+/* ********************** */
+/* Pie figure*/
+#fig-pie {
+    width: 25%;
+}
+
+/* Nested figures */
+#fig-bars, #fig-pies {
+    width: 60%;
+}
+/* ********************** */
+
+
+/* ... */
+/* ********************** */
+
+/* ********************** */

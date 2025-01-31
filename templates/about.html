@@ -9,25 +9,57 @@
 {% endblock %}
 
 {% block main %}
-<div>
-    <div id="about-head">
-        <p>
-            A hobby project created by <b>Rachael Lampard-France</b>.
-        </p>
-        <br>
-    </div>
 
-    <div id="about-acknowledgements">
-        <h2>Acknowledgements</h2>
-        <h3><a href="https://exoplanetarchive.ipac.caltech.edu/">NASA Exoplanet Archive</a></h3>
-        <div>
-            <p>Tables used to gather data from NASA's database...</p>
-            <p><b>Stellar Hosts Table: DOI - 10.26133/NEA40</b></p>
-            <p><b>Planetary Systems Composite Data Table: DOI 10.26133/NEA13</b></p>
-            <p>(The table used to collect planetary data is a composite<br>table from the 'Planetary Systems' table. Data is<br>gathered and compiled from multiple sources)</p>
-            <p><b>Planetary Systems Table: DOI - 10.26133/NEA12</b></p>
-        </div>
-    </div>
+<div id="about-head">
+    <p>
+        A hobby project created by <b>Rachael Lampard-France</b>.
+    </p>
 </div>
 
+<div class="txt-block-content">
+    <div>
+        <h2>Acknowledgements</h2>
+        <h3><a href="https://exoplanetarchive.ipac.caltech.edu/">NASA Exoplanet Archive</a></h3>
+        <h4>
+            Tables used to gather data from NASA's database...
+        </h4>
+        <div>
+            <table class="text-table" id="about-DOI-table">
+                <tr>
+                    <td>
+                        Planetary Systems Table:
+                    </td>
+                    <td>
+                        DOI - 10.26133/NEA12
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Stellar Hosts Table:
+                    </td>
+                    <td>
+                        DOI - 10.26133/NEA40
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        *Planetary Systems<br>Composite Data Table:
+                    </td>
+                    <td>
+                        DOI - 10.26133/NEA13
+                    </td>
+                </tr>
+            </table>
+            <p>
+                * (The table used to collect planetary data is a composite table<br>
+                from the 'Planetary Systems' table. Data is gathered and<br>
+                compiled from multiple sources)<br> 
+            </p>
+        </div>
+    </div>
+    <!-- <div>
+        <h2>
+        </h2>
+    </div> -->
+</div>
 {% endblock %}

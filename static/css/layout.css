@@ -1,0 +1,97 @@
+/* Layout styles */
+/* ********************** */
+.page-heading {
+    margin: 30px;
+    font-size: 1.3em;
+}
+
+.center, .page-heading, [class|="img"] [id|="about"] {
+    justify-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+
+h1, p, h2, table, h3, div {
+    text-align: center;
+}
+
+.padded, table, main, [class|="img"] {
+    margin: 20px;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+footer p:first-of-type {
+    margin-top: 10px;
+    text-wrap: nowrap;
+}
+footer p {
+    margin: 5px;
+    text-wrap: nowrap;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+[id|="table-container"] {
+    overflow-x:auto;
+    width: 100%;
+}
+/* ********************** */
+
+
+/* Media Queries */
+/* ********************** */
+/* for computer */
+@media screen and (min-width: 601px) {
+}
+
+
+/* for small screens */
+@media screen and (max-width: 600px) {
+    .center-tables {
+        justify-content: left;
+    }
+
+    #img-error {
+        width: 100%;
+    }
+
+    .data-table th, .data-table td, .suggestion-table th, .suggestion-table td {
+        padding: 5px;
+        font-size: 0.7em;
+    }
+}
+
+
+/* for very small screens */
+@media screen and (max-width: 400px) {
+    .center-tables {
+        justify-content: left;
+    }
+
+    #img-error {
+        width: 100%;
+    }
+
+    .data-table th, .data-table td, .suggestion-table th, .suggestion-table td {
+        padding: 5px;
+        font-size: 0.5em;
+    }
+}
+/* ********************** */
+
+/* ... */
+/* ********************** */
+
+/* ********************** */

@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block main %}
-<div id="statistics">
+<div class="txt-block-content">
     <div>
         <h2>Planetary System Type by Star Count</h2>
         <img class="img" id="fig-bars" src="{{ url_for('static', filename='planetary_systems_by_star_count.png') }}" alt="Planetary Systems by Star Count Nested Bar Charts">
@@ -31,7 +31,7 @@
         <p>A collection of pie charts which are independent of one another</p>
         <img class="img" id="fig-pies" src="{{ url_for('static', filename='most_common_planetary_systems.png') }}" alt="Most Common Planetary Systems Pie Charts">
         <p>(percentile of how many planets occur (for each system type by increasing star count))</p>
-        <table id="fig2-description">
+        <table class="text-table" id="statstics-text-table">
             <tr>
                 <td>
                     Pie charts -
