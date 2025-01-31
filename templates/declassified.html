@@ -20,8 +20,9 @@
         <thead>
             <tr>
                 <th class="column-header"></th>
-                <th class="column-header">Planet Name</th>
-                <th class="column-header">Host Name</th>
+                <th class="column-header">🌑Declassified🌑<br>Planet Name</th>
+                <th class="column-header">☀️Host Star☀️</th>
+                <th class="column-header">🌌System🌌</th>
                 <th class="column-header">Public Discovery Date</th>
             </tr>
         </thead>
@@ -29,9 +30,10 @@
             {% for planet in planets %}
             <tr>
                 <td class="table-data">🌑</td>
-                <td class="table-data"><a href="{{ url_for('system', stellar_body=planet.name) }}">{{ planet.name }}</a></td>
-                <td class="table-data"><a href="{{ url_for('system', stellar_body=planet.hostname) }}">{{ planet.hostname }}</a></td>
-                <td class="table-data">{{ planet.disc_pubdate }}</td>
+                <td class="table-data"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                <td class="table-data"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td class="table-data"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
+                <td>{{ planet.disc_pubdate }}</td>
             </tr>
             {% endfor %}
         </tbody>
