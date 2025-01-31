@@ -1,0 +1,24 @@
+/* Define common css variables */
+
+/* Variables */
+/* ********************** */
+:root {
+    /* colours */
+    /* ********************** */
+    /* webpage */
+    --primary-colour: ;
+    --secondary-colour: #151922;
+    --background-colour: #1d2230;
+    /* --text-colour: aliceblue; */
+    --text-colour: #d9e3eb;
+    /* ********************** */
+
+    
+    /* fonts */
+    /* ********************** */
+    --heading-font: Audiowide, sans-serif;
+    --text-font: "Trebuchet MS", sans-serif;
+    /* --text-font: "Lucida Console", Monospace; */
+    /* ********************** */
+}
+/* ********************** */

@@ -1,0 +1,40 @@
+@import url('variables.css');
+
+/* Elements */
+/* ********************** */
+body {
+    background-color: var(--background-colour);
+    font-family: var(--heading-font);
+    color: var(--text-colour);
+}
+
+#navbar, .search-icon, footer, .dropdown-content {
+    background-color: var(--secondary-colour);
+}
+/* ********************** */
+
+
+/* Text */
+/* ********************** */
+p {
+    font-family: var(--text-font);
+}
+/* ********************** */
+
+
+/* Links */
+/* ********************** */
+a:link, a:visited {
+    color: var(--text-colour);
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+}
+/* ********************** */
+
+
+/* ... */
+/* ********************** */
+
+/* ********************** */
