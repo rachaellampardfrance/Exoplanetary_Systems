@@ -1,4 +1,6 @@
 /* Global Styles */
+@import url('variables.css');
+
 /* ********************** */
 * {
     box-sizing: border-box;
@@ -27,16 +29,23 @@ header, main, footer {
 }
 
 p {
-    font-size: 1em;
-
-    line-height: 16pt;
-    margin-bottom: 26pt;
-    /* margin-bottom: 1rem; */
+    margin-bottom: var(--base-spacing);
+    line-height: var(--base-spacing);
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 1.5rem;
+h1, h2 {
+    line-height: var(--large-spacing);
     font-weight: bold;
+
+    margin-top: var(--large-spacing);
+    margin-bottom: var(--large-spacing);
+}
+h3, h4, h5, h6 {
+    line-height: var(--large-spacing);
+    font-weight: bold;
+    
+    margin-top: var(--large-spacing);
+    margin-bottom: var(--base-spacing);
 }
 /* ********************** */
 

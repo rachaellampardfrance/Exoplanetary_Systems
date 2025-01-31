@@ -1,19 +1,7 @@
 /* Reusable classes */
-
-/* txt-block-content */
-/* ********************** */
-.txt-block-content h2 {
-    margin-bottom: 35px;
-}
-.txt-block-content > div:first-of-type > h2 {
-    margin-top: 40px;
-}
-.txt-block-content > div:not(:first-of-type) > h2 {
-    margin-top: 80px;
-}
-/* ********************** */
-
 /* ... */
 /* ********************** */
-
+.xlarge-spacing {
+    margin-top: var(--xlarge-spacing);
+}
 /* ********************** */
