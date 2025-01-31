@@ -1,0 +1,110 @@
+@import url('variables.css');
+
+/* Layout styles */
+/* ********************** */
+.page-heading {
+    margin: var(--base-spacing);
+    font-size: var(--font-size-xxlarge);
+}
+
+.center, .page-heading, [class|="img"] [id|="about"] {
+    justify-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+}
+
+h1, p, h2, table, h3, div {
+    text-align: center;
+}
+
+.padded, table, main, [class|="img"] {
+    margin: var(--base-spacing);
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    font-size: var(--font-size-small);
+}
+
+footer p:first-of-type {
+    margin-top: var(--small-spacing);
+}
+footer p {
+    margin: var(--xsmall-spacing);
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+[id|="table-container"] {
+    overflow-x:auto;
+    width: 100%;
+}
+/* ********************** */
+
+
+/* Media Queries */
+/* ********************** */
+/* for computer */
+@media screen and (min-width: 901px) {
+    :root {
+        font-size: 16px;
+    }
+}
+
+/* for laptops/tablets */
+@media screen and (max-width: 900px) {
+    :root {
+        font-size: 16px;
+    }
+
+    .img {
+        width: 80% !important;
+    }
+}
+
+
+/* for small screens */
+@media screen and (max-width: 600px) {
+    :root {
+        font-size: 14px;
+    }
+
+    .center-tables {
+        justify-content: left;
+    }
+
+    .data-table th, .data-table td, .suggestion-table th, .suggestion-table td {
+        padding: var(--xsmall-spacing);
+        font-size: var(--font-size-small);
+    }
+
+    .img {
+        width: 90% !important;
+    }
+}
+
+
+/* for very small screens */
+@media screen and (max-width: 400px) {
+    :root {
+        font-size: 12px;
+    }
+
+    .center-tables {
+        justify-content: left;
+    }
+
+    .img {
+        width: 90% !important;
+    }
+}
+/* ********************** */

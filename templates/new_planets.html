@@ -1,29 +1,29 @@
-<div class="table-newplanets">
-    <table>
+<div id="table-container-newplanets">
+    <table class="data-table">
         <thead>
             <tr>
-                <th colspan="6"><h2>✨NEW PLANETS✨</h2></th>
+                <th class="table-header" colspan="6">✨NEW PLANETS✨</th>
             </tr>
         </thead>
         <thead>
             <tr>
-                <th></th>
-                <th>🪐Planet Name🪐</th>
-                <th>☀️Host Star☀️</th>
-                <th>🌌System🌌</th>
-                <th>💫Circumbinary?💫</th>
-                <th>📡Public Discovery Date📡</th>
+                <th class="column-header"></th>
+                <th class="column-header">🪐Planet Name🪐</th>
+                <th class="column-header">☀️Host Star☀️</th>
+                <th class="column-header">🌌System🌌</th>
+                <th class="column-header">💫Circumbinary?💫</th>
+                <th class="column-header">📡Public Discovery📡<br>Date</th>
             </tr>
         </thead>
         <tbody>
             {% for planet in new_planets %}
             <tr>
-                <td class="nowrap">✨🪐✨</td>
-                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
-                <td>{{ planet.cb_flag }}</td>
-                <td>{{ planet.disc_pubdate }}</td>
+                <td class="table-data">✨🪐✨</td>
+                <td class="table-data"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                <td class="table-data"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td class="table-data"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
+                <td class="table-data">{{ planet.cb_flag }}</td>
+                <td class="table-data">{{ planet.disc_pubdate }}</td>
             </tr>
             {% endfor %}
         </tbody>

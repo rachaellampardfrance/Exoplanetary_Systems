@@ -10,29 +10,29 @@
 
 {% block main %}
 {% if planets %}
-<div class="table-declassedplanets">
-    <table>
+<div id="table-container-declassed-planets">
+    <table class="data-table">
         <thead>
             <tr>
-                <th colspan="4"><h2>👾Declassified Planets👾</h2></th>
+                <th class="table-header" colspan="4">👾Declassified Planets👾</th>
             </tr>
         </thead>
         <thead>
             <tr>
-                <th></th>
-                <th>Planet Name</th>
-                <th>☀️Host Star☀️</th>
-                <th>🌌System🌌</th>
-                <th>Public Discovery Date</th>
+                <th class="column-header"></th>
+                <th class="column-header">🌑Declassified🌑<br>Planet Name</th>
+                <th class="column-header">☀️Host Star☀️</th>
+                <th class="column-header">🌌System🌌</th>
+                <th class="column-header">Public Discovery Date</th>
             </tr>
         </thead>
         <tbody>
             {% for planet in planets %}
             <tr>
-                <td class="nowrap">🌑</td>
-                <td class="nowrap"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
-                <td class="nowrap"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
+                <td class="table-data">🌑</td>
+                <td class="table-data"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
+                <td class="table-data"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                <td class="table-data"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
                 <td>{{ planet.disc_pubdate }}</td>
             </tr>
             {% endfor %}

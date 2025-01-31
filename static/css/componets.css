@@ -1,0 +1,150 @@
+/* Styles for specific and reusable elements */
+@import url('variables.css');
+
+/* Nav bar styles */
+/* ********************** */
+/* Nav bar */
+#navbar {
+    list-style: none;
+    font-size: var(--font-size-xsmall);
+
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: var(--small-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
+    position: relative;
+}
+.navbar-logo {
+    font-size: var(--font-size-xxlarge);
+    text-wrap: nowrap;
+}
+.navbar-logo:hover, a:link, a:visited {
+    text-decoration: none;
+}
+.nav-item {
+    display: inline-block;
+    padding-bottom: var(--small-spacing);
+}
+.nav-item, .nav-link {
+    padding-right: var(--xsmall-spacing);
+}
+.nav-link {
+    white-space: nowrap;
+}
+#search-head {
+    text-align: left;
+}
+
+/* Drop down */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: flex;
+    display: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.dropdown-item {
+    font-size: var(--font-size-small);
+    white-space: nowrap;
+    text-align: center;
+    padding: 0.2em;
+}
+/* ********************** */
+
+
+/* Reusable table styles */
+/* ********************** */
+/* text tables */
+.text-table td {
+    font-family: var(--text-font);
+    padding: var(--xsmall-spacing);
+}
+.text-table-head {
+    text-align: right;
+    font-weight: bold;
+}
+.text-table-txt {
+    text-align: left; 
+}
+
+
+/* suggestion table */
+.suggestion-table {
+    margin: var(--small-spacing);
+}
+
+/* various tables */
+.data-table, .suggestion-table {
+    white-space: nowrap;
+}
+.data-table th, .data-table td, .suggestion-table td, .suggestion-table th {
+    border: 4px solid var(--data-table-border-colour);
+}
+.table-header {
+    font-size: var(--font-size-xlarge);
+    padding-top: var(--base-spacing);
+    padding-bottom: var(--base-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
+}
+.column-header {
+    font-size: var(--font-size-large);
+    vertical-align: top;
+}
+.column-header-s {
+    font-size: var(--font-size-base);
+    vertical-align: top;
+}
+[class|="table-data"], [class|="column-header"] {
+    padding-top: var(--xsmall-spacing);
+    padding-bottom: var(--xsmall-spacing);
+    padding-left: var(--small-spacing);
+    padding-right: var(--small-spacing);
+
+}
+[class|="table-data"] {
+    font-size: var(--font-size-small);
+}
+.table-data-catagory {
+    font-weight: bold;
+    background-color: var(--data-table-cat-bg-colour);
+    padding-top: var(--small-spacing);
+    padding-bottom: var(--small-spacing);
+}
+/* ********************** */
+
+
+/* Specific ID styles */
+/* ********************** */
+/* Images */
+/* ********************** */
+#img-error {
+    width: 40%
+  }
+
+#fig-pie {
+    width: 25%;
+}
+
+#fig-bars, #fig-pies {
+    width: 60%;
+}
+/* ********************** */
+/* ********************** */
+
+
+/* ... */
+/* ********************** */
+
+/* ********************** */

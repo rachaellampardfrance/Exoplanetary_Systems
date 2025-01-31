@@ -34,39 +34,39 @@
 </p>
 {% endif %}
 
-<div class="table-planet">
-    <table>
+<div id="table-container-planet">
+    <table class="data-table">
         <thead>
             <tr>
                 {% if planet.declassified == 'Yes' %}
-                <th colspan="12"><h2>⛔❗Declassified❗ 🪐{{ planet.name }}🪐 ❗Declassified❗⛔</h2></th>
+                <th class="table-header" colspan="12">⛔❗Declassified❗ 🪐{{ planet.name }}🪐 ❗Declassified❗⛔</th>
                 {% else %}
-                <th colspan="12"><h2>🪐{{ planet.name }}🪐</h2></th>
+                <th class="table-header" colspan="12">🪐{{ planet.name }}🪐</th>
                 {% endif %}
             </tr>
         </thead>
         <thead>
             <tr>
-                <th>Public Discovery Date</th>
-                <th>Circumbinary?</th>
-                <th>Controversial?</th>
-                <th>Orbit Period<br>(earth days)</th>
-                <th>Mass<br>(to earth)</th>
-                <th>Radius<br>(to earth)</th>
-                <th>Insolation Flux<br>(to earth)</th>
-                <th>Equilibirum Temperature<br>(Kelvin)</th>
+                <th class="column-header-s">Public Discovery Date</th>
+                <th class="column-header-s">Circumbinary?</th>
+                <th class="column-header-s">Controversial?</th>
+                <th class="column-header-s">Orbit Period<br>(earth days)</th>
+                <th class="column-header-s">Mass<br>(to earth)</th>
+                <th class="column-header-s">Radius<br>(to earth)</th>
+                <th class="column-header-s">Insolation Flux<br>(to earth)</th>
+                <th class="column-header-s">Equilibirum Temperature<br>(Kelvin)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ planet.disc_pubdate }}</td>
-                <td>{{ planet.cb_flag }}</td>
-                <td>{{ planet.cv_flag }}</td>
-                <td>{{ planet.orbit_period }}</td>
-                <td>{{ planet.mass }}</td>
-                <td>{{ planet.radius }}</td>
-                <td>{{ planet.insol_flux }}</td>
-                <td>{{ planet.equlib_temp }}</td>
+                <td class="table-data">{{ planet.disc_pubdate }}</td>
+                <td class="table-data">{{ planet.cb_flag }}</td>
+                <td class="table-data">{{ planet.cv_flag }}</td>
+                <td class="table-data">{{ planet.orbit_period }}</td>
+                <td class="table-data">{{ planet.mass }}</td>
+                <td class="table-data">{{ planet.radius }}</td>
+                <td class="table-data">{{ planet.insol_flux }}</td>
+                <td class="table-data">{{ planet.equlib_temp }}</td>
             </tr>
         </tbody>
     </table>

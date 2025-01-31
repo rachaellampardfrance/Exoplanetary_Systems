@@ -9,33 +9,80 @@
 {% endblock %}
 
 {% block main %}
-<div>
-    <div class="about-head">
-        <p>
-            A hobby project created by <b>Rachael Lampard-France</b>.
-        </p>
-        <br> 
-    </div>
+<div id="about-head">
+    <h2>
+        Created By
+    </h2>
+    <p>
+        <a href="https://www.linkedin.com/in/rachael-lampard-france-a5995b195" target="_blank">
+            <i>Rachael Lampard-France</i>.
+        </a>
+    </p>
+</div>
 
+<div>
+    <h2 class="xlarge-spacing">Disclaimer</h2>
+    <p>
+        All data is gathered from <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA's Exoplanet Archive</a>.
+    </p>
+    <p>
+        Additionally planetary data is gathered from the 'Planetary Systems Composite Data' (PSCompPars) table<br>
+        comprised of data from 'Planetary Systems' (PS) table and may not be self consisent as data is<br>
+        drawn from multiple sources. Data should not be used for acurate measurements but for hobby/interest.
+    </p>
+    <p>
+        Note that not all information may be Acurate as data is updated monthly and<br>
+        additionally handled before being represented on the site.
+    </p>
+    <p>
+        All figures are generated for this website and may also display inaccuracies.
+    </p>
+</div>
+
+<div>
+    <h2 class="xlarge-spacing">Acknowledgements</h2>
+    <h3><a href="https://exoplanetarchive.ipac.caltech.edu/">NASA Exoplanet Archive</a></h3>
+    <h4>
+        Tables used to gather data from NASA's database...
+    </h4>
     <div>
-        <h2>Disclaimer</h2>
-        <p>All data is gathered from <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA's Exoplanet Archive</a>.</p>
-        <p>Additionally planetary data is gathered from the 'Planetary Systems Composite Data' (PSCompPars) table<br>comprised of data from 'Planetary Systems' (PS) table and may not be self consisent as data is<br>drawn from multiple sources. Data should not be used for acurate measurements but for hobby/interest.</p>
-        <p>Note that not all information may be Acurate as data is updated monthly and additionally handled before being represented on the site.</p>
-        <p>All figures are generated for this website and may also display inaccuracies.</p>
-        <br>
-    </div>
-    
-    <div id="about-acknowledgements">
-        <h2>Acknowledgements</h2>
-        <h3><a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA Exoplanet Archive</a></h3>
-        <div>
-            <p>Tables used to gather data from NASA's database...</p>
-            <p><b><a href="https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=STELLARHOSTS" target="_blank">Stellar Hosts Table</a>: DOI - 10.26133/NEA40</b></p>
-            <p><b><a href="https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars" target="_blank">Planetary Systems Composite Data Table</a>: DOI 10.26133/NEA13</b></p>
-            <p>(The table used to collect planetary data is a composite<br>table from the 'Planetary Systems' table. Data is<br>gathered and compiled from multiple sources)</p>
-            <p><b><a href="https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS" target="_blank">Planetary Systems Table</a>: DOI - 10.26133/NEA12</b></p>
-        </div>
+        <table class="text-table align-bottom" id="about-DOI-table">
+            <tr>
+                <td class="text-table-head">
+                    <a href="https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PS" target="_blank">
+                        Planetary Systems Table:
+                    </a>
+                </td>
+                <td class="text-table-txt">
+                    DOI - 10.26133/NEA12
+                </td>
+            </tr>
+            <tr>
+                <td class="text-table-head">
+                    <a href="https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=STELLARHOSTS" target="_blank">
+                        Stellar Hosts Table:
+                    </a>
+                </td>
+                <td class="text-table-txt">
+                    DOI - 10.26133/NEA40
+                </td>
+            </tr>
+            <tr>
+                <td class="text-table-head">
+                    <a href="https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars" target="_blank">
+                        *Planetary Systems<br>Composite Data Table:
+                    </a>
+                </td>
+                <td class="text-table-txt">
+                    DOI - 10.26133/NEA13
+                </td>
+            </tr>
+        </table>
+        <p>
+            * (The table used to collect planetary data is a composite table<br>
+            from the 'Planetary Systems' table. Data is gathered and<br>
+            compiled from multiple sources)<br> 
+        </p>
     </div>
 </div>
 {% endblock %}
