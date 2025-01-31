@@ -82,6 +82,11 @@ table {
         justify-content: left;
     }
 
+    .data-table th, .data-table td, .suggestion-table th, .suggestion-table td {
+        padding: var(--xsmall-spacing);
+        font-size: var(--font-size-small);
+    }
+
     .img {
         width: 90% !important;
     }
