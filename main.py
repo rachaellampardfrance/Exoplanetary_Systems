@@ -213,14 +213,15 @@ def declassified():
             WHERE declassified = 1;
         """)
         planets = cursor.fetchall()
-        planet_names.extend(planet[0] for planet in planets)
+        if planets:
+            planet_names.extend(planet[0] for planet in planets)
     
     declassed = []
 
     for planet_name in planet_names:
-        declassed.extend(Planet(planet_name))
+        declassed.append(Planet(planet_name))
 
-    return render_template("declassified.html", planet=declassed)
+    return render_template("declassified.html", planets=declassed)
 
 @app.errorhandler(404)
 def page_not_found(error=404):
