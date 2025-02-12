@@ -130,6 +130,8 @@ class System():
     def _set_num_planets(self) -> None:
         count = 0
         for star in self.stars:
-            count += len(star.planets)
+            for planet in star.planets:
+                if planet.declassified != 'Yes':
+                    count += 1
         self._num_planets = count
 # *****************************
