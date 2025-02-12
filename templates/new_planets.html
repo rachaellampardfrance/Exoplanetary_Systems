@@ -2,7 +2,7 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th class="table-header" colspan="6">✨NEW PLANETS✨</th>
+                <th class="table-header" colspan="7">✨NEW PLANETS✨</th>
             </tr>
         </thead>
         <thead>
@@ -11,6 +11,7 @@
                 <th class="column-header">🪐Planet Name🪐</th>
                 <th class="column-header">☀️Host Star☀️</th>
                 <th class="column-header">🌌System🌌</th>
+                <th class="column-header">🚨Controversial?🚨</th>
                 <th class="column-header">💫Circumbinary?💫</th>
                 <th class="column-header">📡Public Discovery📡<br>Date</th>
             </tr>
@@ -22,6 +23,13 @@
                 <td class="table-data"><a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a></td>
                 <td class="table-data"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
                 <td class="table-data"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
+                <td class="table-data">
+                    {% if planet.cv_flag == 'Yes' %}
+                    ❗{{ planet.cv_flag }}❗
+                    {% else %}
+                    {{ planet.cv_flag }}
+                    {% endif %}
+                </td>
                 <td class="table-data">{{ planet.cb_flag }}</td>
                 <td class="table-data">{{ planet.disc_pubdate }}</td>
             </tr>
