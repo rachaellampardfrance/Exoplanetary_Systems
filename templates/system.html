@@ -37,8 +37,16 @@
                 <td class="column-header">☀️</td>
                 {% endfor %}
                 <td></td>
-                {% for _ in range(system.num_planets) %}
-                <td class="column-header">🪐</td>
+                {% for star in system.stars %}
+                    {% for planet in star.planets %}
+                        {% if planet.declassified != 'Yes' %}
+                            {% if planet.cv_flag != 'Yes' %}
+                                <td class="column-header">🪐</td>
+                            {% else %}
+                                <td class="column-header">🚨</td>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor%}
                 {% endfor %}
             </tr>
             <tr>
@@ -96,11 +104,11 @@
                     {% endif %}
                 </td>
                 {% endfor %}
-                <td class="table-data-catagory">Discovery Year<br>(Published)</td>
+                <td class="table-data-catagory">Controversial?</td>
                 {% for star in system.stars %}
                     {% for planet in star.planets %}
                         {% if planet.declassified != 'Yes' %}
-                            <td class="table-data">{{ planet.disc_pubdate }}</td>
+                            <td class="table-data">{{ planet.cv_flag }}</td>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
@@ -114,14 +122,14 @@
                     {% endif %}
                 </td>
                 {% endfor %}
-                <td class="table-data-catagory"></td>
+                <td class="table-data-catagory">Discovery Year<br>(Published)</td>
                 {% for star in system.stars %}
                     {% for planet in star.planets %}
                         {% if planet.declassified != 'Yes' %}
-                            <td class="table-data"></td>
+                            <td class="table-data">{{ planet.disc_pubdate }}</td>
                         {% endif %}
                     {% endfor %}
-                {% endfor %}    
+                {% endfor %}   
             </tr>
         </tbody>
     </table>
