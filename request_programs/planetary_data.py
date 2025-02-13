@@ -6,7 +6,8 @@ and updates the corrosponding dataframe.
 from database_helpers import (
     upsert_planetary_data,
     print_table_updated_count,
-    mark_declassified_planets
+    mark_declassified_planets,
+    print_updates
 )
 from helpers import (
     get_user_confirm, tap_request,
@@ -67,8 +68,9 @@ def main():
     # print max last updated value from planets table
     print_last_updated("planets")
     print_table_updated_count("planets")
+    print_updates("planets")
 
-
+    print("\nPlanetary Data requests and updates complete.\n")
 
 
 

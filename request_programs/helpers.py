@@ -119,6 +119,7 @@ def tap_request(service_url: str, query: str, sync_type: str) -> pd.DataFrame:
         job = tap_service.launch_job(query)
 
     result_csv = job.get_results().to_pandas().to_csv(index=False)
+    print()
     return pd.read_csv(StringIO(result_csv))
 
 
@@ -126,6 +127,7 @@ def clean_data(data: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """organise data alphabetaically and drop duplicates
     
     :param column_name: column name to sort data by"""
+    print("cleaning...\n")
     data = _organise_data(data, column_name)
     data = _drop_duplicate_data(data)
 
@@ -143,15 +145,14 @@ def show_cleaning(data: pd.DataFrame, data_colum: pd.DataFrame, column_name: str
     :param data_column: Dataframe.column to reference data by
     :param column_name: column name to reference data by
     """
-    print(f"Rows in data: {data_colum.count().sum()}\n")
+    print(f"Rows in data: {data_colum.count().sum()}")
     duplicates = data.duplicated(subset=[column_name], keep='first')
     print(f"Number of non-duplicate data: {data_colum.count().sum() - duplicates.sum()}")
     print(f"Number of duplicate data: {duplicates.sum()}")
-    print(f"Columns with null values:\n{data.isnull().sum()}")
+    print(f"Columns with null values:\n{data.isnull().sum()}\n")
 
 def print_last_updated(table):
     date = get_last_updated(table)[0]
 
     print("Last updated on {}".format(date))
-
     

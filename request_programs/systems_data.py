@@ -7,7 +7,8 @@ import pandas as pd
 
 from database_helpers import (
     upsert_systems_data,
-    print_table_updated_count
+    print_table_updated_count,
+    mark_empty_systems, print_updates
 )
 from helpers import (
     get_user_confirm,
@@ -61,14 +62,18 @@ def main():
     sh_df = clean_data(sh_df, sort_column)
     show_cleaning(sh_df, sh_df.sy_name, sort_column)
 
+    # mark empty systems
+    mark_empty_systems(sh_df)
+
     # append new data to systems table in database and update existing if changes
     upsert_systems_data(sh_df)
 
     # print max last updated value from systems table
     print_last_updated("systems")
     print_table_updated_count("systems")
+    print_updates("systems")
 
-    print("Systems data requests and updates complete")
+    print("\nSystems data requests and updates complete.\n")
 
 
 if __name__ == '__main__':

@@ -8,7 +8,8 @@ import pandas as pd
 from database_helpers import (
     upsert_stars_data,
     update_stars_spectypes,
-    print_table_updated_count
+    print_table_updated_count,
+    print_updates
 )
 from helpers import (
     get_user_confirm,
@@ -33,8 +34,9 @@ def main():
     # print max last updated value from stellar table
     print_last_updated("stars")
     print_table_updated_count("stars")
+    print_updates("stars")
 
-    print("Stellar Data requests and updates complete")
+    print("\nStellar Data requests and updates complete.\n")
 # *******
 
 
@@ -148,13 +150,13 @@ def get_spectypes(service_url: str) -> pd.DataFrame:
 
 
 def clean_spectypes_df(df: pd.DataFrame) -> pd.DataFrame:
-    print(f"after collection: {df.count()}")
+    print(f"after collection: {df.size}")
 
     df = df.dropna()
-    print(f"after drop na: {df.count()}")
+    print(f"after drop na: {df.size}")
 
     df = df.drop_duplicates(subset=['hostname'], keep='first')
-    print(f"after drop dups: {df.count()}")
+    print(f"after drop duplicates: {df.size}\n")
     return df
 # *******
 
