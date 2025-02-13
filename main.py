@@ -241,7 +241,8 @@ def get_exo_system_count():
         cursor = conn.cursor()
         query = f"""
             SELECT COUNT(sy_name)
-                FROM {TABLES[1]};
+              FROM {TABLES[1]}
+             WHERE sy_pnum != 0;
         """
         cursor.execute(query)
 

@@ -22,8 +22,8 @@ def mark_declassified_planets(data_frame: pd.DataFrame) -> None:
 
         cursor.execute(f"""
             UPDATE planets
-            SET declassified = 1
-            WHERE pl_name NOT IN ({placeholders});
+               SET declassified = 1
+             WHERE pl_name NOT IN ({placeholders});
         """, classified_planets)
 
 
@@ -116,6 +116,26 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
                 OR planets.equlib_temp != excluded.equlib_temp;
     """, data_to_insert)
 
+def mark_empty_systems(data_frame: pd.DataFrame) -> None:
+    """Any planets that exist in the local database and are
+    not within the planet names gathered from the tap request
+    will be marked as declassified
+    """
+    planetary_systems = []
+    for _, row in data_frame.iterrows():
+        planetary_systems.append(
+            row['sy_name'],
+    )
+    placeholders = ', '.join('?' for _ in planetary_systems)
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(f"""
+            UPDATE systems
+               SET sy_pnum = 0
+             WHERE sy_name NOT IN ({placeholders});
+        """, planetary_systems)
 
 def upsert_systems_data(data_frame: pd.DataFrame) -> None:
     """insert/update new pandas dataframe into the systems table"""
@@ -204,9 +224,8 @@ def update_stars_spectypes(data_frame: pd.DataFrame) -> None:
     with sqlite3.connect(DB_PATH) as conn:
         conn.executemany("""
             UPDATE stars
-            SET st_spectype = ?
-            WHERE
-                stars.hostname == ?;
+               SET st_spectype = ?
+             WHERE stars.hostname == ?;
     """, data_to_insert)
 
 
@@ -216,7 +235,7 @@ def get_last_updated(table) -> str:
 
         c.execute("""
             SELECT MAX(last_updated)
-            FROM {}
+              FROM {}
         """.format(table))
 
         return c.fetchone()
@@ -224,9 +243,13 @@ def get_last_updated(table) -> str:
  
 def get_systems_db_data():
     with sqlite3.connect(DB_PATH) as conn:
-        # c = conn.cursor()
+        query = """
+            SELECT *
+              FROM systems
+             WHERE sy_pnum != 0;
+        """
         
-        return pd.read_sql_query("SELECT * FROM systems", conn)
+        return pd.read_sql_query(query, conn)
 
 def print_table_updated_count(table: str) -> None:
     with sqlite3.connect(DB_PATH) as conn:
@@ -236,8 +259,8 @@ def print_table_updated_count(table: str) -> None:
 
         c.execute(f"""
             SELECT COUNT(*)
-            FROM {table}
-            WHERE DATE(last_updated) = '{today}';
+              FROM {table}
+             WHERE DATE(last_updated) = '{today}';
         """)
 
         result = c.fetchone()
