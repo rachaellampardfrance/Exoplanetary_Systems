@@ -60,38 +60,38 @@ def statistics():
     return render_template("statistics.html")
 
 
-@app.route("/new/<category>")
-def new(category):
+@app.route("/updates/<category>")
+def updates(category):
     """Generate most recent planet discoveries from planets
     database table from MAX disc_pubdate
     """
     month_going_back = 1
 
-    if category not in ['p', 's', 'ps']:
+    if category not in ['planets', 'systems', 'all']:
         abort(404)
 
-    if category in ['s', 'ps']:
+    if category in ['systems', 'all']:
         new_systems = get_systems_from_max_updated(month_going_back)
 
 
-    if category in ['p', 'ps']:
+    if category in ['planets', 'all']:
         new_planets = get_planets_from_month_disc(month_going_back)
 
 
-    if category == 'p':
+    if category == 'planets':
         return render_template(
-            "new.html",
+            "updates.html",
             new_planets=new_planets,
             category=category
         )
-    elif category == 's':
+    elif category == 'systems':
         return render_template(
-            "new.html",
+            "updates.html",
             new_systems=new_systems,
             category=category
         )
     return render_template(
-        "new.html",
+        "updates.html",
         new_systems=new_systems,
         new_planets=new_planets,
         category=category
@@ -200,7 +200,7 @@ def suggestions(search):
 def about():
     return render_template("about.html")
 
-@app.route("/declassed")
+@app.route("/declassified")
 def declassified():
 
     planet_names = []
@@ -216,12 +216,12 @@ def declassified():
         if planets:
             planet_names.extend(planet[0] for planet in planets)
     
-    declassed = []
+    declassified = []
 
     for planet_name in planet_names:
-        declassed.append(Planet(planet_name))
+        declassified.append(Planet(planet_name))
 
-    return render_template("declassified.html", planets=declassed)
+    return render_template("declassified.html", planets=declassified)
 
 @app.errorhandler(404)
 def page_not_found(error=404):
@@ -257,6 +257,7 @@ def get_planet_count():
         cursor.execute(query)
         return cursor.fetchone()[0]
 # ******************
+
 
 # new helper functions
 # ******************

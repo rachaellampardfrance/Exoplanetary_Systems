@@ -6,7 +6,7 @@
 
 {% block pagehead %}
     {% if planet.declassified == 'Yes' %}
-    ❗Planet Declassified❗ ⛔{{ planet.name }}⛔
+    ❗Planet Declassified❗<br>⛔{{ planet.name }}⛔
     {% else %}
         ✨Planet {{ planet.name }}✨
     {% endif %}
@@ -15,8 +15,34 @@
 {% block main %}
 {% if planet.declassified == 'Yes' %}
 <p>
-    <b>'{{ planet.name }}'</b> was thought to orbit the star <b>'{{ planet.hostname }}'</b>. However, it has since been declassified.
+    <b>'{{ planet.name }}'</b> was thought to orbit the star <a href="{{ url_for('star', star_name=planet.hostname) }}"><b>'{{ planet.hostname }}'</b></a> in the <a href="{{ url_for('system', stellar_body=planet.system) }}"><b>'{{ planet.system }}'</b></a> system. However, it has since been declassified.
 </p>
+
+<div id="table-container-planet">
+    <table class="data-table">
+            <thead>
+                <tr>
+                    <th class="table-header" colspan="12">👾{{ planet.name }}👾</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th class="column-header-s">☀️Host Star☀️</th>
+                    <th class="column-header-s">🌌System🌌</th>          
+                    <th class="column-header-s">🛰️Method🛰️</th>
+                    <th class="column-header-s">📡Public Discovery Date📡</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-data"><a href="{{ url_for('star', star_name=planet.hostname) }}">{{ planet.hostname }}</a></td>
+                    <td class="table-data"><a href="{{ url_for('system', stellar_body=planet.system) }}">{{ planet.system }}</a></td>
+                    <td class="table-data">{{ planet.disc_method }}</td>
+                    <td class="table-data">{{ planet.disc_pubdate }}</td>
+                </tr>
+            </tbody>
+    </table>
+</div>
 {% else %}
 <p>
     <b>'{{ planet.name }}'</b> orbits the star <a href="{{ url_for('star', star_name=planet.hostname) }}"><b>'{{ planet.hostname }}'</b></a> in the <a href="{{ url_for('system', stellar_body=planet.system) }}"><b>'{{ planet.system }}'</b></a> system, and was discovered in {{ planet.disc_pubdate }}{% if planet.cv_flag == 'Yes' %} However it is considered a controversial discovery{% endif %}.
@@ -46,9 +72,9 @@
             </thead>
             <thead>
                 <tr>
-                    <th class="column-header-s">Public Discovery Date</th>
-                    <th class="column-header-s">Circumbinary?</th>
-                    <th class="column-header-s">Controversial?</th>
+                    <th class="column-header-s">📡Public Discovery📡<br>Date</th>
+                    <th class="column-header-s">💫Circumbinary?💫</th>
+                    <th class="column-header-s">🚨Controversial?🚨</th>
                     <th class="column-header-s">Orbit Period<br>(earth days)</th>
                     <th class="column-header-s">Mass<br>(to earth)</th>
                     <th class="column-header-s">Radius<br>(to earth)</th>

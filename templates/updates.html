@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block main %}
-{% if category in ['s', 'ps'] %}
+{% if category in ['systems', 'all'] %}
 {% include "system_updates.html" %}
 {% endif %}
-{% if category in ['p', 'ps'] %}
+{% if category in ['planets', 'all'] %}
 {% include "new_planets.html" %}
 {% endif %}
 
