@@ -62,18 +62,24 @@
     <table class="data-table">
         <thead>
             <tr>
-                <th class="column-header">
+                <th class="table-header">
                     🪐Planets🪐
                 </th>
             </tr>
         </thead>
         <tbody>
             {% for planet in star.planets %}
-            <tr>
-                <td class="table-data">
-                    <a href="{{ url_for('planet', planet_name=planet.name) }}">{{ planet.name }}</a>
-                </td>
-            </tr>
+                <tr>
+                    <td class="table-data">
+                        {% if planet.declassified == 'Yes' %}
+                            <a href="{{ url_for('planet', planet_name=planet.name) }}">👾{{ planet.name }}👾</a>
+                        {% elif planet.cv_flag == 'Yes' %}
+                            <a href="{{ url_for('planet', planet_name=planet.name) }}">🚨{{ planet.name }}🚨</a>
+                        {% else %}
+                            <a href="{{ url_for('planet', planet_name=planet.name) }}">🪐{{ planet.name }}🪐</a>
+                        {% endif %}
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
