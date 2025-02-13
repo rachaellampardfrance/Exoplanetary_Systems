@@ -253,6 +253,7 @@ def get_planet_count():
         query = f"""
             SELECT COUNT(pl_name)
               FROM {TABLES[0]}
+                WHERE declassified != 1;
         """
         cursor.execute(query)
         return cursor.fetchone()[0]
