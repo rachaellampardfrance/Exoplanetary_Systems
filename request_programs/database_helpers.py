@@ -23,8 +23,14 @@ def mark_declassified_planets(data_frame: pd.DataFrame) -> None:
         cursor.execute(f"""
             UPDATE planets
                SET declassified = 1
-             WHERE pl_name NOT IN ({placeholders});
+             WHERE pl_name NOT IN ({placeholders})
+               AND declassified != 1;
         """, classified_planets)
+
+        cursor.execute("""
+            SELECT changes();
+        """)
+        print(f"Number of planets declassified since update: {cursor.fetchone()[0]}")
 
 
 def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
@@ -134,8 +140,14 @@ def mark_empty_systems(data_frame: pd.DataFrame) -> None:
         cursor.execute(f"""
             UPDATE systems
                SET sy_pnum = 0
-             WHERE sy_name NOT IN ({placeholders});
+             WHERE sy_name NOT IN ({placeholders})
+               AND sy_pnum != 0;
         """, planetary_systems)
+
+        cursor.execute("""
+            SELECT changes();
+        """)
+        print(f"Number of planetary systems declassified since update: {cursor.fetchone()[0]}")
 
 def upsert_systems_data(data_frame: pd.DataFrame) -> None:
     """insert/update new pandas dataframe into the systems table"""
@@ -267,3 +279,26 @@ def print_table_updated_count(table: str) -> None:
         count = result[0] if result else 0
 
         print(f"Todays new updates to {table}: {count}")
+
+def print_updates(table):
+    max_date = get_last_updated(table)[0]
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(f"""
+            SELECT *
+              FROM {table}
+             WHERE DATE(last_updated) = '{max_date}';
+        """)
+
+        results = cursor.fetchall()
+
+        if results:
+            print(f"Updates to {table}:")
+            for result in results:
+                print(result)
+        else:
+            print("No updates")
+
+    
