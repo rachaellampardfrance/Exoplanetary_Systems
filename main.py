@@ -1,11 +1,12 @@
 """API Program for handling requests for website pages"""
 
+import io
 import sqlite3
 from flask import (
     Flask, abort,
     render_template,
     request, redirect,
-    url_for
+    url_for, send_file
 )
 
 from helpers.system import System
@@ -200,6 +201,7 @@ def suggestions(search):
 def about():
     return render_template("about.html")
 
+
 @app.route("/declassified")
 def declassified():
 
@@ -223,13 +225,41 @@ def declassified():
 
     return render_template("declassified.html", planets=declassified)
 
+
 @app.errorhandler(404)
 def page_not_found(error=404):
     return render_template('404.html', error=error), 404
 
+
 # @app.errorhandler(Exception)
 # def handle_exception(error):
 #     return render_template('500.html', error=error), 500
+
+
+@app.route('/image/<name>')
+def get_image(name):
+    """passes image file if found"""
+
+    with sqlite3.connect(DB) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT image_data
+              FROM figures
+                WHERE name = ?
+                AND created = (
+                    SELECT MAX(created)
+                      FROM figures
+                        WHERE name = ?
+                );
+        """, (name, name,))
+        result = cursor.fetchone()
+
+        if result is None:
+            abort(404)
+
+        image_data = result[0]
+        return send_file(io.BytesIO(image_data), mimetype='image/png')
 
 
 
