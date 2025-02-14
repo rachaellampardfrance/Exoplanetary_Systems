@@ -1,12 +1,13 @@
 """functions to create visual figures from dataframes"""
 
+import io
 from matplotlib import pyplot as plt
 import matplotlib.figure
 import numpy as np
 import pandas as pd
 
 from helpers import format_name_for_file, render_figlet
-from database_helpers import get_systems_db_data
+from database_helpers import get_systems_db_data, save_figure_to_database
 from save import save_dated_figure
 
 TEXT_COLOUR = '#581845'
@@ -85,15 +86,7 @@ def save_figures(star_series, planet_to_star_df):
     figures.append(create_fig_system_pies(planet_to_star_df=planet_to_star_df))
 
     for figure, figname in figures:
-        save_fig(figure, figname)
-
-def save_fig(fig: matplotlib.figure.Figure, fig_name: str) -> None:
-    """formats file names and saves figures"""
-
-    # overwrite top level figure
-    fig.savefig(("static/"+fig_name+".png"))
-    # save with datestamp to dated folder
-    save_dated_figure(fig, fig_name, "png")
+        save_figure_to_database(figure, figname)
 
 
 def create_fig_star_pie(star_series):

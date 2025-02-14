@@ -1,9 +1,11 @@
 """Helper functions to read collected data into database tables"""
 
-import sqlite3
+import io
 import pandas as pd
+import sqlite3
 
 DB_PATH = "database.db"
+
 
 def mark_declassified_planets(data_frame: pd.DataFrame) -> None:
     """Any planets that exist in the local database and are
@@ -140,6 +142,7 @@ def upsert_planetary_data(data_frame: pd.DataFrame) -> None:
                 OR planets.equlib_temp != excluded.equlib_temp;
     """, data_to_insert)
 
+
 def mark_empty_systems(data_frame: pd.DataFrame) -> None:
     """Any planets that exist in the local database and are
     not within the planet names gathered from the tap request
@@ -184,6 +187,7 @@ def mark_empty_systems(data_frame: pd.DataFrame) -> None:
         print(f"Planetary systems declassified today:")
         for result in results:
             print(result)
+
 
 def upsert_systems_data(data_frame: pd.DataFrame) -> None:
     """insert/update new pandas dataframe into the systems table"""
@@ -259,6 +263,7 @@ def upsert_stars_data(data_frame: pd.DataFrame) -> None:
                 stars.sy_name != excluded.sy_name;
     """, data_to_insert)
 
+
 def update_stars_spectypes(data_frame: pd.DataFrame) -> None:
     """update stars table with new spectral types"""
 
@@ -299,6 +304,7 @@ def get_systems_db_data():
         
         return pd.read_sql_query(query, conn)
 
+
 def print_table_updated_count(table: str) -> None:
     with sqlite3.connect(DB_PATH) as conn:
         c = conn.cursor()
@@ -315,6 +321,7 @@ def print_table_updated_count(table: str) -> None:
         count = result[0] if result else 0
 
         print(f"Todays new updates to {table}: {count}")
+
 
 def print_updates(table):
     max_date = get_last_updated(table)[0]
@@ -337,4 +344,22 @@ def print_updates(table):
         else:
             print("No updates")
 
-    
+
+def save_figure_to_database(fig, name: str) -> None:
+    """converts figure to memory binary object and saves
+    to database
+    """
+
+    buffer = io.BytesIO()
+    fig.savefig(buffer, format="png")
+    buffer.seek(0)
+
+    img_data = buffer.read()
+
+    with sqlite3.connect(DB_PATH) as conn:
+        cursor = conn.cursor()
+        query = """
+            INSERT INTO figures (name, image_data, created)
+            VALUES (?, ?, current_timestamp);
+        """
+        cursor.execute(query, (name, img_data))
