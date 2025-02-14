@@ -8,7 +8,6 @@ import pandas as pd
 
 from helpers import format_name_for_file, render_figlet
 from database_helpers import get_systems_db_data, save_figure_to_database
-from save import save_dated_figure
 
 TEXT_COLOUR = '#581845'
 # colour map with id's for correct allocation
