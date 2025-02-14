@@ -1,13 +1,13 @@
 """functions to create visual figures from dataframes"""
 
+import io
 from matplotlib import pyplot as plt
 import matplotlib.figure
 import numpy as np
 import pandas as pd
 
 from helpers import format_name_for_file, render_figlet
-from database_helpers import get_systems_db_data
-from save import save_dated_figure
+from database_helpers import get_systems_db_data, save_figure_to_database
 
 TEXT_COLOUR = '#581845'
 # colour map with id's for correct allocation
@@ -78,29 +78,15 @@ def create_planet_to_star_df(data):
 
 def save_figures(star_series, planet_to_star_df):
     """save all figures"""
+    figures = []
+    # create figures
+    figures.append(create_fig_star_pie(star_series=star_series))
+    figures.append(create_fig_nested_bar(planet_to_star_df=planet_to_star_df))
+    figures.append(create_fig_system_pies(planet_to_star_df=planet_to_star_df))
 
-    # create figure
-    fig1, fig1_name = create_fig_star_pie(star_series=star_series)
-    # save figure
-    save_fig(fig1, fig1_name)
+    for figure, figname in figures:
+        save_figure_to_database(figure, figname)
 
-    # create figure
-    fig2, fig2_name = create_fig_nested_bar(planet_to_star_df=planet_to_star_df)
-    # save figure
-    save_fig(fig2, fig2_name)
-
-    # create figure
-    fig3, fig3_name = create_fig_system_pies(planet_to_star_df=planet_to_star_df)
-    # save figure
-    save_fig(fig3, fig3_name)
-
-def save_fig(fig: matplotlib.figure.Figure, fig_name: str) -> None:
-    """formats file names and saves figures"""
-
-    # overwrite top level figure
-    fig.savefig(("static/"+fig_name+".png"))
-    # save with datestamp to dated folder
-    save_dated_figure(fig, fig_name, "png")
 
 def create_fig_star_pie(star_series):
     """generate Occurance of Planetary Systems by Star System Type pie figure"""

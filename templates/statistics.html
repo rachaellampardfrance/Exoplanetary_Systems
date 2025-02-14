@@ -12,7 +12,7 @@
 <div>
     <div>
         <h2>Planetary System Type by Star Count</h2>
-        <img class="img" id="fig-bars" src="{{ url_for('static', filename='planetary_systems_by_star_count.png') }}" alt="Planetary Systems by Star Count Nested Bar Charts">
+        <img class="img" id="fig-bars" src="{{ url_for('get_image', name='planetary_systems_by_star_count') }}" alt="Planetary Systems by Star Count Nested Bar Chart Plot">
         <p>
             (represents all observations of planetary systems, nested by how many planets occur in each<br>
             system and organised by how many stars are in the system.)
@@ -29,7 +29,7 @@
     <div>
         <h2 class="xlarge-spacing">Most Common Planetary System Type by Star Count</h2>
         <p>A collection of pie charts which are independent of one another</p>
-        <img class="img" id="fig-pies" src="{{ url_for('static', filename='most_common_planetary_systems.png') }}" alt="Most Common Planetary Systems Pie Charts">
+        <img class="img" id="fig-pies" src="{{ url_for('get_image', name='most_common_planetary_systems') }}" alt="Most Common Planetary Systems Pie Charts">
         <p>(percentile of how many planets occur (for each system type by increasing star count))</p>
         <table class="text-table" id="statstics-text-table">
             <tr class="align-top">
@@ -58,7 +58,7 @@
     </div>
     <div>
         <h2 class="xlarge-spacing">Occurrence of Planetary Systems by Star Count</h2>
-        <img class="img" id="fig-pie" src="{{ url_for('static', filename='occurrence_of_planetary_systems_by_star_system_type.png') }}" alt="Occurrence of Planetary Systems by Star System Type Pie Chart">
+        <img class="img" id="fig-pie" src="{{ url_for('get_image', name='occurrence_of_planetary_systems_by_star_system_type') }}" alt="Occurrence of Planetary Systems by Star System Type Pie Chart">
         <P>(percentile of where planetary systems occur in relation to count of stars present in the system)</P>
     </div>
 </div>
