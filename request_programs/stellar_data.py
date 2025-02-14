@@ -72,7 +72,7 @@ def request_stellar_schema(service_url: str) -> pd.DataFrame:
     )
 
 def save_schema(schema: pd.DataFrame) -> None:
-    schema.to_csv('stellar_hosts_schema.csv', index=False)
+    schema.to_csv('stellarhosts_schema.csv', index=False)
 # *******
 
 

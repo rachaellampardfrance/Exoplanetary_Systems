@@ -50,7 +50,7 @@ def main():
         )
 
         print("Fetching schema...")
-        ps_schema.to_csv("planets_schema.csv", index=False)
+        ps_schema.to_csv("pscomppars_schema.csv", index=False)
         print("Finished fetching schema.")
 
     print("Fetching requested 'Planetary System Composite Data' table data...")

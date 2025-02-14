@@ -47,7 +47,7 @@ def main():
         # check if schema has changed since the last pull
             # report if updated and save
         print("Fetching schema...")
-        sh_schema.to_csv('systems_schema.csv', index=False)
+        sh_schema.to_csv('stellarhosts_schema.csv', index=False)
         print("Finished fetching schema")
 
     print("Fetching requested 'stellar hosts' table data...")
